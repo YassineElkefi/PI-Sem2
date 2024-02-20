@@ -1,13 +1,28 @@
+require('dotenv').config()
 const express = require("express")
+const request = require("./Routes/requests")
+const connectDB = require('./Server/Config/db');
+const cors = require('cors');
+
+
 
 const app = express()
+const PORT = process.env.PORT || 5000;
+
+
+//Connect Database
+connectDB()
+app.use(express.json());
+app.use(cors());
+app.use("/requests",request)
 
 
 
 
-app.get('/',(req,res)=>{
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+
+  app.get('/',(req,res)=>{
     res.send("<h1>Backend Works !</h1>")
-})
-app.listen(5000,()=>{
-    console.log("Listening on port 5000");
 })

@@ -1,0 +1,52 @@
+<section id="requests">
+    <h2>All Requests :</h2>
+    <div class="row">
+        @for (req of requests; track $index) {
+            <div class="card col-3 mb-5 mx-4">
+                <div class="card-body">
+                    <i class="fa fa-trash-alt text-danger" style="position: absolute; top: 10px; right: 10px; cursor: pointer;" (click)="deleteRequest(req._id)"></i>
+                    <i class="fa-solid fa-pencil text-primary" style="position: absolute; top: 10px; right: 40px; cursor: pointer;"(click)="fillform(req);selectedRequest = req;"></i>
+                    <h5 class="card-title">Sender: {{ req.sender }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Receiver: {{ req.receiver }}</h6>
+                    <p class="card-text">Offer: {{ req.offer }}</p>
+                    <p class="card-text">Departure: {{ req.departure }}</p>
+                    <p class="card-text">Arrival: {{ req.arrival }}</p>
+                </div>
+            </div>
+        }
+    </div>
+        
+
+   
+</section>
+<section id="sendRequest">
+    <h2>Send a request :</h2>
+    <div class="mb-3 col-6">
+        <input type="text" hidden class="form-control" placeholder="Sender" [(ngModel)]="id">
+    </div>
+    
+    <div class="mb-3 col-6">
+        <input type="text" class="form-control" placeholder="Sender" [(ngModel)]="sender">
+    </div>
+    
+    <div class=" mb-3 col-6">
+        <input type="text" class="form-control" placeholder="Receiver" [(ngModel)]="receiver">
+    </div>
+    
+    <div class="mb-3 col-6">
+        <input type="text" class="form-control" placeholder="Offer" [(ngModel)]="offer">
+    </div>
+    
+    <div class="mb-3 col-6">
+        <input type="text" class="form-control" placeholder="Departure" [(ngModel)]="departure">
+    </div>
+    
+    <div class="mb-3 col-6">
+        <input type="text" class="form-control" placeholder="Arrival" [(ngModel)]="arrival">
+    </div>
+    
+    <button type="button" (click)="sendRequest()" class="btn btn-primary mt-1 me-2" [disabled]="selectedRequest !== null">Send Request</button>
+    <button type="button" (click)="updateRequest(id)" class="btn btn-warning mt-1 me-2" [disabled]="selectedRequest === null">Update Request</button>
+    <button type="button" (click)="clearForm()" class="btn btn-danger mt-1 me-2" [disabled]="selectedRequest === null">Clear</button>
+</section>
+
