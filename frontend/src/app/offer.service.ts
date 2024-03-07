@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, ObservedValuesFromArray } from 'rxjs';
 
 
 @Injectable({
@@ -11,6 +11,10 @@ export class OfferService {
 
   constructor(private http: HttpClient) { }
 
+  findOfferById(id: string): Observable<any[]>{
+    return this.http.get<any[]>(`${this.baseUrl}/findOfferById/${id}`);
+  }
+
   getAllOffers(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/allOffers`);
   }
@@ -18,6 +22,7 @@ export class OfferService {
   postOffer(offer: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/addOffer`, offer);
   }
+
   deleteOffer(id: string): Observable<any> {
     return this.http.delete<any>(`${this.baseUrl}/deleteOffer/${id}`);
   }
@@ -25,4 +30,13 @@ export class OfferService {
   editOffer(id: string, offer: any): Observable<any> {
     return this.http.patch<any>(`${this.baseUrl}/editOffer/${id}`, offer);
   }
+
+  acceptRequest(id: string, offer: any, offerId: string): Observable<any> {
+    return this.http.patch<any>(`${this.baseUrl}/acceptRequest/${id}/${offerId}`, offer);
+  }
+
+  declineRequest(id: string): Observable<any> {
+    return this.http.patch<any>(`${this.baseUrl}/declineRequest/${id}`, {});
+}
+
 }
