@@ -22,6 +22,11 @@ const RequestSchema = new Schema({
     arrival:{
         type: String,
         required: true
+    },
+    state:{
+        type: String,
+        required: true,
+        default: "pending"
     }
 });
 module.exports = mongoose.model('Request',RequestSchema)

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RequestService } from '../request.service';
+import { OfferService } from '../offer.service';
 import { OnInit } from '@angular/core';
 
 @Component({
@@ -8,6 +9,8 @@ import { OnInit } from '@angular/core';
   styleUrl: './requests.component.css'
 })
 export class RequestsComponent implements OnInit{
+  @Input() offerId: string = '';
+
   requests: any[] = [];
   selectedRequest: any = null;
 
@@ -33,7 +36,7 @@ export class RequestsComponent implements OnInit{
       });
   }
 
-  constructor(private requestService: RequestService) { }
+  constructor(private requestService: RequestService, private offerSerive:OfferService) { }
 
   sender: string = '';
   receiver: string = '';
@@ -47,7 +50,7 @@ export class RequestsComponent implements OnInit{
     const request = {
       sender: this.sender,
       receiver: this.receiver,
-      offer: this.offer,
+      offer: this.offerId,
       departure: this.departure,
       arrival: this.arrival
     };

@@ -1,94 +1,87 @@
-<section id="offers">
-    <h2>All Offers :</h2>
+<div class="container">
     <div class="row">
-        @for (offer of offers; track $index) {
-            <div class="card col-3 mb-5 mx-4">
-                <div class="card-body">
-                    <i class="fa fa-trash-alt text-danger" style="position: absolute; top: 10px; right: 10px; cursor: pointer;"  (click)="deleteOffer(offer._id)"></i>
-                    <i class="fa-solid fa-pencil text-primary" style="position: absolute; top: 10px; right: 40px; cursor: pointer;"(click)="fillform(offer);selectedOffer = offer;"></i>
-                    <h5 class="card-title">Title: {{ offer.title }}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Type: {{ offer.type }}</h6>
-                    <p class="card-text">Description: {{ offer.description }}</p>
+        <div class="col-6">
+            <section id="offers">
+                <h2>All Offers :</h2>
+                <div class="row">
+                    @for (offer of offers; track $index) {
+                        <div class="card col-md-4 col-4 mb-5 mx-4">
+                            <div class="card-body">
+                                <!-- send request to offer -->
+                                <i class="fa fa-paper-plane text-success" style="position: absolute; top: 10px; right: 70px; cursor: pointer;"(click)="recupererId(offer._id)" ></i>
+                                <i class="fa fa-trash-alt text-danger" style="position: absolute; top: 10px; right: 10px; cursor: pointer;"  (click)="deleteOffer(offer._id)"></i>
+                                <i class="fa-solid fa-pencil text-primary" style="position: absolute; top: 10px; right: 40px; cursor: pointer;"(click)="fillform(offer);selectedOffer = offer;"></i>
+                                <h5 class="card-title mt-3">Title: {{ offer.title }}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Type: {{ offer.type }}</h6>
+                                <p class="card-text">Description: {{ offer.description }}</p>
+                            </div>
+                        </div>
+                    }
                 </div>
-            </div>
-        }
-    </div>
-</section>
-
-<section id="postOffer">
-    <h2>Post an offer :</h2>
-    <div class="mb-3 col-6">
-        <input type="text" hidden class="form-control" placeholder="Sender" [(ngModel)]="id">
-    </div>
-    
-    <div class="mb-3 col-6">
-        <input type="text" class="form-control" placeholder="Title" [(ngModel)]="title">
-    </div>
-    
-    <div class=" mb-3 col-6">
-        <input type="text" class="form-control" placeholder="Description" [(ngModel)]="description">
-    </div>
-    
-    <div class="mb-3 col-6">
-        <input type="text" class="form-control" placeholder="Path" [(ngModel)]="path">
-    </div>
-
-    <div class="mb-3 col-6">
-        <select class="form-control" [(ngModel)]="type" (change)="onTypeChange()">
-          <option value="" disabled selected>Select your option</option>
-          <option value="Delivery">Delivery</option>
-          <option value="Carpooling">Carpooling</option>
-        </select>
-      </div>
-      
-
-    <div class="mb-3 col-6">
-        <label for="numberOfPeople">Number of people:</label>
-        <input id="numberOfPeople" type="number" class="form-control" placeholder="Number of people" [(ngModel)]="nb_ppl" [disabled]="type === 'Delivery'">
-    </div>
-
-    <div class="mb-3 col-6">
-        <label for="numberOfPackages">Number of packages:</label>
-        <input id="numberOfPackages" type="number" class="form-control" placeholder="Number of packages" [(ngModel)]="nb_pkg" [disabled]="type === 'Carpooling'">
-    </div>
-
-    
-    <div class="mb-3 col-6">
-        <label for="departureTimeSelect">Departure Time:</label>
-        <select id="departureTimeSelect" class="form-control" [(ngModel)]="departure_time" name="departureTime">
-          <option value="" disabled selected>Choose a time</option>
-          <option *ngFor="let time of availableTimes" [value]="time">{{time}}</option>
-        </select>
-      </div>
-      
-      
-      <div class="mb-3 col-6">
-        <label for="departureDate">Departure Date:</label>
-        <input type="date" class="form-control" id="departureDate" [(ngModel)]="departure_date" name="departureDate">
-      </div>
-
-    
-    <button type="button" (click)="sendOffer()" class="btn btn-primary mt-1 me-2" [disabled]="selectedOffer !== null">Post Offer</button>
-    <button type="button" (click)="editOffer(id)" class="btn btn-warning mt-1 me-2" [disabled]="selectedOffer === null">Edit Offer</button>
-    <button type="button" (click)="clearForm()" class="btn btn-danger mt-1 me-2" [disabled]="selectedOffer === null">Clear</button>
-</section>
-
-<section id="requests">
-    <h2>All Requests :</h2>
-    <div class="row">
-        @for (req of requests; track $index) {
-            <div class="card col-3 mb-5 mx-4">
-                <div class="card-body">
-                    <i class="fa fa-times text-danger" style="position: absolute; top: 10px; right: 10px; cursor: pointer;" (click)="declineRequest(req._id)"></i>
-                    <i class="fa fa-check text-primary" style="position: absolute; top: 10px; right: 40px; cursor: pointer;" (click)="acceptRequest(req._id, req.offer)"></i>
-                    
-                    <h5 class="card-title">Sender: {{ req.sender }}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Receiver: {{ req.receiver }}</h6>
-                    <p class="card-text">Offer: {{ req.offer }}</p>
-                    <p class="card-text">Departure: {{ req.departure }}</p>
-                    <p class="card-text">Arrival: {{ req.arrival }}</p>
+            </section>
+            <section id="postOffer">
+                <h2>Post an offer :</h2>
+                <div class="mb-3 col-6">
+                    <input type="text" hidden class="form-control" placeholder="Sender" [(ngModel)]="id">
                 </div>
-            </div>
-        }
+                
+                <div class="mb-3 col-6">
+                    <input type="text" class="form-control" placeholder="Title" [(ngModel)]="title">
+                </div>
+                
+                <div class=" mb-3 col-6">
+                    <input type="text" class="form-control" placeholder="Description" [(ngModel)]="description">
+                </div>
+                
+                <div class="mb-3 col-6">
+                    <input type="text" class="form-control" placeholder="Path" [(ngModel)]="path">
+                </div>
+            
+                <div class="mb-3 col-6">
+                    <select class="form-control" [(ngModel)]="type" (change)="onTypeChange()">
+                      <option value="" disabled selected>Select your option</option>
+                      <option value="Delivery">Delivery</option>
+                      <option value="Carpooling">Carpooling</option>
+                    </select>
+                  </div>
+                  
+            
+                <div class="mb-3 col-6">
+                    <label for="numberOfPeople">Number of people:</label>
+                    <input id="numberOfPeople" type="number" class="form-control" placeholder="Number of people" [(ngModel)]="nb_ppl" [disabled]="type === 'Delivery'">
+                </div>
+            
+                <div class="mb-3 col-6">
+                    <label for="numberOfPackages">Number of packages:</label>
+                    <input id="numberOfPackages" type="number" class="form-control" placeholder="Number of packages" [(ngModel)]="nb_pkg" [disabled]="type === 'Carpooling'">
+                </div>
+            
+                
+                <div class="mb-3 col-6">
+                    <label for="departureTimeSelect">Departure Time:</label>
+                    <select id="departureTimeSelect" class="form-control" [(ngModel)]="departure_time" name="departureTime">
+                      <option value="" disabled selected>Choose a time</option>
+                      <option *ngFor="let time of availableTimes" [value]="time">{{time}}</option>
+                    </select>
+                  </div>
+                  
+                  
+                  <div class="mb-3 col-6">
+                    <label for="departureDate">Departure Date:</label>
+                    <input type="date" class="form-control" id="departureDate" [(ngModel)]="departure_date" name="departureDate">
+                  </div>
+            
+                
+                <button type="button" (click)="sendOffer()" class="btn btn-primary mt-1 me-2" [disabled]="selectedOffer !== null">Post Offer</button>
+                <button type="button" (click)="editOffer(id)" class="btn btn-warning mt-1 me-2" [disabled]="selectedOffer === null">Edit Offer</button>
+                <button type="button" (click)="clearForm()" class="btn btn-danger mt-1 me-2" [disabled]="selectedOffer === null">Clear</button>
+            </section>
+        </div>
+        <div class="col-6">
+            @if (id) {
+                <app-requests [offerId]="id"></app-requests>
+            }
+        </div>
     </div>
-</section>
+
+</div>

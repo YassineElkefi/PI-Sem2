@@ -146,6 +146,9 @@ export class OffersComponent implements OnInit{
     this.departure_date = ''
   }
 
+  recupererId(_id:string){
+    this.id = _id;
+  }
 acceptRequest(id:any, OfferId:string){
   OfferId = "65e8e799fdf51532813b289d";
   console.log(id);
