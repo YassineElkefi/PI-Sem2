@@ -146,4 +146,41 @@ export class OffersComponent implements OnInit{
     this.departure_date = ''
   }
 
+acceptRequest(id:any, OfferId:string){
+  OfferId = "65e8e799fdf51532813b289d";
+  console.log(id);
+  id = localStorage.getItem('id')
+    const offer = {
+      title: this.title,
+      description: this.description,
+      path: this.path,
+      type: this.type,
+      nb_ppl: this.nb_ppl,
+      nb_pkg: this.nb_pkg,
+      departure_time: this.departure_time,
+      departure_date: this.departure_date
+    };
+    this.offerService.acceptRequest(id, offer, OfferId)
+      .subscribe(response => {
+        console.log('Request accepted and Offer edited successfully:', response);
+        this.ngOnInit();
+      }, error => {
+        console.error('Error acceping the request:', error);
+      });
+}
+
+
+declineRequest(id: any) {
+  this.offerService.declineRequest(id)
+      .subscribe(response => {
+          console.log('Request declined successfully:', response);
+          this.ngOnInit();
+      }, error => {
+          console.error('Error declining the request:', error);
+      });
+}
+
+
+
+
 }

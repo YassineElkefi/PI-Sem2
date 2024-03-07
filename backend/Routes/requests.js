@@ -71,8 +71,24 @@ router.patch("/updateRequest/:id", async (req, res) => {
     }
 });
 
+const findReqById = async (id) => {
+    try {
+        const request = await Request.findById(id);
+        if (!request) {
+            console.log('Request not found');
+            return null;
+        }
+        console.log('Request found:', request);
+        return request;
+    } catch (err) {
+        console.error("Error fetching request by ID:", err);
+        throw err;
+    }
+};
+
 router.get("/",(req,res)=>{
     res.send("<h1>Requests working</h1>")
 })
 
+module.exports = { findReqById };
 module.exports= router
