@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RequestService } from '../request.service';
 import { OnInit } from '@angular/core';
 
@@ -8,6 +8,8 @@ import { OnInit } from '@angular/core';
   styleUrl: './requests.component.css'
 })
 export class RequestsComponent implements OnInit{
+  @Input() offerId: string = '';
+
   requests: any[] = [];
   selectedRequest: any = null;
 

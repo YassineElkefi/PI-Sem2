@@ -146,4 +146,7 @@ export class OffersComponent implements OnInit{
     this.departure_date = ''
   }
 
+  recupererId(_id:string){
+    this.id = _id;
+  }
 }
