@@ -2,7 +2,8 @@ const express = require('express')
 const router = express.Router()
 const Offer = require('../Models/Offer')
 const Request = require('../Models/Request')
-const { findReqById } = require('../Routes/requests');
+const requests = require('../Routes/requests');
+const findReqById = requests.findReqById;
 
 
 const findOfferById = async (id) => {
@@ -23,7 +24,7 @@ const findOfferById = async (id) => {
 router.get("/findOfferById/:id", async(req,res) =>{
     const offerId = req.params.id;
     try{
-        const data = await findOfferById(id)
+        const data = await findOfferById(offerId)
         res.json(data)
     } catch (error){
         res.status(500).json({message:err.message})
