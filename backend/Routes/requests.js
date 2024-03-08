@@ -90,5 +90,4 @@ router.get("/",(req,res)=>{
     res.send("<h1>Requests working</h1>")
 })
 
-module.exports = { findReqById };
 module.exports= router

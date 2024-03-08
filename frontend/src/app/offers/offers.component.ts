@@ -76,6 +76,7 @@ export class OffersComponent implements OnInit{
     this.offerService.postOffer(offer)
       .subscribe(response => {
         console.log('Offer posted successfully:', response);
+        this.clearForm();
         this.ngOnInit();
       }, error => {
         console.error('Error posting the offer:', error);
@@ -97,6 +98,7 @@ export class OffersComponent implements OnInit{
     this.offerService.editOffer(id, offer)
       .subscribe(response => {
         console.log('Offer edited successfully:', response);
+        this.clearForm();
         this.ngOnInit();
       }, error => {
         console.error('Error editing the offer:', error);
@@ -150,9 +152,7 @@ export class OffersComponent implements OnInit{
     this.id = _id;
   }
 acceptRequest(id:any, OfferId:string){
-  OfferId = "65e8e799fdf51532813b289d";
   console.log(id);
-  id = localStorage.getItem('id')
     const offer = {
       title: this.title,
       description: this.description,

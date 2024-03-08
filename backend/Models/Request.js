@@ -9,7 +9,7 @@ const RequestSchema = new Schema({
     },
     receiver:{
         type: String,
-        required: true
+        required: false
     },
     offer:{
         type:String,

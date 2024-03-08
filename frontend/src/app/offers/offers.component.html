@@ -7,13 +7,17 @@
                     @for (offer of offers; track $index) {
                         <div class="card col-md-4 col-4 mb-5 mx-4">
                             <div class="card-body">
-                                <!-- send request to offer -->
                                 <i class="fa fa-paper-plane text-success" style="position: absolute; top: 10px; right: 70px; cursor: pointer;"(click)="recupererId(offer._id)" ></i>
                                 <i class="fa fa-trash-alt text-danger" style="position: absolute; top: 10px; right: 10px; cursor: pointer;"  (click)="deleteOffer(offer._id)"></i>
                                 <i class="fa-solid fa-pencil text-primary" style="position: absolute; top: 10px; right: 40px; cursor: pointer;"(click)="fillform(offer);selectedOffer = offer;"></i>
                                 <h5 class="card-title mt-3">Title: {{ offer.title }}</h5>
                                 <h6 class="card-subtitle mb-2 text-muted">Type: {{ offer.type }}</h6>
-                                <p class="card-text">Description: {{ offer.description }}</p>
+                                @if (offer.type == "Carpooling") {
+                                    <p class="card-text">Seats: {{ offer.nb_ppl }}</p>
+                                }@else {
+                                    <p class="card-text">Packages: {{ offer.nb_pkg }}</p>
+                                }
+                                
                             </div>
                         </div>
                     }
@@ -76,10 +80,35 @@
                 <button type="button" (click)="editOffer(id)" class="btn btn-warning mt-1 me-2" [disabled]="selectedOffer === null">Edit Offer</button>
                 <button type="button" (click)="clearForm()" class="btn btn-danger mt-1 me-2" [disabled]="selectedOffer === null">Clear</button>
             </section>
+            
+            <section id="requests">
+                <h2>All Requests :</h2>
+                <div class="row">
+                    @for (req of requests; track $index) {
+                        @if (req.state != "Approved" && req.state !="Declined") {
+                        <div class="card col-3 mb-5 mx-4">
+                            <div class="card-body">
+                                <i class="fa fa-times text-danger" style="position: absolute; top: 10px; right: 10px; cursor: pointer;" (click)="declineRequest(req._id)"></i>
+                                <i class="fa fa-check text-primary" style="position: absolute; top: 10px; right: 40px; cursor: pointer;" (click)="acceptRequest(req._id, req.offer)"></i>
+            
+                                <h5 class="card-title">Sender: {{ req.sender }}</h5>
+                                <p class="card-text">Offer: {{ req.offer }}</p>
+                                <p class="card-text">Departure: {{ req.departure }}</p>
+                                <p class="card-text">Arrival: {{ req.arrival }}</p>
+                            </div>
+                        </div>
+                        }
+                    }
+                </div>
+            </section>
+               
+            
         </div>
         <div class="col-6">
             @if (id) {
                 <app-requests [offerId]="id"></app-requests>
+            }@else{
+                <app-requests></app-requests>
             }
         </div>
     </div>

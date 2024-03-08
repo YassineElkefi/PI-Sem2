@@ -98,16 +98,15 @@ router.patch("/acceptRequest/:id/:offerId", async (req, res) => {
             return res.status(404).json({ message: 'Offer not found' });
         }
 
-        /*const { sender, receiver, departure, arrival, state } = req.body;
+        const { sender, receiver, departure, arrival, state } = req.body;
 
-        // Assuming you have a request model and you need to update its status
         const request = await Request.findById(requestId);
         if (!request) {
             return res.status(404).json({ message: 'Request not found' });
         }
 
         request.state = "Approved";
-        await request.save();*/
+        await request.save();
 
         if (offer.type === 'Carpooling') {
             offer.nb_ppl = Math.max(0, offer.nb_ppl - 1);
@@ -137,14 +136,14 @@ router.patch("/acceptRequest/:id/:offerId", async (req, res) => {
 router.patch("/declineRequest/:id", async (req, res) => {
     const requestId = req.params.id;
     try {
-        const request = await findReqById(requestId);
+        const request = await Request.findById(requestId);
 
         if (!request) {
             return res.status(404).json({ message: 'Request not found' });
         }
         console.log(request)
-        /*request.state = "Declined";
-        await request.save();*/
+        request.state = "Declined";
+        await request.save();
 
         res.json({ message: 'Request declined successfully' });
     } catch (err) {
