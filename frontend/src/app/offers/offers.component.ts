@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { OfferService } from '../offer.service';
 import { RequestService } from '../request.service';
 
-
 @Component({
   selector: 'app-offers',
   templateUrl: './offers.component.html',
@@ -18,12 +17,13 @@ export class OffersComponent implements OnInit{
   title: string = '';
   description: string = '';
   path: string = '';
-  type: string = '';
+  type: string = 'Carpooling';
   nb_ppl: number = 0;
   nb_pkg: number = 0;
   departure_time: string = '';
   departure_date: string = '';
   id: string = '';
+  price: number = 0;
 
   constructor(private offerService: OfferService, private requestService: RequestService) { }
 
@@ -71,7 +71,8 @@ export class OffersComponent implements OnInit{
       nb_ppl: this.nb_ppl,
       nb_pkg: this.nb_pkg,
       departure_time: this.departure_time,
-      departure_date: this.departure_date
+      departure_date: this.departure_date,
+      price: this.price
     };
     this.offerService.postOffer(offer)
       .subscribe(response => {
@@ -182,8 +183,5 @@ declineRequest(id: any) {
           console.error('Error declining the request:', error);
       });
 }
-
-
-
 
 }

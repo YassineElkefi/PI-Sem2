@@ -25,7 +25,7 @@ const RequestSchema = new Schema({
     },
     nb_pkg:{
         type: Number,
-        required: true
+        required: false
     },
     departure_time:{
         type: String,
@@ -34,6 +34,10 @@ const RequestSchema = new Schema({
     departure_date:{
         type: String,
         required: true
-    }
+    },
+    price:{
+        type: Number,
+        required: true
+    },
 });
 module.exports = mongoose.model('Offer',RequestSchema)

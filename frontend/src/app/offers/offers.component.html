@@ -1,4 +1,132 @@
-<div class="container">
+<div id="banner-image"></div>
+
+<div class="container-fluid">
+    <h1 align="center" class="py-5">CAR POOLING OFFERS</h1>
+    <div class="row py-5">
+        <div class="col-4">
+            <h4 class="mx-5">Filters :</h4> 
+            <div class="filters">
+                <h4>Filters:</h4>
+                <div class="filter-group">
+                    <label for="arrival-filter">Arrival Point:</label>
+                    <div class="filter-options">
+                        <input type="checkbox" id="arrival-filter1" name="arrival-filter" value="arrival1">
+                        <label for="arrival-filter1">Arrival Point 1</label>
+                        <input type="checkbox" id="arrival-filter2" name="arrival-filter" value="arrival2">
+                        <label for="arrival-filter2">Arrival Point 2</label>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <label for="destination-filter">Destination Point:</label>
+                    <div class="filter-options">
+                        <input type="checkbox" id="destination-filter1" name="destination-filter" value="destination1">
+                        <label for="destination-filter1">Destination Point 1</label>
+                        <input type="checkbox" id="destination-filter2" name="destination-filter" value="destination2">
+                        <label for="destination-filter2">Destination Point 2</label>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <label for="time-filter">Time:</label>
+                    <div class="filter-options">
+                        <input type="checkbox" id="time-filter1" name="time-filter" value="9AM">
+                        <label for="time-filter1">9AM</label>
+                        <input type="checkbox" id="time-filter2" name="time-filter" value="10AM">
+                        <label for="time-filter2">10AM</label>
+                    </div>
+                </div>
+                <button class="clear-button">Clear Filters</button>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="row">
+                <div class="col-3">
+                    <h4>Offers :</h4>
+                </div>
+                <div class="col-offset-3">
+                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Post offer</button>
+                </div>
+            </div>
+            
+
+            @for (offer of offers; track $index) {
+                <div class="card mt-3">
+                    <div class="card-body">
+                      <h4>{{ offer.title }}</h4>
+                      <h4>Posted by : {{ offer.offerer }}</h4>
+                      <h4>Path : {{ offer.path }}</h4>
+                      <h4>Departure Time : {{ offer.departure_time }}</h4>
+                      <h4>Departure Date : {{ offer.departure_date }}</h4>
+                      <h4>Seats remaining: {{ offer.nb_ppl }} </h4> 
+                      <h4>Price : {{ offer.price }} DT</h4>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Post an offer</h5>
+          <button type="button" class="close btn" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+            <div class="mb-3 col-12">
+                <input type="text" hidden class="form-control" placeholder="Sender" [(ngModel)]="id">
+            </div>
+            
+            <div class="mb-3 col-12">
+                <input type="text" class="form-control" placeholder="Title" [(ngModel)]="title">
+            </div>
+            
+            <div class=" mb-3 col-12">
+                <input type="text" class="form-control" placeholder="Description" [(ngModel)]="description">
+            </div>
+            
+            <div class="mb-3 col-12">
+                <input type="text" class="form-control" placeholder="Path" [(ngModel)]="path">
+            </div>
+              
+            <div class="mb-3 col-12">
+                <label for="numberOfPeople">Number of people:</label>
+                <input id="numberOfPeople" type="number" class="form-control" placeholder="Number of people" [(ngModel)]="nb_ppl" [disabled]="type === 'Delivery'">
+            </div>
+        
+            <div class="mb-3 col-12">
+                <label for="departureTimeSelect">Departure Time:</label>
+                <select id="departureTimeSelect" class="form-control" [(ngModel)]="departure_time" name="departureTime">
+                  <option value="" disabled selected>Choose a time</option>
+                  <option *ngFor="let time of availableTimes" [value]="time">{{time}}</option>
+                </select>
+              </div>
+              
+              
+              <div class="mb-3 col-12">
+                <label for="departureDate">Departure Date:</label>
+                <input type="date" class="form-control" id="departureDate" [(ngModel)]="departure_date" name="departureDate">
+              </div>
+
+              <div class="mb-3 col-12">
+                <label for="price">Price:</label>
+                <input type="number" class="form-control" id="price" [(ngModel)]="price" name="price">
+              </div>  
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" (click)="sendOffer()" class="btn btn-primary mt-1 me-2" data-bs-dismiss="modal">Post Offer</button>
+          <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- <div class="container">
     <div class="row">
         <div class="col-6">
             <section id="offers">
@@ -22,65 +150,10 @@
                         </div>
                     }
                 </div>
-            </section>
-            <section id="postOffer">
-                <h2>Post an offer :</h2>
-                <div class="mb-3 col-6">
-                    <input type="text" hidden class="form-control" placeholder="Sender" [(ngModel)]="id">
-                </div>
-                
-                <div class="mb-3 col-6">
-                    <input type="text" class="form-control" placeholder="Title" [(ngModel)]="title">
-                </div>
-                
-                <div class=" mb-3 col-6">
-                    <input type="text" class="form-control" placeholder="Description" [(ngModel)]="description">
-                </div>
-                
-                <div class="mb-3 col-6">
-                    <input type="text" class="form-control" placeholder="Path" [(ngModel)]="path">
-                </div>
+            </section>-->
+        
             
-                <div class="mb-3 col-6">
-                    <select class="form-control" [(ngModel)]="type" (change)="onTypeChange()">
-                      <option value="" disabled selected>Select your option</option>
-                      <option value="Delivery">Delivery</option>
-                      <option value="Carpooling">Carpooling</option>
-                    </select>
-                  </div>
-                  
-            
-                <div class="mb-3 col-6">
-                    <label for="numberOfPeople">Number of people:</label>
-                    <input id="numberOfPeople" type="number" class="form-control" placeholder="Number of people" [(ngModel)]="nb_ppl" [disabled]="type === 'Delivery'">
-                </div>
-            
-                <div class="mb-3 col-6">
-                    <label for="numberOfPackages">Number of packages:</label>
-                    <input id="numberOfPackages" type="number" class="form-control" placeholder="Number of packages" [(ngModel)]="nb_pkg" [disabled]="type === 'Carpooling'">
-                </div>
-            
-                
-                <div class="mb-3 col-6">
-                    <label for="departureTimeSelect">Departure Time:</label>
-                    <select id="departureTimeSelect" class="form-control" [(ngModel)]="departure_time" name="departureTime">
-                      <option value="" disabled selected>Choose a time</option>
-                      <option *ngFor="let time of availableTimes" [value]="time">{{time}}</option>
-                    </select>
-                  </div>
-                  
-                  
-                  <div class="mb-3 col-6">
-                    <label for="departureDate">Departure Date:</label>
-                    <input type="date" class="form-control" id="departureDate" [(ngModel)]="departure_date" name="departureDate">
-                  </div>
-            
-                
-                <button type="button" (click)="sendOffer()" class="btn btn-primary mt-1 me-2" [disabled]="selectedOffer !== null">Post Offer</button>
-                <button type="button" (click)="editOffer(id)" class="btn btn-warning mt-1 me-2" [disabled]="selectedOffer === null">Edit Offer</button>
-                <button type="button" (click)="clearForm()" class="btn btn-danger mt-1 me-2" [disabled]="selectedOffer === null">Clear</button>
-            </section>
-            
+            <!--
             <section id="requests">
                 <h2>All Requests :</h2>
                 <div class="row">
@@ -101,9 +174,9 @@
                     }
                 </div>
             </section>
-               
+            -->
             
-        </div>
+        <!--</div>
         <div class="col-6">
             @if (id) {
                 <app-requests [offerId]="id"></app-requests>
@@ -113,4 +186,4 @@
         </div>
     </div>
 
-</div>
+</div>-->

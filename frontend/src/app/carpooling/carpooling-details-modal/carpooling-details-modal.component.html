@@ -1,0 +1,47 @@
+  <div class="modal show" [class.show]="isOpen" id="detailsModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header" *ngIf="selectedOffer">
+          <h5 class="modal-title" id="detailsModal">{{selectedOffer?.title}}</h5>
+          <button type="button" class="close btn btn-danger" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" *ngIf="(selectedOffer)">
+            <div class="row">
+            <div class="mb-3 col-12">
+                <h4>Offerer : {{ selectedOffer?.offerer }}</h4>
+            </div>
+            
+            <div class="mb-3 col-12">
+            </div>
+                <h4>Path : {{ selectedOffer?.path }}</h4>
+            <div class=" mb-3 col-12">
+                <h4>Car : {{ selectedOffer?.car }}</h4>
+            </div>
+            
+            <div class="mb-3 col-12">
+                <h4>Description : {{ selectedOffer?.description }}</h4>
+            </div>
+            <div class="mb-3 col-12">
+                <h4>Number of seats remaining : {{ selectedOffer?.nb_ppl }}</h4>
+            </div>
+              
+            <div class="mb-3 col-12">
+                <h4>Price : {{ selectedOffer?.price }} DT</h4>
+            </div>
+            <div class="mb-3 col-12">
+                <h4>Departure date : {{ selectedOffer?.departure_date }}</h4>
+            </div>
+            <div class="mb-3 col-12">
+                <h4>Departure time : {{ selectedOffer?.departure_time }}</h4>
+            </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-start">
+        <button type="button" class="btn btn-success" (click)="onRequest()" data-bs-toggle="modal" data-bs-target="#requestModal">Request to join</button>
+          <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
