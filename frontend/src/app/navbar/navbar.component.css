@@ -1,0 +1,39 @@
+
+li a {
+  color: white;
+  font-family: 'Dongle';
+  font-size: 27px;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}
+.nav-item {
+  margin-right: 12px;
+  margin-left: 12px;
+}
+
+.nav-item a.active {
+  color: #E29F06;
+}
+
+.nav-item a:hover {
+  color: #E29F06;
+}
+
+button{
+  background: none;
+  border: none;
+}
+
+.navbar-links {
+  display: none;
+}
+
+.navbar-links.show-links {
+  display: block;
+}
+
+@media (max-width: 991.98px) {
+  .person-icon {
+    display: none;
+  }
+}
