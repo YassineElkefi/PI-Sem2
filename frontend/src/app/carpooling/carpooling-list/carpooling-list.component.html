@@ -1,0 +1,6 @@
+@for (offer of offers; track $index) {
+    <app-carpooling-items 
+    [offer]="offer" 
+    (OfferToList)="sendOfferToHome($event)"
+    ></app-carpooling-items>
+}

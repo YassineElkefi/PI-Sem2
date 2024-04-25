@@ -1,0 +1,28 @@
+<div id="banner-image"></div>
+<div class="container-fluid">
+    <h1 align="center" class="py-5">CAR POOLING OFFERS</h1>
+    <div class="row py-5">
+        <div class="col-4">
+            <app-carpooling-filters [locations]="locations"></app-carpooling-filters>
+        </div>
+        <div class="col-6">
+            <div class="col-3">
+                <h4>Offers :</h4>
+            </div>
+            <div class="col-offset-3">
+                <button class="btn btn-success" (click)="openModal()" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Post offer</button>
+            </div>
+            <app-carpooling-list [offers]="offers"
+            (offerToHome)="recupererOffre($event);openModal2()" data-bs-toggle="modal" data-bs-target="#detailsModalCenter"
+            ></app-carpooling-list>
+        </div>
+        <div class="col-2">
+            <app-carpooling-details-modal #modal2 [selectedOffer]="selectedOffer"></app-carpooling-details-modal>
+        </div>
+    </div>
+</div>
+<app-request-modal #modal3 [selectedOffer]="selectedOffer" (close)="closeRequestModal()"
+(requestToHome)="handleRequestPosted($event)"
+></app-request-modal>
+<app-post-offer-modal #modal (offerToHome)="handleOfferPosted($event)"></app-post-offer-modal>
+
