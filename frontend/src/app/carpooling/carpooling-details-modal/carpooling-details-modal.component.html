@@ -9,15 +9,15 @@
         </div>
         <div class="modal-body" *ngIf="(selectedOffer)">
             <div class="row">
-            <div class="mb-3 col-12">
-                <h4>Offerer : {{ selectedOffer?.offerer }}</h4>
+            <div class="col-12">
+                <h4>Offeror : {{ selectedOffer?.offeror.firstName }} {{ selectedOffer?.offeror.lastName }}</h4>
             </div>
             
             <div class="mb-3 col-12">
             </div>
                 <h4>Path : {{ selectedOffer?.path }}</h4>
             <div class=" mb-3 col-12">
-                <h4>Car : {{ selectedOffer?.car }}</h4>
+                <h4>Car : {{ selectedOffer?.offeror.car }}</h4>
             </div>
             
             <div class="mb-3 col-12">

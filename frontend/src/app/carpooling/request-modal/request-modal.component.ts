@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-request-modal',
@@ -21,15 +22,15 @@ export class RequestModalComponent {
   closeModal() {
     this.isOpen = false;
   }
-
+constructor(private authService: AuthService) { }
   sendRequest() {
     const requestData = {
       arrival: this.arrival,
       departure: this.departure,
-      offer: this.selectedOffer._id,
+      offer: this.selectedOffer,
       state:'Pending',
-      sender:'testUser',
-      receiver:this.selectedOffer.offerer,
+      sender:this.authService.getUser() ,
+      receiver:this.selectedOffer.offeror,
     }
 
     this.requestToHome.emit(requestData);

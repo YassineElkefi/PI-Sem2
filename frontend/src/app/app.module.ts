@@ -32,7 +32,7 @@ import { CarpoolingDetailsModalComponent } from './carpooling/carpooling-details
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

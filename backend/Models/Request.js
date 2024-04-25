@@ -4,15 +4,15 @@ const Schema = mongoose.Schema;
 
 const RequestSchema = new Schema({
     sender:{
-        type: String,
+        type: Schema.Types.Mixed,
         required: true,
     },
     receiver:{
-        type: String,
+        type: Schema.Types.Mixed,
         required: false
     },
     offer:{
-        type:String,
+        type:Schema.Types.Mixed,
         required: true
     },
     departure:{
@@ -26,7 +26,7 @@ const RequestSchema = new Schema({
     state:{
         type: String,
         required: true,
-        default: "pending"
+        default: "Pending"
     }
 });
 module.exports = mongoose.model('Request',RequestSchema)

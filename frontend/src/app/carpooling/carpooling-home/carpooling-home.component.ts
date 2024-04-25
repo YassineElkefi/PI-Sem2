@@ -4,6 +4,9 @@ import { PostOfferModalComponent } from '../post-offer-modal/post-offer-modal.co
 import { CarpoolingDetailsModalComponent } from '../carpooling-details-modal/carpooling-details-modal.component';
 import { RequestModalComponent } from '../request-modal/request-modal.component';
 import { RequestService } from '../../request.service';
+import { AuthService } from '../../auth.service';
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-carpooling-home',
@@ -21,11 +24,25 @@ export class CarpoolingHomeComponent implements OnInit{
   @ViewChild('modal2') modal2?: CarpoolingDetailsModalComponent;
   @ViewChild('modal3') modal3?: RequestModalComponent;
 
-constructor(private offerService: OfferService, private requestService:RequestService){}
+isLoggedIn: boolean= false;
+
+constructor(private offerService: OfferService, private requestService:RequestService, private authService:AuthService, private router: Router){
+  this.isLoggedIn = this.authService.isAuthenticated();
+  if (this.isLoggedIn){
+    console.log('User is authenticated');
+ }
+
+}
+
+
+
 offers?: any[];
 locations: string[]=[];
+user:any;
 
 ngOnInit(): void {
+  this.isLoggedIn = this.authService.isAuthenticated();
+  this.user = this.authService.getUser();
   this.fetchAllCarpoolingOffers();
 }
 
@@ -52,6 +69,7 @@ openModal2(): void {
 }
 
 handleOfferPosted(offerData: any) {
+
   this.offerService.postOffer(offerData)
       .subscribe(response => {
         console.log('Offer posted successfully:', response);
@@ -80,5 +98,8 @@ handleRequestPosted(requestData: any) {
     // Handle error response
   });
 }
-
+logout(){
+  this.authService.logout();
+  this.router.navigateByUrl('/Auth/Login');
+}
 }

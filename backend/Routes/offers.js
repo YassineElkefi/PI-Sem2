@@ -43,9 +43,9 @@ router.get('/allOffers', async(req,res) =>{
 
 router.post("/addOffer", async (req, res) => {
     try {
-        const { title, description, path, type, nb_ppl, nb_pkg, departure_time, departure_date,price } = req.body;
+        const { title, description, path, type, nb_ppl, nb_pkg, departure_time, departure_date,price,car, offeror } = req.body;
         const offer = await Offer.create({
-            title, description, path, type, nb_ppl, nb_pkg, departure_time, departure_date,price
+            title, description, path, type, nb_ppl, nb_pkg, departure_time, departure_date,price, car, offeror
         });
         res.status(201).json({ message: 'Offer posted', offer });
     } catch (err) {

@@ -39,5 +39,9 @@ const RequestSchema = new Schema({
         type: Number,
         required: true
     },
+    offeror: {
+        type: Schema.Types.Mixed,
+        required: true
+    }
 });
 module.exports = mongoose.model('Offer',RequestSchema)
