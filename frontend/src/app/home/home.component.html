@@ -1,0 +1,113 @@
+<div class="overlay-container">
+  <img src="../../assets/images/main - Copy (2).png" alt="">
+  <h1 class="title">WELCOME <br> TO <span class="unique-word">DELIVERINI</span></h1>
+  <div class="mission">
+    <h3>OUR MISSION</h3>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In elementum dictum risus, in rutrum quam aliquet eu. Sed vestibulum, tellus nec pharetra consequat,
+      nulla mauris tempor erat, in rutrum ante tortor a diam. Nulla rhoncus diam tellus. Mauris sagittis, lorem non eleifend interdum, nisi lacus sodales lectus, ac ultricies ligula ipsum
+      ac tellus. Nam congue justo magna, vitae lobortis mi dictum sed. In sit amet consectetur mi. Sed iaculis felis magna, eu venenatis enim ultricies ut. In dui quam, fermentum nec dolor.
+    </p>
+  </div>
+  <div class="service">
+    <h3>OUR MISSION</h3>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In elementum dictum risus, in rutrum quam aliquet eu. Sed vestibulum, tellus nec pharetra consequat,
+      nulla mauris tempor erat, in rutrum ante tortor a diam. Nulla rhoncus diam tellus. Mauris sagittis, lorem non eleifend interdum, nisi lacus sodales lectus, ac ultricies ligula ipsum
+      ac tellus. Nam congue justo magna, vitae lobortis mi dictum sed.
+    </p>
+  </div>
+</div>
+<div class="pictures">
+    <div class="container-xxl py-5 category">
+        <div class="container">
+            <div class="text-center">
+                <h3>LIVE THE EXPERIENCE</h3>
+                <br>
+            </div>
+            <div class="row g-3">
+                <div class="col-lg-7 col-md-6">
+                    <div class="row g-3">
+                        <div class="col-lg-12 col-md-12">
+                            <a class="position-relative d-block overflow-hidden" href="">
+                                <img class="img-fluid" src="../../assets/images/E20968E1-25EB-4411-98C2-7EC6731B063B.jpeg" alt="">
+                                <div class="bg-light text-center position-absolute bottom-0 end-0 py-2 px-3" style="margin: 1px;">
+                                    <h5 class="m-0" >Pick your spot</h5>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                                <div class="row g-3">
+                                    <div class="col-lg-12 col-md-12 wow zoomIn">
+                                        <a class="position-relative d-block overflow-hidden" href="">
+                                            <img class="img-fluid" src="../../assets/images/senior-people-road-trip-with-smartphone.jpg" alt="">
+                                            <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3" style="margin: 1px;">
+                                                <h5 class="m-0">Organize</h5>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    
+                                    <div class="col-lg-12 col-md-12 wow zoomIn">
+                                        <a class="position-relative d-block overflow-hidden" href="">
+                                            <img class="img-fluid" src="../../assets/images/pexels-norma-mortenson-4391478.jpg" alt="">
+                                            <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3" style="margin: 1px;">
+                                                <h5 class="m-0">Deliver Packages</h5>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        <div class="col-lg-6 col-md-12 wow zoomIn">
+                            <a class="position-relative d-block overflow-hidden" href="">
+                                <img class="img-fluid" src="../../assets/images/autree.png" alt="">
+                                <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3" style="margin: 1px;">
+                                    <h5 class="m-0">Follow a path</h5>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-6 wow zoomIn" style="min-height: 350px;">
+                    <a class="position-relative d-block h-100 overflow-hidden" href="">
+                        <img class="img-fluid position-absolute w-100 h-100" src="../../assets/images/women-taking-selfie-smartphone-near-car-trunk-man-leaning-out-from-auto.jpg" alt="" style="object-fit: cover;">
+                        <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3" style="margin:  1px;">
+                            <h5 class="m-0">Make friends</h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="overlay-container">
+
+    <img src="../../assets/images/main - Copy.png" alt="">
+
+    <div class="recommendations">
+        <div class="container">
+            <div class="slider">
+              <div class="slide-track">
+                <div class="slide" *ngFor="let member of teamMembers">
+                  <div class="team-item">
+                    <div class="overflow-hidden">
+                        <img class="img-fluid" [src]="'../../assets/images/' + member.imageUrl" alt="">
+                    </div>
+                    <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
+                      <div class="d-flex justify-content-center pt-2 px-1">
+                        <button type="button">Check it out</button>
+
+                      </div>
+                    </div>
+                    <div class="text-center p-4">
+                      <h5 class="mb-0">{{ member.name }}</h5>
+                      <small>{{ member.role }}</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+    </div>
+</div>
+
+

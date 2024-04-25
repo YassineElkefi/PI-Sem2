@@ -1,0 +1,74 @@
+.footer{
+    background-color: rgba(0, 0, 0, 1);
+  }
+
+.footer-section {
+    flex: 1;
+    padding: 0 10px;
+}
+
+h4{
+    color: #E29F06;
+    font-family: 'Dongle';
+    font-size: 45px;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}
+
+.color1 {
+  color: #ffffff;
+    font-family: 'Dongle';
+    font-size: 30px;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+  }
+
+.color2, .color3 {
+  color: #ffffff;
+    font-family: 'Dongle';
+    font-size: 25px;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+  }
+
+
+  .color2 i{
+    font-size: 20px;
+  }
+  
+ .color1:hover{
+    color: #E29F06;
+  }
+  
+.btn.btn-outline-light:hover {
+  background-color: transparent;
+  color: #E29F06;
+    
+  border-color: #E29F06;
+}
+
+  button{
+    font-size: 20px;
+    font-family: 'Dongle';
+    color: #ffffff;
+    background-color: #E29F06;
+    border-radius: 5px;
+    border-color: #E29F06;
+  -webkit-text-stroke-width: 0.2px;
+  -webkit-text-stroke-color: black;
+  }
+  
+input{
+  background-color: white;
+  border-color: #E29F06;
+  border-width: 2px;
+  color: #ffffff;
+}
+
+::placeholder{
+  color:#E29F06;
+  font-family: 'Dongle';
+  font-size: 25px;
+  -webkit-text-stroke-width: 0.5px;
+  -webkit-text-stroke-color: black;
+}
