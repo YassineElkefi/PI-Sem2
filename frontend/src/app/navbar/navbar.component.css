@@ -37,3 +37,25 @@ button{
     display: none;
   }
 }
+
+.dropdown-menu {
+  background-color: #212529;
+  border: 1px solid #343a40;
+}
+
+.dropdown-menu a {
+  color: #fff;
+  font-family: 'Dongle';
+  font-size: 30px;
+  padding: 10px 20px; 
+}
+
+.dropdown-menu a:hover {
+  background-color: #343a40;
+}
+a.dropdown-item{
+  cursor: pointer;
+}
+a.dropdown-item:hover {
+  color: #E29F06;
+}

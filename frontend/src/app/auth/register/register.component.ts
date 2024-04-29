@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { AuthService } from '../../auth.service';
-import { NgForm } from '@angular/forms';
+import { NgForm, NgModel } from '@angular/forms';
 import { first, last } from 'rxjs';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -34,6 +34,7 @@ export class RegisterComponent {
       return;
     }
 
+    //const user:User = new User(this.firstName,this.lastName,this.email,this.cin,this.password,this.phone,this.address,this.car,this.nb_strikes);
     const user:any = {
       firstName: this.firstName,
       lastName: this.lastName,
@@ -53,7 +54,7 @@ export class RegisterComponent {
       (response) => {
         console.log(response);
         console.log('User registered successfully');
-        this.router.navigate(['/Auth/Login']);
+        this.router.navigate(['/auth/login']);
       },
       (error) => {
         if (error.status === 400) {

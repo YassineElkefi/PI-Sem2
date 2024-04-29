@@ -2,17 +2,13 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const RequestSchema = new Schema({
+const OfferSchema = new Schema({
     title:{
         type: String,
         required: true,
     },
-    description:{
-        type: String,
-        required: true
-    },
     path:{
-        type:String,
+        type:Array,
         required: true
     },
     type:{
@@ -21,7 +17,7 @@ const RequestSchema = new Schema({
     },
     nb_ppl:{
         type: Number,
-        required: true
+        required: false
     },
     nb_pkg:{
         type: Number,
@@ -42,6 +38,10 @@ const RequestSchema = new Schema({
     offeror: {
         type: Schema.Types.Mixed,
         required: true
+    },
+    state:{
+        type: String,
+        required: true
     }
 });
-module.exports = mongoose.model('Offer',RequestSchema)
+module.exports = mongoose.model('Offer',OfferSchema)

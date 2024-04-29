@@ -5,7 +5,6 @@ import { CarpoolingDetailsModalComponent } from '../carpooling-details-modal/car
 import { RequestModalComponent } from '../request-modal/request-modal.component';
 import { RequestService } from '../../request.service';
 import { AuthService } from '../../auth.service';
-import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -51,10 +50,6 @@ fetchAllCarpoolingOffers(): void {
   this.offerService.getAllOffers()
     .subscribe(response => {
       this.offers = response;
-      
-      const allLocations = this.offers.flatMap(offer => offer.path.split('-').map((location: string) => location.trim()));
-      const uniqueLocations = allLocations.filter((location, index) => allLocations.indexOf(location) === index);
-      this.locations = uniqueLocations;
       console.log('All offers fetched successfully:', this.offers);
     }, error => {
       console.error('Error fetching offers:', error);
@@ -100,6 +95,6 @@ handleRequestPosted(requestData: any) {
 }
 logout(){
   this.authService.logout();
-  this.router.navigateByUrl('/Auth/Login');
+  this.router.navigateByUrl('/auth/login');
 }
 }

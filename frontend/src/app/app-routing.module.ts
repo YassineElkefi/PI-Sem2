@@ -8,8 +8,8 @@ import { CarpoolingFiltersComponent } from './carpooling/carpooling-filters/carp
 import { authGuard } from './auth.guard';
 
 const routes: Routes = [
-  {path: 'Carpooling', component: CarpoolingHomeComponent, canActivate: [authGuard]},
-  {path: 'Auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)},
+  {path: 'carpooling', component: CarpoolingHomeComponent, canActivate: [authGuard]},
+  {path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)},
   {path:'Home', component:HomeComponent},
   {path:'Delivery', component:DeliveryComponent},
   {path:'About-us', component:AboutUsComponent},

@@ -40,21 +40,21 @@
                 <div class="col-md-6">
                   <div data-mdb-input-init class="form-outline mb-4">
                     <label class="form-label" for="email">Email Address</label>
-                    <input type="email" id="email" class="form-control" [(ngModel)]="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"/>
+                    <input #em="ngModel" type="email" id="email" class="form-control" [(ngModel)]="email" name="email" required pattern="[a-z0-9._%+\-\]+@[a-z0-9.\-]+\.[a-z]{2,}$"/>
                   </div>
-                  <div class="alert alert-danger" *ngIf="registerForm.controls['email']?.invalid && registerForm.controls['email']?.touched">
-                    <div *ngIf="registerForm.controls['email']?.errors?.['pattern']">Email is invalid</div>
-                  </div>
+                  @if(em.errors?.['pattern']){
+                    <div class="alert alert-danger" >Email is invalid</div>
+                  }
                 </div>
 
                 <div class="col-md-6">
                   <div data-mdb-input-init class="form-outline mb-4">
                     <label class="form-label" for="cin">Identity Card Number</label>
-                    <input type="text" id="cin" class="form-control" [(ngModel)]="cin" name="cin" required pattern="[0-9]{8}" />
+                    <input #ci="ngModel" type="text" id="cin" class="form-control" [(ngModel)]="cin" name="cin" required pattern="[0-9]{8}" />
                   </div>
-                  <div class="alert alert-danger" *ngIf="registerForm.controls['cin']?.invalid && registerForm.controls['cin']?.touched">
-                    <div *ngIf="registerForm.controls['cin']?.errors?.['pattern']">Identity Number is invalid</div>
-                  </div>
+                  @if(ci.errors?.['pattern']){
+                    <div class="alert alert-danger">Identity Number is invalid</div>
+                  }
                 </div>
               </div>
 
@@ -62,11 +62,11 @@
                 <div class="col-6">
                   <div data-mdb-input-init class="form-outline mb-4">
                     <label class="form-label" for="phone">Phone</label>
-                    <input type="tel" id="phone" class="form-control" [(ngModel)]="phone" name="phone" required pattern="[0-9]{8}" />
+                    <input #ph="ngModel" type="tel" id="phone" class="form-control" [(ngModel)]="phone" name="phone" required pattern="[0-9]{8}" />
                   </div>
-                    <div class="alert alert-danger" *ngIf="registerForm.controls['phone']?.invalid && registerForm.controls['phone']?.touched">
-                      <div *ngIf="registerForm.controls['phone']?.errors?.['pattern']">Phone Number is invalid</div>
-                    </div>
+                  @if(ph.errors?.['pattern']){
+                    <div class="alert alert-danger">Phone Number is invalid</div>
+                  }
                 </div>
                 <div class="col-6">
                   <div data-mdb-input-init class="form-outline mb-4">
@@ -86,11 +86,11 @@
                 <div class="col-6">
                   <div data-mdb-input-init class="form-outline mb-4">
                     <label class="form-label" for="confirmpwd">Confirm Password</label>
-                    <input type="password" id="confirmpwd" class="form-control" [(ngModel)]="confirmPassword" name="confirmpwd" required [pattern]="password"/>
+                    <input #pw="ngModel" type="password" id="confirmpwd" class="form-control" [(ngModel)]="confirmPassword" name="confirmpwd" required [pattern]="password"/>
                 </div>
-                <div class="alert alert-danger" *ngIf="registerForm.controls['confirmpwd']?.invalid && registerForm.controls['confirmpwd']?.touched">
-                  <div *ngIf="registerForm.controls['confirmpwd']?.errors?.['pattern']">Passwords don't match</div>
-                </div>
+                @if(pw.errors?.['pattern']){
+                  <div class="alert alert-danger">Passwords don't match</div>
+                }
                 </div>
               </div>
               
@@ -114,7 +114,7 @@
                 Sign up
               </button>
             </form>
-            <p>Already a member ? <a routerLink="/Auth/Login" class="link-success">Sign In</a></p>
+            <p>Already a member ? <a routerLink="/auth/login" class="link-success">Sign In</a></p>
           </div>
         </div>
       </div>
