@@ -9,7 +9,6 @@ import { OffersComponent } from './offers/offers.component';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AppRoutingModule } from './app-routing.module';
-import { DeliveryComponent } from './delivery/delivery.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ButtonModule } from 'primeng/button';
 import { FooterComponent } from './footer/footer.component';
@@ -20,6 +19,15 @@ import { PostOfferModalComponent } from './carpooling/post-offer-modal/post-offe
 import { RequestModalComponent } from './carpooling/request-modal/request-modal.component';
 import { CarpoolingDetailsModalComponent } from './carpooling/carpooling-details-modal/carpooling-details-modal.component';
 import { CarpoolingHomeComponent } from './carpooling/carpooling-home/carpooling-home.component';
+import { DeliveryHomeComponent } from './delivery/delivery-home/delivery-home.component';
+import { DeliveryListComponent } from './delivery/delivery-list/delivery-list.component';
+import { DeliveryItemComponent } from './delivery/delivery-item/delivery-item.component';
+import { DeliveryFilterComponent } from './delivery/delivery-filter/delivery-filter.component';
+import { OfferFilterPipe } from './pipes/offer-filter.pipe';
+import { DeliveryAddOfferComponent } from './delivery/delivery-add-offer/delivery-add-offer.component';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -28,7 +36,6 @@ import { CarpoolingHomeComponent } from './carpooling/carpooling-home/carpooling
     OffersComponent,
     HomeComponent,
     NavbarComponent,
-    DeliveryComponent,
     AboutUsComponent,
     FooterComponent,
     CarpoolingHomeComponent,
@@ -38,14 +45,24 @@ import { CarpoolingHomeComponent } from './carpooling/carpooling-home/carpooling
     PostOfferModalComponent,
     RequestModalComponent,
     CarpoolingDetailsModalComponent,
-  ],
+    DeliveryHomeComponent,
+    DeliveryListComponent,
+    DeliveryItemComponent,
+    DeliveryFilterComponent,
+    OfferFilterPipe,
+    DeliveryAddOfferComponent
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
     CarouselModule,
-    ButtonModule
+    ButtonModule,
+    InputGroupModule,
+    InputGroupAddonModule,
+    DropdownModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

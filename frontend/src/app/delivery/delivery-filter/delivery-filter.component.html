@@ -1,0 +1,37 @@
+<form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+
+    <select ngModel name="location">
+        <option value="All">All Locations</option>
+        <option *ngFor="let location of locations" [value]="location">{{ location }}</option>
+    </select>
+
+    <input type="number" min="1" max="5" ngModel name="nbr_pkgs">
+
+    <input type="number" ngModel name="price" step="0.1" min="0">
+
+    <input type="date" ngModel name="date">
+      
+    <input type="time" ngModel name="time">
+
+    <button class="btn btn-primary" type="submit">Filter</button>
+
+</form>
+
+      <!--<p-inputGroup>
+        <p-dropdown [options]="locations"   optionLabel="name" [showClear]="true" placeholder="Select a location"></p-dropdown>
+
+        <p-inputGroupAddon>
+            <i class="pi pi-user"></i>
+        </p-inputGroupAddon>
+        <input pInputText placeholder="Username" />
+    </p-inputGroup>
+    <p-inputGroup>
+        <p-inputGroupAddon>$</p-inputGroupAddon>
+        <input type="text" pInputText placeholder="Price" />
+        <p-inputGroupAddon>.00</p-inputGroupAddon>
+    </p-inputGroup>
+    <p-inputGroup>
+        <p-inputGroupAddon>www</p-inputGroupAddon>
+        <input type="text" pInputText placeholder="Website" />
+    </p-inputGroup>
+  -->

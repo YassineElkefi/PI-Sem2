@@ -1,9 +1,11 @@
 .app-container {
   position: relative;
-  min-height: 100vh; /* Ensures the container takes up at least the full viewport height */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-.overlay-top{
+.overlay-top {
   position: fixed;
   top: 0;
   left: 0;
@@ -13,7 +15,10 @@
 }
 
 .overlay-bottom {
+  flex-shrink: 0;
+  margin-top: auto;
   bottom: 0;
   left: 0;
   width: 100%;
+  
 }

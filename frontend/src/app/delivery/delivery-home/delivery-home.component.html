@@ -1,0 +1,11 @@
+<div class="main">
+    <div class="background-image">
+        <div class="content">
+            <app-delivery-filter (sendFiltersToHome)="getfilters($event)"></app-delivery-filter>
+            <div class="main-content">
+                <app-delivery-add-offer></app-delivery-add-offer>
+                <app-delivery-list [offers]="offers" [filters]="filters"></app-delivery-list>
+            </div>
+        </div>
+    </div>
+</div>

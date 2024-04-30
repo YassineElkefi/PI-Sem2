@@ -32,21 +32,21 @@
     <div class="collapse navbar-collapse justify-content-lg-center" id="navbarNav" [ngClass]="{'show': isNavbarOpen}">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/Home" routerLinkActive="active">HOME</a>
+          <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">HOME</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link">CARPOOLING</a>
+          <a class="nav-link" routerLink="/Carpooling" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">CARPOOLING</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/Delivery" routerLinkActive="active">DELIVERY</a>
+          <a class="nav-link" routerLink="/delivery" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">DELIVERY</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/About-us" routerLinkActive="active">ABOUT US</a>
+          <a class="nav-link" routerLink="/About-us" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">ABOUT US</a>
         </li>
       </ul>
     </div>
 
-    <button ><i class="bi bi-person-circle" style="font-size: 1.5rem; color: #E29F06;" ></i></button>
+    <button routerLink="/Auth" ><i class="bi bi-person-circle" style="font-size: 1.5rem; color: #E29F06;" ></i></button>
   
     <button class="navbar-toggler" type="button"  (click)="toggleNavbar()" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>

@@ -12,7 +12,7 @@ const RequestSchema = new Schema({
         required: true
     },
     path:{
-        type:String,
+        type: Array,
         required: true
     },
     type:{
@@ -21,7 +21,7 @@ const RequestSchema = new Schema({
     },
     nb_ppl:{
         type: Number,
-        required: true
+        required: false
     },
     nb_pkg:{
         type: Number,
