@@ -25,6 +25,7 @@
     <button><i class="bi bi-person-circle" style="font-size: 1.5rem; color: #E29F06;"></i></button>
   </div>
 </nav>-->
+
 <nav class="navbar navbar-expand-lg">
   <div class="container">
     <a class="">Navbar scroll</a>
@@ -35,19 +36,39 @@
           <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">HOME</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/Carpooling" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">CARPOOLING</a>
+          <a class="nav-link" routerLink="/carpooling" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">CARPOOLING</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/delivery" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">DELIVERY</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/About-us" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">ABOUT US</a>
+          <a class="nav-link" routerLink="/about-us" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">ABOUT US</a>
         </li>
       </ul>
     </div>
+    @if(isAuthenticated){
+      <div class="dropdown">
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="bi bi-person-circle" style="font-size: 1.5rem; color: #E29F06;"></i>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Profile</a>
+          <a class="dropdown-item" href="#">My offers</a>
+          <a class="dropdown-item" (click)="logout()">Logout</a>
+        </div>
+      </div>
+    }@else {
+      <div class="dropdown">
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="bi bi-person-circle" style="font-size: 1.5rem; color: #E29F06;"></i>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" routerLink="/auth/register">Register </a>
+          <a class="dropdown-item" routerLink="/auth/login">Login</a>
+        </div>
+      </div>
+    }
 
-    <button routerLink="/Auth" ><i class="bi bi-person-circle" style="font-size: 1.5rem; color: #E29F06;" ></i></button>
-  
     <button class="navbar-toggler" type="button"  (click)="toggleNavbar()" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>

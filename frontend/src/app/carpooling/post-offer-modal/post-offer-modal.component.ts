@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-post-offer-modal',
@@ -19,6 +20,9 @@ export class PostOfferModalComponent {
   departure_date: string = '';
   id: string = '';
   price: number = 0;
+  isLoggedIn: boolean = false;
+  user: any;
+  car: any;
 
   @Output() offerToHome = new EventEmitter();
   isOpen: boolean = false;
@@ -30,6 +34,11 @@ export class PostOfferModalComponent {
   closeModal() {
     this.isOpen = false;
   }
+  constructor(private authService: AuthService) { }
+  ngOnInit(): void {
+  this.isLoggedIn = this.authService.isAuthenticated();
+  this.user = this.authService.getUser();
+  }
   sendOffer(){
     const offerData={
       title: this.title,
@@ -39,7 +48,9 @@ export class PostOfferModalComponent {
       nb_ppl: this.nb_ppl,
       departure_time: this.departure_time,
       departure_date: this.departure_date,
-      price: this.price
+      price: this.price,
+      car: this.user.car,
+      offeror: this.user
     }
 
     this.offerToHome.emit(offerData);

@@ -1,7 +1,8 @@
+@if(offer.type == 'Carpooling'){
 <div class="card mt-3" (click)="sendOfferToList()">
     <div class="card-body">
       <h4>{{ offer.title }}</h4>
-      <h4>Posted by : {{ offer.offerer }}</h4>
+      <h4>Posted by : {{ offer.offeror.firstName }} {{offer.offeror.lastName}} </h4>
       <h4>Path : {{ offer.path }}</h4>
       <h4>Departure Time : {{ offer.departure_time }}</h4>
       <h4>Departure Date : {{ offer.departure_date }}</h4>
@@ -9,3 +10,4 @@
       <h4>Price : {{ offer.price }} DT</h4>
     </div>
 </div>
+}

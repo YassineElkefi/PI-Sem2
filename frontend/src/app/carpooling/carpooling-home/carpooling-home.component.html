@@ -26,3 +26,7 @@
 ></app-request-modal>
 <app-post-offer-modal #modal (offerToHome)="handleOfferPosted($event)"></app-post-offer-modal>
 
+@if(isLoggedIn){
+    <h2>Welcome {{ user?.firstName }} {{user?.lastName}} - {{ user?.car }} </h2>
+    <button class="btn btn-danger" (click)="logout()">Logout</button>
+}
