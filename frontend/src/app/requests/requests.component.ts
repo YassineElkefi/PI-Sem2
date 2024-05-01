@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { RequestService } from '../request.service';
-import { OfferService } from '../offer.service';
+import { RequestService } from '../services/request.service';
+import { OfferService } from '../services/offer.service';
 import { OnInit } from '@angular/core';
 
 @Component({

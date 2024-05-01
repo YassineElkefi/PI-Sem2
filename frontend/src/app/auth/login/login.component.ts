@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../auth.service';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
@@ -23,7 +23,7 @@ export class LoginComponent {
       next: (response) => {
         if(!(response.status === 200) && !(response.status === 400)){
         console.log(response);
-        this.router.navigate(['/Home']);
+        this.router.navigate(['/']);
         }else if(response.status === 400){
           Swal.fire({
             icon: 'error',

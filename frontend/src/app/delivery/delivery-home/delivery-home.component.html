@@ -3,9 +3,14 @@
         <div class="content">
             <app-delivery-filter (sendFiltersToHome)="getfilters($event)"></app-delivery-filter>
             <div class="main-content">
-                <app-delivery-add-offer></app-delivery-add-offer>
-                <app-delivery-list [offers]="offers" [filters]="filters"></app-delivery-list>
+                <div class="col-offset-3">
+                    <button class="btn btn-success" (click)="openAddModal()" data-bs-toggle="modal" data-bs-target="#addModal">Post an offer</button>
+                </div>
+                <app-delivery-list [offers]="offers" [filters]="filters" (selectedOfferToHome)="handleIncomingOffer($event);openDetailsModal()"  data-bs-toggle="modal" data-bs-target="#deliveryDetailsModal"></app-delivery-list>
+                <app-delivery-offer-details #detailsModal [selectedOffer]="selectedOffer"></app-delivery-offer-details>
             </div>
         </div>
     </div>
 </div>
+<app-delivery-add-offer #addModal (offerToHome)="handlePostedOffer($event)"></app-delivery-add-offer>
+<!--[offer]="offer"-->

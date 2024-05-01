@@ -8,52 +8,57 @@
           </button>
         </div>
         <div class="modal-body">
+
+          <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
             <div class="row">
-            <div class="mb-3 col-12">
-                <input type="text" hidden class="form-control" placeholder="Sender" [(ngModel)]="id">
-            </div>
-            
-            <div class="mb-3 col-12">
-                <input type="text" class="form-control" placeholder="Title" [(ngModel)]="title">
-            </div>
-            
-            <div class=" mb-3 col-12">
-                <input type="text" class="form-control" placeholder="Description" [(ngModel)]="description">
-            </div>
-            
-            <div class="mb-3 col-12">
-                <input type="text" class="form-control" placeholder="Path" [(ngModel)]="path">
-            </div>
-              
-            <div class="mb-3 col-12">
-                <label for="numberOfPeople">Number of people:</label>
-                <input id="numberOfPeople" type="number" class="form-control" placeholder="Number of people" [(ngModel)]="nb_ppl">
-            </div>
-        
-            <div class="mb-3 col-12">
-                <label for="departureTimeSelect">Departure Time:</label>
-                <select id="departureTimeSelect" class="form-control" [(ngModel)]="departure_time" name="departureTime">
-                  <option value="" disabled selected>Choose a time</option>
-                  <option *ngFor="let time of availableTimes" [value]="time">{{time}}</option>
-                </select>
+          
+              <div class="col-12 mb-3">
+                <input type="text" class="form-control" placeholder="Title" ngModel name="title" required>
+              </div>
+          
+              <div class="col-12 mb-3">
+                <div *ngFor="let location of locations; let i = index" class="d-flex align-items-center">
+                  <label for="location{{i}}" class="me-2">Location {{i + 1}}:</label>
+                  <select id="location{{i}}" name="location{{i}}" [(ngModel)]="locations[i]" class="form-select" required>
+                    <option value="" disabled selected>Select Location</option>
+                    <option *ngFor="let option of locationOptions" [value]="option">{{ option }}</option>
+                  </select>
+                  <button *ngIf="i > 0" (click)="removeLocation(i)" class="btn btn-danger ms-2">-</button>
+                  <button *ngIf="i === locations.length - 1" (click)="addLocation()" class="btn btn-secondary ms-2">+</button>
+                </div>
               </div>
               
-              
-              <div class="mb-3 col-12">
-                <label for="departureDate">Departure Date:</label>
-                <input type="date" class="form-control" id="departureDate" [(ngModel)]="departure_date" name="departureDate">
+          
+              <div class="col-12 mb-3">
+                <label for="departureDate" class="form-label">Departure Date:</label>
+                <input type="date" class="form-control" id="departureDate" ngModel name="departure_date" required>
+              </div>
+          
+              <div class="col-12 mb-3">
+                <label for="departureTime" class="form-label">Departure Time:</label>
+                <input id="departureTime" type="time" class="form-control" ngModel name="departure_time" required>
               </div>
 
-              <div class="mb-3 col-12">
-                <label for="price">Price:</label>
-                <input type="number" class="form-control" id="price" [(ngModel)]="price" name="price">
-              </div>  
+              <div class="col-12 mb-3">
+                <label for="numberOfPeople" class="form-label">Number of People:</label>
+                <input id="numberOfPeople" type="number" class="form-control" placeholder="Number of people" ngModel name="nb_ppl" required>
+              </div>
+          
+              <div class="col-12 mb-3">
+                <label for="price" class="form-label">Price:</label>
+                <input id="price" type="number" class="form-control" placeholder="Price" ngModel name="price" required>
+              </div>
+          
+              <div class="col-12 mb-3">
+                <button type="submit" (click)="registerPath()" [disabled]="!f.form.valid" data-bs-dismiss="modal" class="btn btn-primary mt-1">Post Offer</button>
+              </div>
+
             </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" (click)="sendOffer()" class="btn btn-primary mt-1 me-2" data-bs-dismiss="modal">Post Offer</button>
-          <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button> -->
+          </form>
+          
+
+
+            
         </div>
       </div>
     </div>

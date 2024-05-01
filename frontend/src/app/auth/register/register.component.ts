@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { AuthService } from '../../auth.service';
+import { AuthService } from '../../services/auth.service';
 import { NgForm, NgModel } from '@angular/forms';
 import { first, last } from 'rxjs';
 import { Router } from '@angular/router';

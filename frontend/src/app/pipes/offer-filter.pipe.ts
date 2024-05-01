@@ -23,7 +23,7 @@ export class OfferFilterPipe implements PipeTransform {
       filteredOffers = filteredOffers.filter(offer => offer.path.includes(location));
     }
     if (pkgs) {
-      filteredOffers = filteredOffers.filter(offer => offer.nbr_pkgs >= pkgs);
+      filteredOffers = filteredOffers.filter(offer => offer.nb_pkg >= pkgs);
     }
     if (price) {
       filteredOffers = filteredOffers.filter(offer => offer.price >= price);

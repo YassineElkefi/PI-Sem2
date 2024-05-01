@@ -21,10 +21,10 @@
         </div>
     </div>
 </div>
-<app-request-modal #modal3 [selectedOffer]="selectedOffer" (close)="closeRequestModal()"
+<!--<app-request-modal #modal3 [selectedOffer]="selectedOffer" (close)="closeRequestModal()"
 (requestToHome)="handleRequestPosted($event)"
-></app-request-modal>
-<app-post-offer-modal #modal (offerToHome)="handleOfferPosted($event)"></app-post-offer-modal>
+></app-request-modal>-->
+<app-post-offer-modal #modal (offerToHome)="handlePostedOffer($event)"></app-post-offer-modal>
 
 @if(isLoggedIn){
     <h2>Welcome {{ user?.firstName }} {{user?.lastName}} - {{ user?.car }} </h2>

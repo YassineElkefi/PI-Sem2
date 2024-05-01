@@ -1,11 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { OfferService } from '../../offer.service';
+import { OfferService } from '../../services/offer.service';
 import { PostOfferModalComponent } from '../post-offer-modal/post-offer-modal.component';
 import { CarpoolingDetailsModalComponent } from '../carpooling-details-modal/carpooling-details-modal.component';
 import { RequestModalComponent } from '../request-modal/request-modal.component';
-import { RequestService } from '../../request.service';
-import { AuthService } from '../../auth.service';
+import { RequestService } from '../../services/request.service';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { Offer } from '../../models/Offer';
+import { map } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-carpooling-home',
@@ -13,17 +16,20 @@ import { Router } from '@angular/router';
   styleUrl: './carpooling-home.component.css'
 })
 export class CarpoolingHomeComponent implements OnInit{
-
+  offers?: any[];
+  locations: string[]=[];
+  user:any;
   selectedOffer: any;
-  recupererOffre(offer: any){
-  this.selectedOffer = offer;
-  }
+  isLoggedIn: boolean= false;
 
   @ViewChild('modal') modal?: PostOfferModalComponent;
   @ViewChild('modal2') modal2?: CarpoolingDetailsModalComponent;
   @ViewChild('modal3') modal3?: RequestModalComponent;
 
-isLoggedIn: boolean= false;
+
+  recupererOffre(offer: any){
+  this.selectedOffer = offer;
+  }
 
 constructor(private offerService: OfferService, private requestService:RequestService, private authService:AuthService, private router: Router){
   this.isLoggedIn = this.authService.isAuthenticated();
@@ -32,12 +38,6 @@ constructor(private offerService: OfferService, private requestService:RequestSe
  }
 
 }
-
-
-
-offers?: any[];
-locations: string[]=[];
-user:any;
 
 ngOnInit(): void {
   this.isLoggedIn = this.authService.isAuthenticated();
@@ -48,12 +48,15 @@ ngOnInit(): void {
 
 fetchAllCarpoolingOffers(): void {
   this.offerService.getAllOffers()
-    .subscribe(response => {
-      this.offers = response;
-      console.log('All offers fetched successfully:', this.offers);
-    }, error => {
-      console.error('Error fetching offers:', error);
-    });
+  .pipe(
+    map((offers: Offer[]) => offers.filter(offer => offer.type === 'Carpooling'))
+  )
+  .subscribe(filteredOffers => {
+    this.offers = filteredOffers;
+    console.log('Filtered offers fetched successfully:', this.offers);
+  }, error => {
+    console.error('Error fetching filtered offers:', error);
+  });
 }
 
 openModal(): void {
@@ -63,7 +66,7 @@ openModal2(): void {
   this.modal2?.openModal();
 }
 
-handleOfferPosted(offerData: any) {
+handlePostedOffer(offerData: any) {
 
   this.offerService.postOffer(offerData)
       .subscribe(response => {

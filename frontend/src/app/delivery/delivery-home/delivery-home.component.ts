@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { OfferService } from '../../offer.service';
-import { RequestService } from '../../request.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { OfferService } from '../../services/offer.service';
+import { RequestService } from '../../services/request.service';
 import { Offer } from '../../models/Offer';
 import { map } from 'rxjs/operators';
+import { DeliveryAddOfferComponent } from '../delivery-add-offer/delivery-add-offer.component';
+import { DeliveryOfferDetailsComponent } from '../delivery-offer-details/delivery-offer-details.component';
 
 @Component({
   selector: 'app-delivery-home',
@@ -13,6 +15,24 @@ export class DeliveryHomeComponent implements OnInit{
   constructor(private offerService: OfferService, private requestService:RequestService){}
   filters?: any
   offers: Offer[] = []
+  selectedOffer: Offer;
+
+
+  @ViewChild('addModal') addModal?: DeliveryAddOfferComponent;
+  @ViewChild('detailsModal') detailsModal?: DeliveryOfferDetailsComponent;
+  
+  handleIncomingOffer(offer: Offer){
+    this.selectedOffer = offer;
+  }
+
+  openAddModal(): void {
+    this.addModal?.openModal();
+  }
+
+  openDetailsModal(): void {
+    this.detailsModal?.openModal();
+  }
+
 
   ngOnInit(): void{
     this.fetchAllOffers();
@@ -33,6 +53,16 @@ export class DeliveryHomeComponent implements OnInit{
       }, error => {
         console.error('Error fetching filtered offers:', error);
       });
+  }
+
+  handlePostedOffer(form: any){
+    this.offerService.postOffer(form)
+    .subscribe(response => {
+      console.log('Offer added successfully:', response);
+      this.ngOnInit();
+    }, error => {
+      console.error('Error adding Offer:', error);
+    });
   }
 
 }

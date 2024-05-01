@@ -8,7 +8,7 @@ import { authGuard } from './auth.guard';
 import { DeliveryHomeComponent } from './delivery/delivery-home/delivery-home.component';
 
 const routes: Routes = [
-  {path: 'carpooling', component: CarpoolingHomeComponent, canActivate: [authGuard]},
+  {path: 'carpooling', component: CarpoolingHomeComponent},
   {path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)},
   {path:'', component:HomeComponent},
   {path:'delivery', component:DeliveryHomeComponent},

@@ -1,7 +1,7 @@
 <ol class="list-group">
   <ng-container *ngIf="offers">
     <ng-container *ngFor="let offer of offers | offersFilter: filters">
-      <app-delivery-item [offer]="offer"></app-delivery-item>
+      <app-delivery-item [offer]="offer" (selectedOfferToList)="handleIncomingOffer($event)"></app-delivery-item>
     </ng-container>
   </ng-container>
 </ol>

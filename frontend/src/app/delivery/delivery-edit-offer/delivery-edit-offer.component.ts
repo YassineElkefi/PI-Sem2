@@ -1,20 +1,20 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { Component, Output, EventEmitter, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-delivery-add-offer',
-  templateUrl: './delivery-add-offer.component.html',
-  styleUrl: './delivery-add-offer.component.css'
+  selector: 'app-delivery-edit-offer',
+  templateUrl: './delivery-edit-offer.component.html',
+  styleUrl: './delivery-edit-offer.component.css'
 })
-export class DeliveryAddOfferComponent implements OnInit {
+export class DeliveryEditOfferComponent {
   isOpen: boolean = false;
   locations: string[] = [''];
   locationOptions: string[] = ['Yasminet', 'Mourouj', 'Tekup'];
   isLoggedIn: boolean = false;
   user: any;
   
-  @Output() offerToHome = new EventEmitter();
+  @Output() offerToItem = new EventEmitter();
 
   @ViewChild('f') myForm: NgForm;
 
@@ -34,19 +34,19 @@ export class DeliveryAddOfferComponent implements OnInit {
 
   ngOnInit(): void {
    
-    this.isLoggedIn = this.authService.isAuthenticated();
-    this.user = this.authService.getUser();
+    /*this.isLoggedIn = this.authService.isAuthenticated();
+    this.user = this.authService.getUser();*/
 
     }
 
   onSubmit(form: any) {
-    form.path =this.locations;
+    /*form.path =this.locations;
     form.type = "Delivery";
     form.state = "pending";
-    form.offeror = this.user;
+    form.offeror = null;
     console.log(form);
     this.sendOffer(form);
-    this.myForm.resetForm();
+    this.myForm.resetForm();*/
   }
 
   openModal() {
@@ -58,7 +58,7 @@ export class DeliveryAddOfferComponent implements OnInit {
   }
 
   sendOffer(form: any): void{
-    this.offerToHome.emit(form);
+    this.offerToItem.emit(form);
     
   }
 }

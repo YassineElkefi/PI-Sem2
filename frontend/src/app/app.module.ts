@@ -28,6 +28,8 @@ import { DeliveryAddOfferComponent } from './delivery/delivery-add-offer/deliver
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { DropdownModule } from 'primeng/dropdown';
+import { DeliveryEditOfferComponent } from './delivery/delivery-edit-offer/delivery-edit-offer.component';
+import { DeliveryOfferDetailsComponent } from './delivery/delivery-offer-details/delivery-offer-details.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { DropdownModule } from 'primeng/dropdown';
     DeliveryItemComponent,
     DeliveryFilterComponent,
     OfferFilterPipe,
-    DeliveryAddOfferComponent
+    DeliveryAddOfferComponent,
+    DeliveryEditOfferComponent,
+    DeliveryOfferDetailsComponent
     ],
   imports: [
     BrowserModule,
