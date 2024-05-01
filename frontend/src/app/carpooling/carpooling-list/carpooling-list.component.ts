@@ -8,6 +8,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class CarpoolingListComponent {
 
   @Input() offers?: any[];
+  @Input() filters?: any;
   @Output() offerToHome = new EventEmitter();
 
   sendOfferToHome(offer: any){

@@ -1,6 +1,7 @@
-@for (offer of offers; track $index) {
-    <app-carpooling-items 
-    [offer]="offer" 
-    (OfferToList)="sendOfferToHome($event)"
-    ></app-carpooling-items>
-}
+<ol class="list-group">
+    <ng-container *ngIf="offers">
+      <ng-container *ngFor="let offer of offers | offersFilter: filters">
+        <app-carpooling-items [offer]="offer" (OfferToList)="sendOfferToHome($event)"></app-carpooling-items>
+      </ng-container>
+    </ng-container>
+  </ol>

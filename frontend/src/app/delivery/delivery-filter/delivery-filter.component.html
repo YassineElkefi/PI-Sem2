@@ -1,21 +1,32 @@
-<form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+<form #f="ngForm" (ngSubmit)="onSubmit(f.value)" class="row g-2 align-items-center">
+    <div class="col-auto">
+        <select class="form-select" ngModel name="location">
+            <option value="" disabled selected>All Locations</option>
+            <option *ngFor="let location of locations" [value]="location">{{ location }}</option>
+        </select>
+    </div>
 
-    <select ngModel name="location">
-        <option value="All">All Locations</option>
-        <option *ngFor="let location of locations" [value]="location">{{ location }}</option>
-    </select>
+    <div class="col-auto">
+        <input type="number" class="form-control" min="1" max="5" ngModel name="nbr_pkgs" placeholder="Number of Packages">
+    </div>
 
-    <input type="number" min="1" max="5" ngModel name="nbr_pkgs">
+    <div class="col-auto" style="width: 120px;">
+        <input type="number" class="form-control" ngModel name="price" step="0.1" min="0" placeholder="Price">
+    </div>
 
-    <input type="number" ngModel name="price" step="0.1" min="0">
-
-    <input type="date" ngModel name="date">
+    <div class="col-auto">
+        <input type="date" class="form-control" ngModel name="date" placeholder="Date">
+    </div>
       
-    <input type="time" ngModel name="time">
+    <div class="col-auto">
+        <input type="time" class="form-control" ngModel name="time" placeholder="Time">
+    </div>
 
-    <button class="btn btn-primary" type="submit">Filter</button>
-
+    <div class="col-auto">
+        <button class="btn btn-primary" type="submit">Filter</button>
+    </div>
 </form>
+
 
       <!--<p-inputGroup>
         <p-dropdown [options]="locations"   optionLabel="name" [showClear]="true" placeholder="Select a location"></p-dropdown>

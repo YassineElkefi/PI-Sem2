@@ -1,9 +1,9 @@
 <div id="banner-image"></div>
 <div class="container-fluid">
-    <h1 align="center" class="py-5">CAR POOLING OFFERS</h1>
+    <h1 align="center" class="py-5">CARPOOLING OFFERS</h1>
     <div class="row py-5">
         <div class="col-4">
-            <app-carpooling-filters [locations]="locations"></app-carpooling-filters>
+            <app-carpooling-filters (sendFiltersToHome)="getfilters($event)"></app-carpooling-filters>
         </div>
         <div class="col-6">
             <div class="col-3">
@@ -12,7 +12,7 @@
             <div class="col-offset-3">
                 <button class="btn btn-success" (click)="openModal()" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Post offer</button>
             </div>
-            <app-carpooling-list [offers]="offers"
+            <app-carpooling-list [offers]="offers" [filters]="filters"
             (offerToHome)="recupererOffre($event);openModal2()" data-bs-toggle="modal" data-bs-target="#detailsModalCenter"
             ></app-carpooling-list>
         </div>

@@ -25,6 +25,7 @@ export class CarpoolingHomeComponent implements OnInit{
   @ViewChild('modal') modal?: PostOfferModalComponent;
   @ViewChild('modal2') modal2?: CarpoolingDetailsModalComponent;
   @ViewChild('modal3') modal3?: RequestModalComponent;
+  filters: any;
 
 
   recupererOffre(offer: any){
@@ -99,5 +100,9 @@ handleRequestPosted(requestData: any) {
 logout(){
   this.authService.logout();
   this.router.navigateByUrl('/auth/login');
+}
+
+getfilters(f : any) {
+  this.filters = f
 }
 }

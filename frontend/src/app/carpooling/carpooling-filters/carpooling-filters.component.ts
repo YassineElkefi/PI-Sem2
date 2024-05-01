@@ -1,15 +1,26 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-carpooling-filters',
   templateUrl: './carpooling-filters.component.html',
-  styleUrl: './carpooling-filters.component.css'
+  styleUrls: ['./carpooling-filters.component.css']
 })
 export class CarpoolingFiltersComponent {
 
-  @Input() locations: string[] = [];
-  @Output() filtersChnaged = new EventEmitter<any>();
+  locations: string[] = ["Ben arous", "Ariana", "Tunis", "Mourouj"];
 
-  times: string[] = ["8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM", "7:00 PM"];
-  
+  @Output() sendFiltersToHome = new EventEmitter<any>();
+
+  onSubmit(form: any) {
+    const value = {
+      location: form.location || 'All',
+      nbr_ppl: form.nbr_ppl ? form.nbr_ppl : null,
+      price: form.price ? form.price : null,
+      date: form.date ? form.date : null,
+      time: form.time ? form.time : null,
+    };
+    console.log(value);
+    this.sendFiltersToHome.emit(value);
+  }
+
 }
