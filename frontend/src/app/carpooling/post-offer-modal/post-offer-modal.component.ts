@@ -13,7 +13,7 @@ export class PostOfferModalComponent {
   offers: any[] = [];
   requests: any[] = [];
   title: string = '';
-  description: string = '';
+  state:string='';
   path: string = '';
   nb_ppl: number = 0;
   departure_time: string = '';
@@ -42,7 +42,6 @@ export class PostOfferModalComponent {
   sendOffer(){
     const offerData={
       title: this.title,
-      description: this.description,
       path: this.path,
       type: 'Carpooling',
       nb_ppl: this.nb_ppl,
@@ -50,7 +49,8 @@ export class PostOfferModalComponent {
       departure_date: this.departure_date,
       price: this.price,
       car: this.user.car,
-      offeror: this.user
+      offeror: this.user,
+      state:this.state
     }
 
     this.offerToHome.emit(offerData);

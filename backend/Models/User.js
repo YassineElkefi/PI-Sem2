@@ -37,6 +37,11 @@ const UserSchema = new mongoose.Schema({
         type: Number,
         required: false
     },
+    avatar:{
+        type: String,
+        required: false,
+        nullable: true
+    },
     });
 
     module.exports = mongoose.model('User',UserSchema)

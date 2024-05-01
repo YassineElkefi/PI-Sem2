@@ -23,7 +23,7 @@ export class LoginComponent {
       next: (response) => {
         if(!(response.status === 200) && !(response.status === 400)){
         console.log(response);
-        this.router.navigate(['/Home']);
+        this.router.navigate(['/']);
         }else if(response.status === 400){
           Swal.fire({
             icon: 'error',

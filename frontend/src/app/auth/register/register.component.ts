@@ -4,6 +4,7 @@ import { NgForm, NgModel } from '@angular/forms';
 import { first, last } from 'rxjs';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { User } from '../../models/User';
 
 
 
@@ -25,6 +26,7 @@ export class RegisterComponent {
   phone: string='';
   address: string='';
   nb_strikes: number=0;
+  avatar:string='';
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -33,19 +35,7 @@ export class RegisterComponent {
       console.log("Passwords don't match");
       return;
     }
-
-    //const user:User = new User(this.firstName,this.lastName,this.email,this.cin,this.password,this.phone,this.address,this.car,this.nb_strikes);
-    const user:any = {
-      firstName: this.firstName,
-      lastName: this.lastName,
-      cin:this.cin,
-      email: this.email,
-      password: this.password,
-      car: this.car,
-      phone: this.phone,
-      address: this.address,
-      nb_strikes: 0
-    };
+    const user: User = new User(this.cin,this.firstName,this.lastName,this.email, this.password,this.phone,this.address,this.car,0,null);
 
     if (this.haveCar === 'yes') {
       user.car = this.car;

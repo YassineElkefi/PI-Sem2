@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 app.use("/requests",request)
 app.use("/offers",offer)
 app.use("/auth",require("./Routes/users"))
-
+app.use('/uploads/avatars', express.static('uploads/avatars'))
 
 
 app.listen(PORT, () => {

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Subscription, interval } from 'rxjs';
+import { User } from '../models/User';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -12,7 +13,8 @@ export class NavbarComponent implements OnInit{
   constructor(private authService: AuthService, private router: Router, private cookieService: CookieService) { }
   isNavbarOpen = false;
   isAuthenticated = false;
-  
+  user: any | undefined;
+  userData:any;
   private cookieSubscription: Subscription | undefined;
 
   ngOnInit(): void {
@@ -20,6 +22,11 @@ export class NavbarComponent implements OnInit{
 
     this.cookieSubscription = interval(1000).subscribe(() => {
       this.isAuthenticated = this.cookieService.check('authToken');
+      this.userData= this.cookieService.get('userData');
+      if(this.userData){
+        this.user = JSON.parse(this.cookieService.get('userData'));
+      }
+      
     });
   }
   toggleNavbar() {
