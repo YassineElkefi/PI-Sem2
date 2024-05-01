@@ -8,11 +8,11 @@ import { Offer } from '../../models/Offer';
 })
 export class DeliveryListComponent{
 
-  @Input() offers?: Offer[];
+  @Input() offers?: any;
   @Input() filters?: any;
   @Output() selectedOfferToHome = new EventEmitter();
   
-  handleIncomingOffer(offer: Offer){
+  handleIncomingOffer(offer: any){
     this.selectedOfferToHome.emit(offer)
   }
 
