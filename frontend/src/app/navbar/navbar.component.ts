@@ -1,14 +1,9 @@
-<<<<<<< HEAD
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
-=======
 import { Component, OnInit, Output } from '@angular/core';
-import { AuthService } from '../auth.service';
->>>>>>> aad534917eeb964be041c2214ef9354d48d82cb2
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Subscription, interval } from 'rxjs';
 import { User } from '../models/User';
+import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
