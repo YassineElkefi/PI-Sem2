@@ -35,6 +35,27 @@ export class PostOfferModalComponent {
   closeModal() {
     this.isOpen = false;
   }
+<<<<<<< HEAD
+=======
+  constructor(private authService: AuthService) { }
+  ngOnInit(): void {
+  this.isLoggedIn = this.authService.isAuthenticated();
+  this.user = this.authService.getUser();
+  }
+  sendOffer(){
+    const offerData={
+      title: this.title,
+      path: this.path,
+      type: 'Carpooling',
+      nb_ppl: this.nb_ppl,
+      departure_time: this.departure_time,
+      departure_date: this.departure_date,
+      price: this.price,
+      car: this.user.car,
+      offeror: this.user,
+      state:this.state
+    }
+>>>>>>> aad534917eeb964be041c2214ef9354d48d82cb2
 
   addLocation() {
     this.locations.push('');
