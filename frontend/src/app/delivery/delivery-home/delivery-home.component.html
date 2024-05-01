@@ -6,11 +6,11 @@
                 <div class="col-offset-3">
                     <button class="btn btn-success" (click)="openAddModal()" data-bs-toggle="modal" data-bs-target="#addModal">Post an offer</button>
                 </div>
-                <app-delivery-list [offers]="offers" [filters]="filters" (selectedOfferToHome)="handleIncomingOffer($event);openDetailsModal()"  data-bs-toggle="modal" data-bs-target="#deliveryDetailsModal"></app-delivery-list>
-                <app-delivery-offer-details #detailsModal [selectedOffer]="selectedOffer"></app-delivery-offer-details>
+                <app-delivery-list [offers]="offers" [filters]="filters" (selectedOfferToHome)="handleIncomingOffer($event) ; openDetailsModal()" data-bs-toggle="modal" data-bs-target="#deliveryDetailsModalCenter"></app-delivery-list>
             </div>
         </div>
     </div>
 </div>
+<app-delivery-offer-details #detailsModal [selectedOffer]="selectedOffer"></app-delivery-offer-details>
 <app-delivery-add-offer #addModal (offerToHome)="handlePostedOffer($event)"></app-delivery-add-offer>
 <!--[offer]="offer"-->
