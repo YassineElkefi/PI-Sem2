@@ -93,21 +93,20 @@ router.get('/user/:id', async (req, res) => {
     }
 });
 
-router.put('/user/updateCar/:userId', async (req, res) => {
+router.put('/user/updateProfile/:userId', async (req, res) => {
     try {
-        const { userId } = req.params;
-        const { car } = req.body;
-
-        // Update the user's car information in the database
-        const updatedUser = await User.findByIdAndUpdate(userId, { car }, { new: true });
-
-        res.status(200).json({ user: updatedUser, message: 'Car information updated successfully' });
+      const { userId } = req.params;
+      const userData = req.body;
+      
+      const updatedUser = await User.findByIdAndUpdate(userId, userData, { new: true });
+  
+      res.status(200).json({ user: updatedUser, message: 'Profile information updated successfully' });
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: 'Internal Server Error' });
+      console.error(err);
+      res.status(500).json({ message: 'Internal Server Error' });
     }
-});
-
+  });
+  
 const uploadDir = path.join(__dirname, '../uploads');
 
 // Ensure the directory exists

@@ -14,7 +14,7 @@ import { RequestService } from '../services/request.service';
 export class ProfileManagementComponent {
 
   userId: string;
-  user:any;
+  user:any = {};
   haveCar: boolean = false;
   car: string= '';
 
@@ -99,12 +99,26 @@ export class ProfileManagementComponent {
     );
   }
 
-  saveCar(){
+  saveChanges() {
     if (!this.haveCar) {
-      this.car = '';
+             this.user.car = '';
     }
-    this.user.car = this.car;
-    this.userService.updateCar(this.userId, this.user.car);
-    this.ngOnInit();
-}
+    this.userService.updateProfile(this.userId, this.user).subscribe(
+      response => {
+        console.log(response);
+      },
+      error => {
+        console.error(error);
+      }
+    );
+  }
+
+//   saveCar(){
+//     if (!this.haveCar) {
+//       this.car = '';
+//     }
+//     this.user.car = this.car;
+//     this.userService.updateCar(this.userId, this.user.car);
+//     this.ngOnInit();
+// }
 }

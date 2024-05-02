@@ -14,16 +14,9 @@ export class UserServiceService {
     return this.http.get(`${this.baseUrl}/user/${userId}`);
   }
 
-  updateCar(userId: string, car: string): void {
-    this.http.put<any>(`${this.baseUrl}/user/updateCar/${userId}`, { car }).subscribe(
-        response => {
-            console.log(response);
-        },
-        error => {
-            console.error(error);
-        }
-    );
-}
+  updateProfile(userId: string, user: any): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}/user/updateProfile/${userId}`, user);
+  }
 
 updateAvatar(userId: string, avatar: File): Observable<any> {
   const formData = new FormData();

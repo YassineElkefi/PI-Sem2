@@ -1,11 +1,37 @@
 <div class="card mt-3" (click)="sendOfferToList()">
-    <div class="card-body">
-      <h4>{{ offer.title }}</h4>
-      <h4>Posted by : {{ offer.offeror?.firstName }} {{offer.offeror?.lastName}} </h4>
-      <h4>Path : {{ offer.path }}</h4>
-      <h4>Departure Time : {{ offer.departure_time }}</h4>
-      <h4>Departure Date : {{ offer.departure_date }}</h4>
-      <h4>Seats remaining: {{ offer.nb_ppl }} </h4> 
-      <h4>Price : {{ offer.price }} DT</h4>
+  <div class="card-body">
+    <div class="row mb-0"> <!-- Added margin utility class -->
+      <div class="col">
+        <h2>Offer title : <span>{{ offer.title }}</span></h2>
+      </div>
+      <div class="col text-end">
+        <h4><span>{{ offer.offeror?.firstName }} {{ offer.offeror?.lastName }}</span></h4>
+      </div>
     </div>
+    <h4 class="mb-1">Path : <span>{{ offer.path }}</span></h4> <!-- Added margin utility class -->
+    <div class="row mb-1"> <!-- Added margin utility class -->
+      <h4>Departure : <span>{{ offer.departure_date }}</span> At <span>{{ offer.departure_time }}</span></h4>
+    </div>
+    <h4 class="mb-0">Seats remaining: <span>{{ offer.nb_ppl }} </span></h4> <!-- Adjusted margin utility class -->
+  </div>
 </div>
+
+
+<!-- <div class="card mt-3" (click)="sendOfferToList()">
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <h2>{{ offer.title }}</h2>
+        </div>
+        <div class="col text-end">
+          <h4><span>{{ offer.offeror?.firstName }} {{ offer.offeror?.lastName }}</span></h4>
+        </div>
+      </div>
+      <h4>Path : <span>{{ offer.path }}</span></h4>
+
+      <div class="row">
+        <h4>Departure : <span>{{ offer.departure_date }}</span> At <span>{{ offer.departure_time }}</span></h4>
+      </div>
+      <h4>Seats remaining: <span>{{ offer.nb_ppl }} </span></h4> 
+    </div>
+</div> -->

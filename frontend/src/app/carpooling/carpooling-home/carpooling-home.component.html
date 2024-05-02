@@ -1,29 +1,23 @@
 <div id="banner-image"></div>
-<div class="container-fluid">
-    <h1 align="center" class="py-5">CARPOOLING OFFERS</h1>
-    <div class="row py-5">
-        <div class="col-4">
+<div class="container-fluid mt-3">
+    <div class="row">
+        <div class="col-4 mt-3">
             <app-carpooling-filters (sendFiltersToHome)="getfilters($event)"></app-carpooling-filters>
         </div>
         <div class="col-6">
-            <div class="col-3">
-                <h4>Offers :</h4>
-            </div>
-            <div class="col-offset-3">
-                <button class="btn btn-success" (click)="  openPostOfferModal()" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Post offer</button>
-            </div>
-            <div class="scrollable-offers">
+            <div class="scrollable-offers mb-5">
                 <app-carpooling-list [offers]="offers" [filters]="filters"
                 (offerToHome)="recupererOffre($event);openOfferDetailsModal()" data-bs-toggle="modal" data-bs-target="#detailsModalCenter"
                 ></app-carpooling-list>
             </div>
         </div>
-        <div class="col-2">
-            <app-carpooling-details-modal #offerDetailsModal [user]="user" [selectedOffer]="selectedOffer"  (OfferToBeDeletedToHome)="handleToBeDeletedOffer($event)"></app-carpooling-details-modal>
+        <div class="col-2 float-end">
+            <button class="btn btn-success mt-3" (click)="openPostOfferModal()" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Post offer</button>
+            <app-carpooling-details-modal #modal2 [user]="user" [selectedOffer]="selectedOffer"  (OfferToBeDeletedToHome)="handleToBeDeletedOffer($event)"></app-carpooling-details-modal>
         </div>
     </div>
 </div>
-<app-request-modal #sendRequestModal [selectedOffer]="selectedOffer"
+<app-request-modal #modal3 [selectedOffer]="selectedOffer"
 (requestToHome)="handleRequestPosted($event)"
 ></app-request-modal>
 

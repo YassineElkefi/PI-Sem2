@@ -6,6 +6,16 @@
   }
 
   .scrollable-offers {
-    max-height: 400px;
+    max-height: 80vh;
     overflow-y: auto;
 }
+h1{
+  font-family: 'Fugaz-one';
+}
+
+h4{
+  font-family: 'Fugaz-one';
+}
+/* div.container-fluid{
+  height: 100vh;
+} */
