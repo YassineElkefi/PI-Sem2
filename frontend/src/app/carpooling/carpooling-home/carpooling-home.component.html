@@ -12,8 +12,10 @@
             </div>
         </div>
         <div class="col-2 float-end">
-            <button class="btn btn-success mt-3" (click)="openPostOfferModal()" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Post offer</button>
-            <app-carpooling-details-modal #offerDetailsModal [user]="user" [selectedOffer]="selectedOffer"  (OfferToBeDeletedToHome)="handleToBeDeletedOffer($event)"></app-carpooling-details-modal>
+            @if(user){
+                <button class="btn btn-success mt-3" (click)="openPostOfferModal()" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Post offer</button>
+            }
+            <app-carpooling-details-modal #offerDetailsModal [selectedOffer]="selectedOffer"  (OfferToBeDeletedToHome)="handleToBeDeletedOffer($event)"></app-carpooling-details-modal>
         </div>
     </div>
 </div>
