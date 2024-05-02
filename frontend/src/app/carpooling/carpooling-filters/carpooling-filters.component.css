@@ -66,3 +66,7 @@
 .clear-button:hover {
     background-color: #0056b3;
 }
+*{
+    font-family: 'Dongle';
+    font-size: 20px;
+}
