@@ -37,7 +37,7 @@
         </div>
         <div class="modal-footer d-flex justify-content-start">
           @if(user){
-            @if(selectedOffer.offeror.cin == user.cin){        
+            @if(selectedOffer?.offeror.cin == user?.cin){        
               <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#editOfferModal">Edit</button>
               <button type="button" (click)="deleteOffer()" data-bs-dismiss="modal" class="btn btn-danger">Delete</button>
             }@else{
