@@ -6,7 +6,10 @@
                     <app-delivery-filter (sendFiltersToHome)="getfilters($event)"></app-delivery-filter>
                     <div class="main-content">
                         <div class="col-offset-3">
-                            <button class="btn btn-success" (click)="openAddModal()" data-bs-toggle="modal" data-bs-target="#addModal">Post an offer</button>
+                            @if(user){
+                                <button class="btn btn-success" (click)="openAddModal()" data-bs-toggle="modal" data-bs-target="#addModal">Post an offer</button>
+
+                            }
                         </div>
                         <app-delivery-list [offers]="offers" [filters]="filters" (selectedOfferToHome)="handleIncomingOffer($event) ; openDetailsModal()" data-bs-toggle="modal" data-bs-target="#deliveryDetailsModalCenter"></app-delivery-list>
                     </div>
@@ -15,7 +18,7 @@
         </div>
     </div>
 </div>
-<app-delivery-offer-details #detailsModal [user]="user" [selectedOffer]="selectedOffer" (OfferToBeDeletedToHome)="handleToBeDeletedOffer($event)"></app-delivery-offer-details>
+<app-delivery-offer-details #detailsModal [selectedOffer]="selectedOffer" (OfferToBeDeletedToHome)="handleToBeDeletedOffer($event)"></app-delivery-offer-details>
 <app-delivery-edit-offer #editOfferModal [selectedOffer]="selectedOffer" (updatedOfferToHome)="handleUpdatedOffer($event)"></app-delivery-edit-offer>
 <app-delivery-add-offer #addModal [user]="user" (offerToHome)="handlePostedOffer($event)"></app-delivery-add-offer>
 <app-delivery-send-request #sendRequestModal [user]="user" [selectedOffer]="selectedOffer" (requestToHome)="handleRequestPosted($event)"></app-delivery-send-request>

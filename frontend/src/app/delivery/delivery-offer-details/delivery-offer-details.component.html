@@ -8,34 +8,33 @@
         </button>
       </div>
       <div class="modal-body">
-
           <div class="row">
-          <div class="col-12">
-              <h4>Offeror : <span>{{ selectedOffer?.offeror.firstName }} {{ selectedOffer?.offeror.lastName }}</span></h4>
-          </div>
+            <div class="col-12">
+                <h4>Offeror : <span>{{ selectedOffer?.offeror.firstName }} {{ selectedOffer?.offeror.lastName }}</span></h4>
+            </div>
           
-          <div class="col-12">
-          </div>
-              <h4>Path : <span>{{ selectedOffer?.path }}</span></h4>
-          <div class="col-12">
-              <h4>Car : <span>{{ selectedOffer?.offeror.car }}</span></h4>
-          </div>
-          <div class="col-12">
-              <h4>Number of packages remaining : <span> {{ selectedOffer?.nb_pkg }}</span></h4>
-          </div>
+
+            <h4>Path : <span>{{ selectedOffer?.path }}</span></h4>
+            <div class="col-12">
+                <h4>Car : <span>{{ selectedOffer?.offeror.car }}</span></h4>
+            </div>
+            <div class="col-12">
+                <h4>Number of packages remaining : <span> {{ selectedOffer?.nb_pkg }}</span></h4>
+            </div>
             
-          <div class="col-12">
-              <h4>Price : <span>{{ selectedOffer?.price }} DT </span></h4>
-          </div>
-          <div class="col-12">
-            <div class="row">
-              <h4>Departure date : <span> {{ selectedOffer?.departure_date }}</span> At <span> {{ selectedOffer?.departure_time }}</span></h4>
+            <div class="col-12">
+                <h4>Price : <span>{{ selectedOffer?.price }} DT </span></h4>
+            </div>
+            <div class="col-12">
+              <div class="row">
+                <h4>Departure date : <span> {{ selectedOffer?.departure_date }}</span> At <span> {{ selectedOffer?.departure_time }}</span></h4>
+              </div>
             </div>
           </div>
-      </div>
+        
       <div class="modal-footer d-flex justify-content-start">
         @if(user){
-          @if(selectedOffer.offeror.cin == user.cin){        
+          @if(selectedOffer?.offeror.cin == user?.cin){        
             <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#editOfferModal">Edit</button>
             <button type="button" (click)="deleteOffer()" data-bs-dismiss="modal" class="btn btn-danger">Delete</button>
           }@else{
