@@ -2,6 +2,9 @@ import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserServiceService } from '../user-service.service';
 import { CookieService } from 'ngx-cookie-service';
+import { OfferService } from '../services/offer.service';
+import { map } from 'rxjs';
+import { RequestService } from '../services/request.service';
 
 @Component({
   selector: 'app-profile-management',
@@ -16,8 +19,11 @@ export class ProfileManagementComponent {
   car: string= '';
 
   newAvatar: File;
+  carpoolingOffers:any;
+  deliveryOffers:any;
+  requests:any;
 
-  constructor(private route: ActivatedRoute, private userService:UserServiceService, private cookieService:CookieService) { }
+  constructor(private route: ActivatedRoute, private userService:UserServiceService, private cookieService:CookieService,private offerService: OfferService,private requestService: RequestService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -29,7 +35,41 @@ export class ProfileManagementComponent {
         console.log(this.user);
       });
     });
+
+    this.offerService.getAllOffers()
+    .pipe(
+      map((offers: any) => offers.filter(offer => offer.type === 'Carpooling' && offer.offeror.id === this.userId))
+    )
+    .subscribe(filteredOffers => {      
+      this.carpoolingOffers = filteredOffers;
+      console.log('Filtered offers fetched successfully:', this.carpoolingOffers);
+    }, error => {
+      console.error('Error fetching filtered offers:', error);
+    });
+
+    this.offerService.getAllOffers()
+    .pipe(
+      map((offers: any) => offers.filter(offer => offer.type === 'Delivery' && offer.offeror.id === this.userId))
+    )
+    .subscribe(filteredOffers => {      
+      this.deliveryOffers = filteredOffers;
+      console.log('Filtered offers fetched successfully:', this.deliveryOffers);
+    }, error => {
+      console.error('Error fetching filtered offers:', error);
+    });
+
+    this.requestService.getAllRequests()
+    .pipe(
+      map((offers: any) => offers.filter(request => request.sender.id === this.userId))
+    )
+    .subscribe(filteredOffers => {      
+      this.requests = filteredOffers;
+      console.log('Filtered offers fetched successfully:', this.requests);
+    }, error => {
+      console.error('Error fetching filtered offers:', error);
+    });
   }
+
 
   onAvatarChange(event: any) {
     this.newAvatar = event.target.files[0];
