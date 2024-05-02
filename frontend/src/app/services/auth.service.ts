@@ -34,7 +34,10 @@ export class AuthService {
   
   getUser(): any {
     const userData = this.cookieService.get('userData');
-    return JSON.parse(userData);
+    if (userData){
+      return JSON.parse(userData);
+    }
+    
   }
 
 private setAuthToken(response:any):void{

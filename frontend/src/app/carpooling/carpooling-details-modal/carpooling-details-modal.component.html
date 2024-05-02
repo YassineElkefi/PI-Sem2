@@ -4,35 +4,34 @@
         <div class="modal-header" *ngIf="selectedOffer">
           <h5 class="modal-title" id="detailsModal">{{selectedOffer?.title}}</h5>
           <button type="button" class="close btn btn-danger" data-bs-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+            <span aria-hidden="true" style="color: black;">&times;</span>
           </button>
         </div>
         <div class="modal-body">
           
             <div class="row">
             <div class="col-12">
-                <h4>Offeror : {{ selectedOffer?.offeror.firstName }} {{ selectedOffer?.offeror.lastName }}</h4>
+                <h4>Offeror : <span>{{ selectedOffer?.offeror.firstName }} {{ selectedOffer?.offeror.lastName }}</span></h4>
             </div>
             
-            <div class="mb-3 col-12">
+            <div class="col-12">
             </div>
-                <h4>Path : {{ selectedOffer?.path }}</h4>
-            <div class=" mb-3 col-12">
-                <h4>Car : {{ selectedOffer?.offeror.car }}</h4>
+                <h4>Path : <span>{{ selectedOffer?.path }}</span></h4>
+            <div class="col-12">
+                <h4>Car : <span>{{ selectedOffer?.offeror.car }}</span></h4>
             </div>
 
-            <div class="mb-3 col-12">
-                <h4>Number of seats remaining : {{ selectedOffer?.nb_ppl }}</h4>
+            <div class="col-12">
+                <h4>Number of seats remaining : <span>{{ selectedOffer?.nb_ppl }}</span></h4>
             </div>
               
-            <div class="mb-3 col-12">
-                <h4>Price : {{ selectedOffer?.price }} DT</h4>
+            <div class="col-12">
+                <h4>Price : <span>{{ selectedOffer?.price }} DT</span></h4>
             </div>
-            <div class="mb-3 col-12">
-                <h4>Departure date : {{ selectedOffer?.departure_date }}</h4>
-            </div>
-            <div class="mb-3 col-12">
-                <h4>Departure time : {{ selectedOffer?.departure_time }}</h4>
+            <div class="col-12">
+              <div class="row">
+                <h4>Departure date : <span> {{ selectedOffer?.departure_date }}</span> At <span> {{ selectedOffer?.departure_time }}</span></h4>
+              </div>
             </div>
           
         </div>

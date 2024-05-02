@@ -9,16 +9,17 @@
         </div>
         <div class="modal-body" *ngIf="(selectedOffer)">
             <div class="row">
-            <div class="mb-3 col-12">
+              <div class="mb-3 col-12">
                 <h4>Path : {{ selectedOffer?.path }} </h4>
-            </div>
-            
-            <div class="mb-3 col-12">
-                <input type="text" class="form-control" placeholder="Pick-up Point" [(ngModel)]="departure">
-            </div>
-            
-            <div class=" mb-3 col-12">
-                <input type="text" class="form-control" placeholder="Arrival" [(ngModel)]="arrival">
+              </div>
+              <label for="departure" class="col-12">Pick-up point:</label>
+              <select class="form-control" [(ngModel)]="selectedPickup">
+                <option *ngFor="let location of selectedOffer?.path" [value]="location">{{ location }}</option>
+              </select>
+              <label for="arrival" class="col-12">Arrival point :</label>
+              <select class="form-control" [(ngModel)]="selectedArrival">
+                <option *ngFor="let location of selectedOffer?.path" [value]="location">{{ location }}</option>
+              </select>
             </div>
         </div>
         <div class="modal-footer">

@@ -1,12 +1,16 @@
 <div class="main">
     <div class="background-image">
-        <div class="content">
-            <app-delivery-filter (sendFiltersToHome)="getfilters($event)"></app-delivery-filter>
-            <div class="main-content">
-                <div class="col-offset-3">
-                    <button class="btn btn-success" (click)="openAddModal()" data-bs-toggle="modal" data-bs-target="#addModal">Post an offer</button>
+        <div class="row justify-content-end py-5">
+            <div class="col-md-6">
+                <div class="content mt-3 mb-5">
+                    <app-delivery-filter (sendFiltersToHome)="getfilters($event)"></app-delivery-filter>
+                    <div class="main-content">
+                        <div class="col-offset-3">
+                            <button class="btn btn-success" (click)="openAddModal()" data-bs-toggle="modal" data-bs-target="#addModal">Post an offer</button>
+                        </div>
+                        <app-delivery-list [offers]="offers" [filters]="filters" (selectedOfferToHome)="handleIncomingOffer($event) ; openDetailsModal()" data-bs-toggle="modal" data-bs-target="#deliveryDetailsModalCenter"></app-delivery-list>
+                    </div>
                 </div>
-                <app-delivery-list [offers]="offers" [filters]="filters" (selectedOfferToHome)="handleIncomingOffer($event) ; openDetailsModal()" data-bs-toggle="modal" data-bs-target="#deliveryDetailsModalCenter"></app-delivery-list>
             </div>
         </div>
     </div>
