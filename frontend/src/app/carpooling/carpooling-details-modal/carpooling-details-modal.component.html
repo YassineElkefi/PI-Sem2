@@ -19,10 +19,7 @@
             <div class=" mb-3 col-12">
                 <h4>Car : {{ selectedOffer?.offeror.car }}</h4>
             </div>
-            
-            <div class="mb-3 col-12">
-                <h4>Description : {{ selectedOffer?.description }}</h4>
-            </div>
+
             <div class="mb-3 col-12">
                 <h4>Number of seats remaining : {{ selectedOffer?.nb_ppl }}</h4>
             </div>
@@ -40,10 +37,10 @@
         <div class="modal-footer d-flex justify-content-start">
           @if(user){
             @if(selectedOffer.offeror.cin == user.cin){        
-              <button type="button" class="btn btn-primary" data-bs-dismiss="modal" >Save changes</button>
+              <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#editOfferModal">Edit</button>
               <button type="button" (click)="deleteOffer()" data-bs-dismiss="modal" class="btn btn-danger">Delete</button>
             }@else{
-              <button type="button" class="btn btn-success" (click)="onRequest()" data-bs-toggle="modal" data-bs-target="#requestModal">Request to join</button>
+              <button type="button" class="btn btn-success" (click)="onRequest()" data-bs-toggle="modal" data-bs-target="#sendRequestModal">Request to join</button>
             }  
           }@else{
             <button type="button" class="btn btn-success"(click)="sendToLogin()" data-bs-dismiss="modal" >login</button>

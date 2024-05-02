@@ -1,25 +1,19 @@
-import { Component, Output, EventEmitter, ViewChild, Input } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { Offer } from '../../models/Offer';
+import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'app-delivery-edit-offer',
-  templateUrl: './delivery-edit-offer.component.html',
-  styleUrl: './delivery-edit-offer.component.css'
+  selector: 'app-carpooling-edit-offer',
+  templateUrl: './carpooling-edit-offer.component.html',
+  styleUrl: './carpooling-edit-offer.component.css'
 })
-export class DeliveryEditOfferComponent {
+export class CarpoolingEditOfferComponent {
   isOpen: boolean = false;
   locations: string[] = [''];
   locationOptions: string[] = ['Yasminet', 'Mourouj', 'Tekup'];
-  isLoggedIn: boolean = false;
-  user: any;
-  
-  @Output() offerToItem = new EventEmitter();
   @Input() selectedOffer?: Offer;
 
   @ViewChild('f') myForm: NgForm;
-
-  constructor() { }
 
   addLocation() {
     this.locations.push('');
@@ -33,11 +27,6 @@ export class DeliveryEditOfferComponent {
     this.locations.splice(index, 1);
   }
 
-  ngOnInit(): void {
-    console.log(this.selectedOffer);
-
-    }
-
   onSubmit(form: any) {
     /*form.path =this.locations;
     form.type = "Delivery";
@@ -50,14 +39,10 @@ export class DeliveryEditOfferComponent {
 
   openModal() {
     this.isOpen = true;
+    console.log(this.selectedOffer);
   }
 
   closeModal() {
     this.isOpen = false;
-  }
-
-  sendOffer(form: any): void{
-    this.offerToItem.emit(form);
-    
   }
 }

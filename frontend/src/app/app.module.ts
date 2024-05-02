@@ -31,6 +31,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { DeliveryEditOfferComponent } from './delivery/delivery-edit-offer/delivery-edit-offer.component';
 import { DeliveryOfferDetailsComponent } from './delivery/delivery-offer-details/delivery-offer-details.component';
 import { ProfileManagementComponent } from './profile-management/profile-management.component';
+import { CarpoolingEditOfferComponent } from './carpooling/carpooling-edit-offer/carpooling-edit-offer.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { ProfileManagementComponent } from './profile-management/profile-managem
     DeliveryAddOfferComponent,
     DeliveryEditOfferComponent,
     DeliveryOfferDetailsComponent,
-    ProfileManagementComponent
+    ProfileManagementComponent,
+    CarpoolingEditOfferComponent
     ],
   imports: [
     BrowserModule,
