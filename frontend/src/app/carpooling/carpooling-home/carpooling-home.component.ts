@@ -8,6 +8,7 @@ import { AuthService } from '../../services/auth.service';
 import { Offer } from '../../models/Offer';
 import { map } from 'rxjs/operators';
 import { User } from '../../models/User';
+import { CarpoolingEditOfferComponent } from '../carpooling-edit-offer/carpooling-edit-offer.component';
 
 
 @Component({
@@ -25,7 +26,7 @@ export class CarpoolingHomeComponent implements OnInit{
   @ViewChild('postOfferModal') postOffer?: PostOfferModalComponent;
   @ViewChild('offerDetailsModal') offerDetails?: CarpoolingDetailsModalComponent;
   @ViewChild('sendRequestModal') sendRequest?: RequestModalComponent;
-  @ViewChild('editOfferModal') editOffer?: RequestModalComponent;
+  @ViewChild('editOfferModal') editOffer?: CarpoolingEditOfferComponent;
   filters: any;
 
 
@@ -74,6 +75,27 @@ export class CarpoolingHomeComponent implements OnInit{
         });
   }
   
+  handleUpdatedOffer(offerData: any){
+    this.offerService.editOffer(this.selectedOffer._id.toString(),offerData)
+        .subscribe(response => {
+          console.log('Offer posted successfully:', response);
+          this.fetchAllCarpoolingOffers();
+        }, error => {
+          console.error('Error posting the offer:', error);
+        });
+  }
+
+
+  handleToBeDeletedOffer(offer: Offer){
+    this.offerService.deleteOffer(offer._id.toString())
+    .subscribe(response => {
+      console.log('Offer deleted successfully:', response);
+      this.ngOnInit();
+    }, error => {
+      console.error('Error adding Offer:', error);
+    });
+  }
+
   fetchAllCarpoolingOffers(): void {
     this.offerService.getAllOffers()
     .pipe(
@@ -97,14 +119,5 @@ export class CarpoolingHomeComponent implements OnInit{
     });
   }
 
-  handleToBeDeletedOffer(offer: Offer){
-    this.offerService.deleteOffer(offer._id.toString())
-    .subscribe(response => {
-      console.log('Offer deleted successfully:', response);
-      this.ngOnInit();
-    }, error => {
-      console.error('Error adding Offer:', error);
-    });
-  }
 
 }
