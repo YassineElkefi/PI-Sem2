@@ -32,7 +32,7 @@ constructor(private router: Router){}
   }
 
   sendToLogin(){
-    this.router.navigateByUrl('/auth');
+    this.router.navigateByUrl('/auth/login');
   }
 
   onRequest(){

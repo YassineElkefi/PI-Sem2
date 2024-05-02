@@ -75,6 +75,27 @@ export class CarpoolingHomeComponent implements OnInit{
         });
   }
   
+  handleUpdatedOffer(offerData: any){
+    this.offerService.editOffer(this.selectedOffer._id.toString(),offerData)
+        .subscribe(response => {
+          console.log('Offer posted successfully:', response);
+          this.fetchAllCarpoolingOffers();
+        }, error => {
+          console.error('Error posting the offer:', error);
+        });
+  }
+
+
+  handleToBeDeletedOffer(offer: Offer){
+    this.offerService.deleteOffer(offer._id.toString())
+    .subscribe(response => {
+      console.log('Offer deleted successfully:', response);
+      this.ngOnInit();
+    }, error => {
+      console.error('Error adding Offer:', error);
+    });
+  }
+
   fetchAllCarpoolingOffers(): void {
     this.offerService.getAllOffers()
     .pipe(
@@ -98,14 +119,5 @@ export class CarpoolingHomeComponent implements OnInit{
     });
   }
 
-  handleToBeDeletedOffer(offer: Offer){
-    this.offerService.deleteOffer(offer._id.toString())
-    .subscribe(response => {
-      console.log('Offer deleted successfully:', response);
-      this.ngOnInit();
-    }, error => {
-      console.error('Error adding Offer:', error);
-    });
-  }
 
 }

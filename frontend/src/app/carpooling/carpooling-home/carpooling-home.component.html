@@ -21,6 +21,6 @@
 (requestToHome)="handleRequestPosted($event)"
 ></app-request-modal>
 
-<app-carpooling-edit-offer #editOfferModal [selectedOffer]="selectedOffer"></app-carpooling-edit-offer>
+<app-carpooling-edit-offer #editOfferModal [selectedOffer]="selectedOffer" (updatedOfferToHome)="handleUpdatedOffer($event)"></app-carpooling-edit-offer>
 
 <app-post-offer-modal #postOfferModal (offerToHome)="handlePostedOffer($event)"></app-post-offer-modal>
