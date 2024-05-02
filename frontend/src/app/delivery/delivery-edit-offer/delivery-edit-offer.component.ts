@@ -1,6 +1,7 @@
-import { Component, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, Output, EventEmitter, ViewChild, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { Offer } from '../../models/Offer';
 
 @Component({
   selector: 'app-delivery-edit-offer',
@@ -15,6 +16,7 @@ export class DeliveryEditOfferComponent {
   user: any;
   
   @Output() offerToItem = new EventEmitter();
+  @Input() selectedOffer?: Offer;
 
   @ViewChild('f') myForm: NgForm;
 

@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { User } from '../../models/User';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-carpooling-details-modal',
@@ -7,7 +9,13 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class CarpoolingDetailsModalComponent {
   isOpen: boolean = false;
-  
+  @Input() user?: User;
+  @Input() selectedOffer?: any = {};
+  @Output() request = new EventEmitter();
+  @Output() OfferToBeDeletedToHome = new EventEmitter();
+
+constructor(private router: Router){}
+
   openModal() {
     this.isOpen = true;
   }
@@ -15,8 +23,14 @@ export class CarpoolingDetailsModalComponent {
   closeModal() {
     this.isOpen = false;
   }
-  @Input() selectedOffer?: any = {};
-  @Output() request = new EventEmitter();
+
+  deleteOffer(){
+    this.OfferToBeDeletedToHome.emit(this.selectedOffer);
+  }
+
+  sendToLogin(){
+    this.router.navigateByUrl('/auth');
+  }
 
   onRequest(){
     this.request.emit();

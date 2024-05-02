@@ -34,9 +34,17 @@
           </div>
       </div>
       <div class="modal-footer d-flex justify-content-start">
-      <!-- <button type="button" class="btn btn-success" (click)="onRequest()" data-bs-toggle="modal" data-bs-target="#requestModal">Request to join</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button> -->
+        @if(user){
+          @if(selectedOffer.offeror.cin == user.cin){        
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" >Save changes</button>
+            <button type="button" (click)="deleteOffer()" data-bs-dismiss="modal" class="btn btn-danger">Delete</button>
+          }@else{
+            <button type="button" class="btn btn-success" (click)="onRequest()" data-bs-toggle="modal" data-bs-target="#requestModal">Request to join</button>
+          }  
+        }@else{
+          <button type="button" class="btn btn-success"(click)="sendToLogin()" data-bs-dismiss="modal" >login</button>
+        }
+
       </div>
     </div>
   </div>

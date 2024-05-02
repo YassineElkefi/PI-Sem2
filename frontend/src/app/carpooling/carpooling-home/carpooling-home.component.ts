@@ -8,6 +8,7 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { Offer } from '../../models/Offer';
 import { map } from 'rxjs/operators';
+import { User } from '../../models/User';
 
 
 @Component({
@@ -18,7 +19,7 @@ import { map } from 'rxjs/operators';
 export class CarpoolingHomeComponent implements OnInit{
   offers?: any[];
   locations: string[]=[];
-  user:any;
+  user: User;
   selectedOffer: any;
   isLoggedIn: boolean= false;
 
@@ -32,77 +33,84 @@ export class CarpoolingHomeComponent implements OnInit{
   this.selectedOffer = offer;
   }
 
-constructor(private offerService: OfferService, private requestService:RequestService, private authService:AuthService, private router: Router){
-  this.isLoggedIn = this.authService.isAuthenticated();
-  if (this.isLoggedIn){
-    console.log('User is authenticated');
- }
+  constructor(private offerService: OfferService, private requestService:RequestService, private authService:AuthService){
+    this.isLoggedIn = this.authService.isAuthenticated();
+    if (this.isLoggedIn){
+      console.log('User is authenticated');
+  }
 
-}
+  }
 
-ngOnInit(): void {
-  this.isLoggedIn = this.authService.isAuthenticated();
-  this.user = this.authService.getUser();
-  this.fetchAllCarpoolingOffers();
-}
+  ngOnInit(): void {
+    this.isLoggedIn = this.authService.isAuthenticated();
+    this.user = this.authService.getUser();
+    this.fetchAllCarpoolingOffers();
+  }
 
 
-fetchAllCarpoolingOffers(): void {
-  this.offerService.getAllOffers()
-  .pipe(
-    map((offers: Offer[]) => offers.filter(offer => offer.type === 'Carpooling'))
-  )
-  .subscribe(filteredOffers => {
-    this.offers = filteredOffers;
-    console.log('Filtered offers fetched successfully:', this.offers);
-  }, error => {
-    console.error('Error fetching filtered offers:', error);
-  });
-}
+  fetchAllCarpoolingOffers(): void {
+    this.offerService.getAllOffers()
+    .pipe(
+      map((offers: Offer[]) => offers.filter(offer => offer.type === 'Carpooling'))
+    )
+    .subscribe(filteredOffers => {
+      this.offers = filteredOffers;
+      console.log('Filtered offers fetched successfully:', this.offers);
+    }, error => {
+      console.error('Error fetching filtered offers:', error);
+    });
+  }
 
-openModal(): void {
-  this.modal?.openModal();
-}
-openModal2(): void {
-  this.modal2?.openModal();
-}
+  openModal(): void {
+    this.modal?.openModal();
+  }
+  openModal2(): void {
+    this.modal2?.openModal();
+  }
 
-handlePostedOffer(offerData: any) {
+  handlePostedOffer(offerData: any) {
 
-  this.offerService.postOffer(offerData)
-      .subscribe(response => {
-        console.log('Offer posted successfully:', response);
-        this.fetchAllCarpoolingOffers();
-      }, error => {
-        console.error('Error posting the offer:', error);
-      });
-}
+    this.offerService.postOffer(offerData)
+        .subscribe(response => {
+          console.log('Offer posted successfully:', response);
+          this.fetchAllCarpoolingOffers();
+        }, error => {
+          console.error('Error posting the offer:', error);
+        });
+  }
 
-openRequestModal() {
-  this.modal3?.openModal();
-}
+  openRequestModal() {
+    this.modal3?.openModal();
+  }
 
-closeRequestModal() {
-  this.modal3?.closeModal();
-}
+  closeRequestModal() {
+    this.modal3?.closeModal();
+  }
 
-handleRequestPosted(requestData: any) {
-  this.requestService.postRequest(requestData)
-  .subscribe(response => {
-    console.log('Request sent successfully:', response);
-    this.ngOnInit();
-    // Handle success response
-  }, error => {
-    console.error('Error sending request:', error);
-    // Handle error response
-  });
-}
-logout(){
-  this.authService.logout();
-  this.router.navigateByUrl('/auth/login');
-}
+  handleRequestPosted(requestData: any) {
+    this.requestService.postRequest(requestData)
+    .subscribe(response => {
+      console.log('Request sent successfully:', response);
+      this.ngOnInit();
+      // Handle success response
+    }, error => {
+      console.error('Error sending request:', error);
+      // Handle error response
+    });
+  }
 
-getfilters(f : any) {
-  this.filters = f
-}
+  getfilters(f : any) {
+    this.filters = f
+  }
+
+  handleToBeDeletedOffer(offer: Offer){
+    this.offerService.deleteOffer(offer._id.toString())
+    .subscribe(response => {
+      console.log('Offer deleted successfully:', response);
+      this.ngOnInit();
+    }, error => {
+      console.error('Error adding Offer:', error);
+    });
+  }
+
 }

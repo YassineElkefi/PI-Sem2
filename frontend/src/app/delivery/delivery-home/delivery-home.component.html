@@ -11,6 +11,7 @@
         </div>
     </div>
 </div>
-<app-delivery-offer-details #detailsModal [selectedOffer]="selectedOffer"></app-delivery-offer-details>
-<app-delivery-add-offer #addModal (offerToHome)="handlePostedOffer($event)"></app-delivery-add-offer>
-<!--[offer]="offer"-->
+<app-delivery-offer-details #detailsModal [user]="user" [selectedOffer]="selectedOffer" (OfferToBeDeletedToHome)="handleToBeDeletedOffer($event)"></app-delivery-offer-details>
+<app-delivery-edit-offer #editModal [selectedOffer]="selectedOffer"></app-delivery-edit-offer>
+<app-delivery-add-offer #addModal [user]="user" (offerToHome)="handlePostedOffer($event)"></app-delivery-add-offer>
+<!--[offer]="offer"    (close)="closeModal()"-->

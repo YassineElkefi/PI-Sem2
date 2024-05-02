@@ -9,7 +9,7 @@ export class Offer {
     public departure_time: string,
     public departure_date: string,
     public price: number,
-    public offeror: User,
+    public offeror: any,
     public nb_ppl: number ,
     public nb_pkg: number ,
     public state: string ,

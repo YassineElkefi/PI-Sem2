@@ -1,24 +1,25 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { NgForm } from '@angular/forms';
+import { User } from '../../models/User';
 
 @Component({
   selector: 'app-delivery-add-offer',
   templateUrl: './delivery-add-offer.component.html',
   styleUrl: './delivery-add-offer.component.css'
 })
-export class DeliveryAddOfferComponent implements OnInit {
+export class DeliveryAddOfferComponent{
   isOpen: boolean = false;
   locations: string[] = [''];
   locationOptions: string[] = ['Yasminet', 'Mourouj', 'Tekup'];
   isLoggedIn: boolean = false;
-  user: any;
+  @Input() user: User;
   
   @Output() offerToHome = new EventEmitter();
 
   @ViewChild('f') myForm: NgForm;
 
-  constructor(private authService: AuthService) { }
+  constructor() { }
 
   addLocation() {
     this.locations.push('');
@@ -32,12 +33,6 @@ export class DeliveryAddOfferComponent implements OnInit {
     this.locations.splice(index, 1);
   }
 
-  ngOnInit(): void {
-   
-    this.isLoggedIn = this.authService.isAuthenticated();
-    this.user = this.authService.getUser();
-
-    }
 
   onSubmit(form: any) {
     form.path =this.locations;
