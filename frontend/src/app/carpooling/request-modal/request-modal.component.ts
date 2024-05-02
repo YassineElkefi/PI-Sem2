@@ -31,6 +31,10 @@ export class RequestModalComponent implements OnInit {
   }
 
   sendRequest() {
+    if (!this.selectedOffer) {
+      console.error('Selected offer is undefined!');
+      return;
+    }
     const requestData = {
       arrival: this.arrival,
       departure: this.departure,

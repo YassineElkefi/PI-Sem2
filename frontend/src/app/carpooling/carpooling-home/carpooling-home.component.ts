@@ -8,6 +8,7 @@ import { AuthService } from '../../services/auth.service';
 import { Offer } from '../../models/Offer';
 import { map } from 'rxjs/operators';
 import { User } from '../../models/User';
+import { CarpoolingEditOfferComponent } from '../carpooling-edit-offer/carpooling-edit-offer.component';
 
 
 @Component({
@@ -25,7 +26,7 @@ export class CarpoolingHomeComponent implements OnInit{
   @ViewChild('postOfferModal') postOffer?: PostOfferModalComponent;
   @ViewChild('offerDetailsModal') offerDetails?: CarpoolingDetailsModalComponent;
   @ViewChild('sendRequestModal') sendRequest?: RequestModalComponent;
-  @ViewChild('editOfferModal') editOffer?: RequestModalComponent;
+  @ViewChild('editOfferModal') editOffer?: CarpoolingEditOfferComponent;
   filters: any;
 
 

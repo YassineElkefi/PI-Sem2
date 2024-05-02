@@ -15,6 +15,10 @@ export class CarpoolingEditOfferComponent {
 
   @ViewChild('f') myForm: NgForm;
 
+  ngOnInit(): void {
+    console.log(this.selectedOffer);
+  }
+
   addLocation() {
     this.locations.push('');
   }
@@ -39,7 +43,6 @@ export class CarpoolingEditOfferComponent {
 
   openModal() {
     this.isOpen = true;
-    console.log(this.selectedOffer);
   }
 
   closeModal() {

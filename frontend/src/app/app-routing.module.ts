@@ -9,7 +9,7 @@ import { DeliveryHomeComponent } from './delivery/delivery-home/delivery-home.co
 import { ProfileManagementComponent } from './profile-management/profile-management.component';
 
 const routes: Routes = [
-  {path: 'carpooling', component: CarpoolingHomeComponent, canActivate: [authGuard]},
+  {path: 'carpooling', component: CarpoolingHomeComponent,},
   {path: 'profile/:_id', component: ProfileManagementComponent, canActivate: [authGuard]},
   {path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)},
   {path:'', component:HomeComponent},
