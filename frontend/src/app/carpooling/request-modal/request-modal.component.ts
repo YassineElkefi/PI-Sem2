@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Offer } from '../../models/Offer';
+import { User } from '../../models/User';
 
 @Component({
   selector: 'app-request-modal',
@@ -12,9 +13,12 @@ export class RequestModalComponent implements OnInit {
   isOpen = false;
   arrival = '';
   departure = '';
-
+  locationOptions: string[] = ['Yasminet', 'Mourouj', 'Tekup'];
+  selectedPickup = "";
+  selectedArrival="";
   @Input() selectedOffer?: Offer;
   @Output() requestToHome = new EventEmitter();
+  @Input() user: User;
 
 
   constructor(private authService: AuthService) { }
@@ -36,8 +40,8 @@ export class RequestModalComponent implements OnInit {
       return;
     }
     const requestData = {
-      arrival: this.arrival,
-      departure: this.departure,
+      arrival: this.selectedArrival,
+      departure: this.selectedPickup,
       offer: this.selectedOffer,
       state:'Pending',
       sender:this.authService.getUser() ,

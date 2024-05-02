@@ -17,7 +17,9 @@
         </div>
     </div>
 </div>
-<app-request-modal #modal3 [selectedOffer]="selectedOffer"
+<app-request-modal #modal3 
+[user]="user"
+[selectedOffer]="selectedOffer"
 (requestToHome)="handleRequestPosted($event)"
 ></app-request-modal>
 
