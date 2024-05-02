@@ -12,40 +12,38 @@ export class CarpoolingEditOfferComponent {
   locations: string[] = [''];
   locationOptions: string[] = ['Yasminet', 'Mourouj', 'Tekup'];
   @Input() selectedOffer?: Offer;
+  @Output() updatedOfferToHome = new EventEmitter();
 
   @ViewChild('f') myForm: NgForm;
 
-  ngOnInit(): void {
-    console.log(this.selectedOffer);
-  }
 
   addLocation() {
-    this.locations.push('');
+    this.selectedOffer.path.push('');
+  }
+
+  removeLocation(index: number) {
+    this.selectedOffer.path.splice(index, 1);
   }
 
   registerPath() {
     this.locations = this.locations.filter(location => location.trim() !== '');
   }
 
-  removeLocation(index: number) {
-    this.locations.splice(index, 1);
-  }
-
   onSubmit(form: any) {
-    /*form.path =this.locations;
-    form.type = "Delivery";
-    form.state = "pending";
-    form.offeror = null;
-    console.log(form);
-    this.sendOffer(form);
-    this.myForm.resetForm();*/
+    this.sendUpdatedOffer(form);
+    this.myForm.resetForm();
   }
 
   openModal() {
     this.isOpen = true;
+    console.log(this.selectedOffer);
   }
 
   closeModal() {
     this.isOpen = false;
+  }
+
+  sendUpdatedOffer(form: any){
+    this.updatedOfferToHome.emit(form);
   }
 }
