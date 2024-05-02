@@ -7,7 +7,8 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body" *ngIf="(selectedOffer)">
+        <div class="modal-body">
+          
             <div class="row">
             <div class="col-12">
                 <h4>Offeror : {{ selectedOffer?.offeror.firstName }} {{ selectedOffer?.offeror.lastName }}</h4>
@@ -33,6 +34,7 @@
             <div class="mb-3 col-12">
                 <h4>Departure time : {{ selectedOffer?.departure_time }}</h4>
             </div>
+          
         </div>
         <div class="modal-footer d-flex justify-content-start">
           @if(user){
@@ -45,6 +47,7 @@
           }@else{
             <button type="button" class="btn btn-success"(click)="sendToLogin()" data-bs-dismiss="modal" >Login</button>
           }
+        
         </div>
       </div>
     </div>

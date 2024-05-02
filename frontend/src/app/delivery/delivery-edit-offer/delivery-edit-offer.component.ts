@@ -13,7 +13,7 @@ export class DeliveryEditOfferComponent {
   locationOptions: string[] = ['Yasminet', 'Mourouj', 'Tekup'];
   isLoggedIn: boolean = false;
   user: any;
-  
+  @Output() updatedOfferToHome = new EventEmitter();
   @Output() offerToItem = new EventEmitter();
   @Input() selectedOffer?: Offer;
 
@@ -39,13 +39,8 @@ export class DeliveryEditOfferComponent {
     }
 
   onSubmit(form: any) {
-    /*form.path =this.locations;
-    form.type = "Delivery";
-    form.state = "pending";
-    form.offeror = null;
-    console.log(form);
-    this.sendOffer(form);
-    this.myForm.resetForm();*/
+    this.sendUpdatedOffer(form);
+    this.myForm.resetForm();
   }
 
   openModal() {
@@ -56,8 +51,7 @@ export class DeliveryEditOfferComponent {
     this.isOpen = false;
   }
 
-  sendOffer(form: any): void{
-    this.offerToItem.emit(form);
-    
+  sendUpdatedOffer(form: any){
+    this.updatedOfferToHome.emit(form);
   }
 }

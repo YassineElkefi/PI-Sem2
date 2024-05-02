@@ -32,6 +32,7 @@ import { DeliveryEditOfferComponent } from './delivery/delivery-edit-offer/deliv
 import { DeliveryOfferDetailsComponent } from './delivery/delivery-offer-details/delivery-offer-details.component';
 import { ProfileManagementComponent } from './profile-management/profile-management.component';
 import { CarpoolingEditOfferComponent } from './carpooling/carpooling-edit-offer/carpooling-edit-offer.component';
+import { DeliverySendRequestComponent } from './delivery/delivery-send-request/delivery-send-request.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { CarpoolingEditOfferComponent } from './carpooling/carpooling-edit-offer
     DeliveryEditOfferComponent,
     DeliveryOfferDetailsComponent,
     ProfileManagementComponent,
-    CarpoolingEditOfferComponent
+    CarpoolingEditOfferComponent,
+    DeliverySendRequestComponent
     ],
   imports: [
     BrowserModule,

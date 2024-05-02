@@ -7,7 +7,8 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body" *ngIf="(selectedOffer)">
+      <div class="modal-body">
+
           <div class="row">
           <div class="col-12">
               <h4>Offeror : {{ selectedOffer?.offeror.firstName }} {{ selectedOffer?.offeror.lastName }}</h4>
@@ -36,15 +37,15 @@
       <div class="modal-footer d-flex justify-content-start">
         @if(user){
           @if(selectedOffer.offeror.cin == user.cin){        
-            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" >Edit</button>
+            <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#editOfferModal">Edit</button>
             <button type="button" (click)="deleteOffer()" data-bs-dismiss="modal" class="btn btn-danger">Delete</button>
           }@else{
-            <button type="button" class="btn btn-success" (click)="onRequest()" data-bs-toggle="modal" data-bs-target="#requestModal">Request to join</button>
+            <button type="button" class="btn btn-success" (click)="onRequest()" data-bs-toggle="modal" data-bs-target="#sendRequestModal">Request to join</button>
           }  
         }@else{
-          <button type="button" class="btn btn-success"(click)="sendToLogin()" data-bs-dismiss="modal" >login</button>
+          <button type="button" class="btn btn-success"(click)="sendToLogin()" data-bs-dismiss="modal" >Login</button>
         }
-
+      
       </div>
     </div>
   </div>

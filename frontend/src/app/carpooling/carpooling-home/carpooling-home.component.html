@@ -13,14 +13,10 @@
         </div>
         <div class="col-2 float-end">
             <button class="btn btn-success mt-3" (click)="openPostOfferModal()" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Post offer</button>
-            <app-carpooling-details-modal #modal2 [user]="user" [selectedOffer]="selectedOffer"  (OfferToBeDeletedToHome)="handleToBeDeletedOffer($event)"></app-carpooling-details-modal>
+            <app-carpooling-details-modal #offerDetailsModal [user]="user" [selectedOffer]="selectedOffer"  (OfferToBeDeletedToHome)="handleToBeDeletedOffer($event)"></app-carpooling-details-modal>
         </div>
     </div>
 </div>
-<app-request-modal #modal3 [selectedOffer]="selectedOffer"
-(requestToHome)="handleRequestPosted($event)"
-></app-request-modal>
-
+<app-request-modal #sendRequestModal [selectedOffer]="selectedOffer" (requestToHome)="handleRequestPosted($event)"></app-request-modal>
 <app-carpooling-edit-offer #editOfferModal [selectedOffer]="selectedOffer" (updatedOfferToHome)="handleUpdatedOffer($event)"></app-carpooling-edit-offer>
-
 <app-post-offer-modal #postOfferModal (offerToHome)="handlePostedOffer($event)"></app-post-offer-modal>

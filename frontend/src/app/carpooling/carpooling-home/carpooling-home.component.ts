@@ -79,7 +79,7 @@ export class CarpoolingHomeComponent implements OnInit{
     this.offerService.editOffer(this.selectedOffer._id.toString(),offerData)
         .subscribe(response => {
           console.log('Offer posted successfully:', response);
-          this.fetchAllCarpoolingOffers();
+          this.ngOnInit();
         }, error => {
           console.error('Error posting the offer:', error);
         });

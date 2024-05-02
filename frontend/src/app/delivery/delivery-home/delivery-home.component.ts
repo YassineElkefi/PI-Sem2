@@ -7,6 +7,8 @@ import { DeliveryAddOfferComponent } from '../delivery-add-offer/delivery-add-of
 import { DeliveryOfferDetailsComponent } from '../delivery-offer-details/delivery-offer-details.component';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/User';
+import { DeliverySendRequestComponent } from '../delivery-send-request/delivery-send-request.component';
+import { DeliveryEditOfferComponent } from '../delivery-edit-offer/delivery-edit-offer.component';
 
 @Component({
   selector: 'app-delivery-home',
@@ -23,6 +25,8 @@ export class DeliveryHomeComponent implements OnInit{
 
   @ViewChild('addModal') addModal?: DeliveryAddOfferComponent;
   @ViewChild('detailsModal') detailsModal?: DeliveryOfferDetailsComponent;
+  @ViewChild('sendRequestModal') sendRequest?: DeliverySendRequestComponent;
+  @ViewChild('editOfferModal') editOffer?: DeliveryEditOfferComponent;
   
   constructor(private offerService: OfferService, private requestService:RequestService, private authService:AuthService){
     this.isLoggedIn = this.authService.isAuthenticated();
@@ -76,6 +80,16 @@ export class DeliveryHomeComponent implements OnInit{
     });
   }
 
+  handleUpdatedOffer(offerData: any){
+    this.offerService.editOffer(this.selectedOffer._id.toString(),offerData)
+        .subscribe(response => {
+          console.log('Offer posted successfully:', response);
+          this.ngOnInit();
+        }, error => {
+          console.error('Error posting the offer:', error);
+        });
+  }
+
   handleToBeDeletedOffer(offer: Offer){
     this.offerService.deleteOffer(offer._id.toString())
     .subscribe(response => {
@@ -83,6 +97,16 @@ export class DeliveryHomeComponent implements OnInit{
       this.ngOnInit();
     }, error => {
       console.error('Error adding Offer:', error);
+    });
+  }
+
+  handleRequestPosted(requestData: any) {
+    this.requestService.postRequest(requestData)
+    .subscribe(response => {
+      console.log('Request sent successfully:', response);
+      this.ngOnInit();
+    }, error => {
+      console.error('Error sending request:', error);
     });
   }
 
