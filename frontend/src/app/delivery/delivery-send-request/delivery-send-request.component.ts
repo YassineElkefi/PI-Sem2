@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Offer } from '../../models/Offer';
 import { User } from '../../models/User';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-delivery-send-request',
@@ -8,15 +9,19 @@ import { User } from '../../models/User';
   styleUrl: './delivery-send-request.component.css'
 })
 export class DeliverySendRequestComponent {
+
   isOpen = false;
   arrival = '';
   departure = '';
-  @Input() user?: User;
+  locationOptions: string[] = ['Yasminet', 'Mourouj', 'Tekup'];
+  selectedPickup = "";
+  selectedArrival="";
   @Input() selectedOffer?: Offer;
   @Output() requestToHome = new EventEmitter();
+  @Input() user: User;
 
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   openModal() {
     this.isOpen = true;
@@ -27,12 +32,16 @@ export class DeliverySendRequestComponent {
   }
 
   sendRequest() {
+    if (!this.selectedOffer) {
+      console.error('Selected offer is undefined!');
+      return;
+    }
     const requestData = {
-      arrival: this.arrival,
-      departure: this.departure,
+      arrival: this.selectedArrival,
+      departure: this.selectedPickup,
       offer: this.selectedOffer,
       state:'Pending',
-      sender:this.user,
+      sender:this.authService.getUser() ,
       receiver:this.selectedOffer.offeror,
     }
 

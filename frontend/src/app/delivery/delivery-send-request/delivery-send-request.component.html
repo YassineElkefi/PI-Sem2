@@ -1,30 +1,30 @@
 <div class="modal show" [class.show]="isOpen" id="sendRequestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header" *ngIf="(selectedOffer)">
-          <h5 class="modal-title" id="requestModalTitle">{{ selectedOffer?.title }}</h5>
-          <button type="button" class="close btn" data-bs-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body" *ngIf="(selectedOffer)">
-            <div class="row">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header" *ngIf="(selectedOffer)">
+        <h5 class="modal-title" id="requestModalTitle">{{ selectedOffer?.title }}</h5>
+        <button type="button" class="close btn" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngIf="(selectedOffer)">
+          <div class="row">
             <div class="mb-3 col-12">
-                <h4>Path : {{ selectedOffer?.path }} </h4>
+              <h4>Path : {{ selectedOffer?.path }} </h4>
             </div>
-            
-            <div class="mb-3 col-12">
-                <input type="text" class="form-control" placeholder="Pick-up Point" [(ngModel)]="departure">
-            </div>
-            
-            <div class=" mb-3 col-12">
-                <input type="text" class="form-control" placeholder="Arrival" [(ngModel)]="arrival">
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" (click)="sendRequest()" class="btn btn-success mt-1 me-2" data-bs-dismiss="modal">Request to join</button>
->
-        </div>
+            <label for="departure" class="col-12">Pick-up point:</label>
+            <select class="form-control" [(ngModel)]="selectedPickup">
+              <option *ngFor="let location of selectedOffer?.path" [value]="location">{{ location }}</option>
+            </select>
+            <label for="arrival" class="col-12">Arrival point :</label>
+            <select class="form-control" [(ngModel)]="selectedArrival">
+              <option *ngFor="let location of selectedOffer?.path" [value]="location">{{ location }}</option>
+            </select>
+          </div>
+      </div>
+      <div class="modal-footer">
+          <button type="button" (click)="sendRequest()" class="btn btn-success mt-1 me-2" data-bs-dismiss="modal">Request to join</button>
       </div>
     </div>
   </div>
+</div>
