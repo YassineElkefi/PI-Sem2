@@ -31,8 +31,8 @@ export class OfferService {
     return this.http.patch<any>(`${this.baseUrl}/editOffer/${id}`, offer);
   }
 
-  acceptRequest(id: string, offer: any, offerId: string): Observable<any> {
-    return this.http.patch<any>(`${this.baseUrl}/acceptRequest/${id}/${offerId}`, offer);
+  acceptRequest(id: string): Observable<any> {
+    return this.http.patch<any>(`${this.baseUrl}/acceptRequest/${id}`, {});
   }
 
   declineRequest(id: string): Observable<any> {

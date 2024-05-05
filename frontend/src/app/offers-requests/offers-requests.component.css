@@ -1,0 +1,55 @@
+.modal-content {
+    background-color: #fff; 
+    border: 1px solid rgba(0, 0, 0, 0.125); 
+    border-radius: 0.25rem; 
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.15);
+  }
+  
+  .modal-body {
+    padding: 1rem;
+  }
+  
+  .modal-header {
+    border-bottom: 1px solid #dee2e6;
+    padding: 0.75rem;
+  }
+  
+  .modal-header .modal-title {
+    margin-bottom: 0;
+  }
+  
+  .modal-footer {
+    border-top: 1px solid #dee2e6;
+    padding: 0.75rem; 
+  }
+  
+.card {
+    border: 1px solid #ccc; 
+    border-radius: 0.25rem; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    padding: 1rem; 
+    margin-bottom: 1rem; 
+    transition: transform 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+}
+  
+.card h6 {
+    margin-bottom: 0.5rem;
+  }
+  
+.card h6:last-child {
+    margin-bottom: 0;
+  }
+  
+.modal-header {
+    border-bottom: none; 
+    padding: 0.75rem; 
+  }
+
+h6, h5{
+    font-family: 'Dongle',sans-serif;
+    font-size: 25px;
+}

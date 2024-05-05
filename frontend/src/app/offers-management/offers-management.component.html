@@ -1,0 +1,40 @@
+<div class="container py-5 mt-5 text-center">
+    <h1>MY OFFERS</h1>
+    <h6>Carpooling offers :</h6>
+  <div class="card-container mt-3">
+    @for(coffer of carpoolingOffers; track $index) {
+      <div class="card mt-3 of" (click)="recuperer(coffer)" data-bs-toggle="modal" data-bs-target="#requestsModalCenter">
+        <div class="card-body">
+          <h6>{{ coffer.title }}</h6>
+          <h6>Posted by : {{ coffer.offeror?.firstName }} {{coffer.offeror?.lastName}} </h6>
+          <h6>Path : {{ coffer.path }}</h6>
+          <h6>Departure Time : {{ coffer.departure_time }}</h6>
+          <h6>Departure Date : {{ coffer.departure_date }}</h6>
+          <h6>Seats remaining: {{ coffer.nb_ppl }} </h6> 
+          <h6>Price : {{ coffer.price }} DT</h6>
+        </div>
+      </div>
+    }
+  </div>
+</div>
+
+<div class="mt-3 text-center">
+  <h6>Delivery offers :</h6>
+  <div class="card-container mt-3">
+    @for(doffer of deliveryOffers; track $index) {
+      <div class="card mt-3 of" (click)="recuperer(doffer)" data-bs-toggle="modal" data-bs-target="#requestsModalCenter">
+        <div class="card-body">
+          <h6>{{ doffer.title }}</h6>
+          <h6>Posted by : {{ doffer.offeror?.firstName }} {{doffer.offeror?.lastName}} </h6>
+          <h6>Path : {{ doffer.path }}</h6>
+          <h6>Departure Time : {{ doffer.departure_time }}</h6>
+          <h6>Departure Date : {{ doffer.departure_date }}</h6>
+          <h6>Number of packages : {{ doffer.nb_pkg }} </h6> 
+          <h6>Price : {{ doffer.price }} DT</h6>
+        </div>
+      </div>
+    }
+  </div>
+</div>
+
+<app-offers-requests #offerRequestsModal [selectedOffer]="selectedOffer"></app-offers-requests>

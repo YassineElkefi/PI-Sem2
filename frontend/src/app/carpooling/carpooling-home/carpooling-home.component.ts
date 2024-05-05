@@ -99,7 +99,7 @@ export class CarpoolingHomeComponent implements OnInit{
   fetchAllCarpoolingOffers(): void {
     this.offerService.getAllOffers()
     .pipe(
-      map((offers: Offer[]) => offers.filter(offer => offer.type === 'Carpooling'))
+      map((offers: Offer[]) => offers.filter(offer => offer.type === 'Carpooling' && offer.nb_ppl > 0))
     )
     .subscribe(filteredOffers => {
       this.offers = filteredOffers;
