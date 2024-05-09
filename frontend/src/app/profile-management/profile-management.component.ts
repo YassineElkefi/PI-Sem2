@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UserServiceService } from '../user-service.service';
+import { UserServiceService } from '../services/user-service.service';
 import { CookieService } from 'ngx-cookie-service';
 import { OfferService } from '../services/offer.service';
 import { map } from 'rxjs';

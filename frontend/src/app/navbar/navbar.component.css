@@ -59,3 +59,7 @@ a.dropdown-item{
 a.dropdown-item:hover {
   color: #E29F06;
 }
+
+.no-arrow::after {
+  display: none;
+}

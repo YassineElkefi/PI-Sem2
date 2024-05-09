@@ -23,7 +23,12 @@ export class LoginComponent {
       next: (response) => {
         if(!(response.status === 200) && !(response.status === 400)){
         console.log(response);
-        this.router.navigate(['/']);
+        if (credentials.cin == "00000000"){
+          this.router.navigate(['/admin/admin-dashboard']);
+        }else{
+          this.router.navigate(['/']);
+        }
+        
         }else if(response.status === 400){
           Swal.fire({
             icon: 'error',

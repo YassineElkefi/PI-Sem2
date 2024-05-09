@@ -1,5 +1,6 @@
 <div class="app-container">
-    <app-navbar class="overlay-top"></app-navbar>
+    <app-navbar class="overlay-top" *ngIf="showNavbar"></app-navbar>
     <router-outlet class="router"></router-outlet>
-    <app-footer class="overlay-bottom"></app-footer>
-</div>
+    <app-footer class="overlay-bottom" *ngIf="showFooter"></app-footer>
+  </div>
+  

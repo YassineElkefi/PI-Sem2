@@ -93,6 +93,15 @@ router.get('/user/:id', async (req, res) => {
     }
 });
 
+router.get('/allUsers', async(req,res) =>{
+    try{
+        const data = await User.find();
+        res.json(data)
+    } catch (error){
+        res.status(500).json({message:err.message})
+    }
+});
+
 router.put('/user/updateProfile/:userId', async (req, res) => {
     try {
       const { userId } = req.params;
