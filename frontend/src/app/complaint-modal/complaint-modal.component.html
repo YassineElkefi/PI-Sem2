@@ -1,0 +1,37 @@
+<div class="modal show" [class.show]="isOpen" id="complaintModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header d-flex justify-content-between align-items-center" *ngIf="selectedRequest">
+          <h5 class="modal-title" id="detailsModal">File a complaint</h5>
+          <button type="button" class="close btn" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" style="color: black;">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+            <div class="row">
+          
+              <div class="col-12 mb-3">
+                <label for="object" class="form-label">Object:</label>
+                <input type="text" class="form-control" placeholder="Object" ngModel name="object" required>
+              </div>
+              
+              <div class="col-12 mb-3">
+                <label for="offer" class="form-label">Offer:</label>
+                <input id="offer" type="text" disabled class="form-control" ngModel name="offer" value="{{selectedRequest?.offer?.title}}" required>
+              </div>
+
+              <div class="col-12 mb-3">
+                <textarea class="form-control" placeholder="Description" ngModel name="description" required></textarea>
+              </div>
+
+              <div class="col-12 mb-3">
+                <button type="submit" [disabled]="!f.form.valid" data-bs-dismiss="modal" class="btn btn-danger mt-1">File Complaint</button>
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -17,7 +17,7 @@ export class OffersRequestsComponent implements OnChanges {
   isOpen: boolean = false;
   user?: User;
   requests: any[] = [];
-  @Input() selectedOffer?: Offer;
+  @Input() selectedOffer?: any;
   offerRequests: any[] = [];
   
   ngOnChanges(): void {
@@ -69,6 +69,16 @@ export class OffersRequestsComponent implements OnChanges {
             this.ngOnChanges();
         }, error => {
             console.error('Error declining the request:', error);
+        });
+  }
+
+  completeOffer(id: any) {
+    this.offerService.completeOffer(this.selectedOffer._id)
+        .subscribe(response => {
+            console.log('Offer completed successfully:', response);
+            this.ngOnChanges();
+        }, error => {
+            console.error('Error completing the offer:', error);
         });
   }
   

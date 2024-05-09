@@ -37,6 +37,10 @@ export class OfferService {
 
   declineRequest(id: string): Observable<any> {
     return this.http.patch<any>(`${this.baseUrl}/declineRequest/${id}`, {});
-}
+  }
+
+  completeOffer(id: string): Observable<any> {
+    return this.http.patch<any>(`${this.baseUrl}/completeOffer/${id}`, {});
+  }
 
 }

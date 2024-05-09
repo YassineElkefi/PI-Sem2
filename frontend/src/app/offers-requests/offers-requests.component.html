@@ -20,6 +20,11 @@
                   <h6>State : {{req.state}}</h6>
                 </div>
             }
+            @if(selectedOffer?.state !== "Completed"){
+            <div class="complete btn btn-outline-dark" (click)="completeOffer(selectedOffer)">
+              <i class="fa-solid fa-flag-checkered me-2"></i> <span>Mark as finished</span>
+            </div>
+          }
         </div>
       </div>
     </div>
