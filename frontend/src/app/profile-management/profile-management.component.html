@@ -112,7 +112,14 @@
       <div class="card mt-3 of">
         <div class="card-body">
             <h5 class="card-title">Sender: {{ req.sender.firstName }} {{req.sender.lastName}}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">State: {{ req.state }}</h6>
+            @if(req.state == 'Pending') {
+              <h6 class="card-subtitle mb-2 text-muted">State: <span class="text-warning">{{ req.state }}</span></h6>
+            }@else if(req.state == 'Approved') {
+              <h6 class="card-subtitle mb-2 text-muted">State: <span class="text-success">{{ req.state }}</span></h6>
+            }@else {
+              <h6 class="card-subtitle mb-2 text-muted">State: <span class="text-danger">{{ req.state }}</span></h6>
+            }
+            <!-- <h6 class="card-subtitle mb-2 text-muted">State: {{ req.state }}</h6> -->
             <p class="card-text">Offer: {{ req.offer.title }}</p>
             <p class="card-text">Departure: {{ req.departure }}</p>
             <p class="card-text">Arrival: {{ req.arrival }}</p>
