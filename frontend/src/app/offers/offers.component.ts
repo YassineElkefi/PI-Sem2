@@ -152,26 +152,26 @@ export class OffersComponent implements OnInit{
   recupererId(_id:string){
     this.id = _id;
   }
-acceptRequest(id:any, OfferId:string){
-  console.log(id);
-    const offer = {
-      title: this.title,
-      description: this.description,
-      path: this.path,
-      type: this.type,
-      nb_ppl: this.nb_ppl,
-      nb_pkg: this.nb_pkg,
-      departure_time: this.departure_time,
-      departure_date: this.departure_date
-    };
-    this.offerService.acceptRequest(id, offer, OfferId)
-      .subscribe(response => {
-        console.log('Request accepted and Offer edited successfully:', response);
-        this.ngOnInit();
-      }, error => {
-        console.error('Error acceping the request:', error);
-      });
-}
+// acceptRequest(id:any, OfferId:string){
+//   console.log(id);
+//     const offer = {
+//       title: this.title,
+//       description: this.description,
+//       path: this.path,
+//       type: this.type,
+//       nb_ppl: this.nb_ppl,
+//       nb_pkg: this.nb_pkg,
+//       departure_time: this.departure_time,
+//       departure_date: this.departure_date
+//     };
+//     this.offerService.acceptRequest(id, offer, OfferId)
+//       .subscribe(response => {
+//         console.log('Request accepted and Offer edited succes sfully:', response);
+//         this.ngOnInit();
+//       }, error => {
+//         console.error('Error acceping the request:', error);
+//       });
+// }
 
 
 declineRequest(id: any) {

@@ -110,9 +110,21 @@
   <div class="card-container mt-3 mb-5">
     @for(req of requests; track $index) {
       <div class="card mt-3 of">
-        <div class="card-body">
+          @if(req.state=='Approved'){
+            <div class="card-header d-flex justify-content-end">
+              <i class="fa-regular fa-flag" (click)="recupererRequest(req)" data-bs-toggle="modal" data-bs-target="#complaintModalCenter"></i>
+            </div>
+          }
+
+        <div class="card-body req">
             <h5 class="card-title">Sender: {{ req.sender.firstName }} {{req.sender.lastName}}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">State: {{ req.state }}</h6>
+            @if(req.state == 'Pending') {
+              <h6 class="card-subtitle mb-2 text-muted">State: <span class="text-warning">{{ req.state }}</span></h6>
+            }@else if(req.state == 'Approved') {
+              <h6 class="card-subtitle mb-2 text-muted">State: <span class="text-success">{{ req.state }}</span></h6>
+            }@else {
+              <h6 class="card-subtitle mb-2 text-muted">State: <span class="text-danger">{{ req.state }}</span></h6>
+            }
             <p class="card-text">Offer: {{ req.offer.title }}</p>
             <p class="card-text">Departure: {{ req.departure }}</p>
             <p class="card-text">Arrival: {{ req.arrival }}</p>
@@ -121,3 +133,5 @@
     }
   </div>
 </div>
+
+<app-complaint-modal #complaintModal [selectedRequest]="selectedRequest" ></app-complaint-modal>

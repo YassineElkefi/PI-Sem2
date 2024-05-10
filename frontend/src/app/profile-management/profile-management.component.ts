@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild, viewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserServiceService } from '../services/user-service.service';
 import { CookieService } from 'ngx-cookie-service';
 import { OfferService } from '../services/offer.service';
 import { map } from 'rxjs';
 import { RequestService } from '../services/request.service';
+import { ComplaintModalComponent } from '../complaint-modal/complaint-modal.component';
 
 @Component({
   selector: 'app-profile-management',
@@ -17,6 +18,8 @@ export class ProfileManagementComponent {
   user:any = {};
   haveCar: boolean = false;
   car: string= '';
+  selectedRequest:any;
+  @ViewChild('complaintModal') complaintModal?: ComplaintModalComponent;
 
   newAvatar: File;
   carpoolingOffers:any;
@@ -113,6 +116,16 @@ export class ProfileManagementComponent {
     );
   }
 
+  recupererRequest(req:any) {
+    this.selectedRequest = req;
+    this.openComplaintModal()
+    }
+
+    openComplaintModal(): void {
+      this.complaintModal?.openModal();
+      console.log("Selected Request : ",this.selectedRequest);
+      
+    }
 //   saveCar(){
 //     if (!this.haveCar) {
 //       this.car = '';

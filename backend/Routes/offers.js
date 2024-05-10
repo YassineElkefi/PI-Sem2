@@ -89,41 +89,34 @@ router.delete("/deleteOffer/:id", async (req, res) => {
     }
 });
 
-router.patch("/acceptRequest/:id/:offerId", async (req, res) => {
+router.patch("/acceptRequest/:id", async (req, res) => {
     const requestId = req.params.id;
-    const offerId = req.params.offerId;
     try {
-        const offer = await Offer.findById(offerId);
-        if (!offer) {
-            return res.status(404).json({ message: 'Offer not found' });
-        }
-
-        const { sender, receiver, departure, arrival, state } = req.body;
-
         const request = await Request.findById(requestId);
         if (!request) {
             return res.status(404).json({ message: 'Request not found' });
         }
 
-        request.state = "Approved";
-        await request.save();
-
-        if (offer.type === 'Carpooling') {
-            offer.nb_ppl = Math.max(0, offer.nb_ppl - 1);
-        } else if (offer.type === 'Delivery') {
-            offer.nb_pkg = Math.max(0, offer.nb_pkg - 1);
+        const offer = await Offer.findById(request.offer._id);
+        if (!offer) {
+            return res.status(404).json({ message: 'Offer not found' });
         }
 
-        await Offer.findByIdAndUpdate(offerId, {
-            title: offer.title,
-            description: offer.description,
-            path: offer.path,
-            type: offer.type,
-            nb_ppl: offer.nb_ppl,
-            nb_pkg: offer.nb_pkg,
-            departure_time: offer.departure_time,
-            departure_date: offer.departure_date
-        });
+        if (offer.type === 'Carpooling') {
+            if (offer.nb_ppl === 0) {
+                return res.status(400).json({ message: 'Offer is completed' });
+            }
+            offer.nb_ppl--;
+        } else if (offer.type === 'Delivery') {
+            if (offer.nb_pkg === 0) {
+                return res.status(400).json({ message: 'Offer is completed' });
+            }
+            offer.nb_pkg--;
+        }
+
+        request.state = "Approved";
+        await request.save();
+        await offer.save();
 
         res.json({ message: 'Request and Offer updated' });
     } catch (err) {
@@ -131,6 +124,8 @@ router.patch("/acceptRequest/:id/:offerId", async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
+
+
 
 
 router.patch("/declineRequest/:id", async (req, res) => {
@@ -151,6 +146,22 @@ router.patch("/declineRequest/:id", async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
+router.patch("/completeOffer/:id", async (req, res) => {
+    const offerId = req.params.id;
+    try {
+        const offer = await Offer.findById(offerId);
+        if (!offer) {
+            return res.status(404).json({ message: 'Offer not found' });
+        }
+        offer.state = "Completed";
+        await offer.save();
+        res.json({ message: 'Offer completed successfully' });
+    } catch (err) {
+        console.error("Error :", err);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+}
+);
 
 
 

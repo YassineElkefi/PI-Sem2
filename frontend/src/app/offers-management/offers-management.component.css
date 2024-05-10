@@ -20,15 +20,3 @@
     font-family: 'Dongle';
     font-size: 20px;
   }
-  .card-header {
-    border: none; /* Remove border */
-    background-color: transparent; /* Remove background color */
-  }
-  
-  .card-body.req {
-    margin-top: -40px; /* Adjust margin to remove vertical space */
-  }
-  
-  .ellipsis-icon {
-    margin: 5px; /* Add margin to the ellipsis icon */
-  }

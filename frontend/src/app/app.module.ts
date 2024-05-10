@@ -33,6 +33,9 @@ import { DeliveryOfferDetailsComponent } from './delivery/delivery-offer-details
 import { ProfileManagementComponent } from './profile-management/profile-management.component';
 import { CarpoolingEditOfferComponent } from './carpooling/carpooling-edit-offer/carpooling-edit-offer.component';
 import { DeliverySendRequestComponent } from './delivery/delivery-send-request/delivery-send-request.component';
+import { OffersManagementComponent } from './offers-management/offers-management.component';
+import { OffersRequestsComponent } from './offers-requests/offers-requests.component';
+import { ComplaintModalComponent } from './complaint-modal/complaint-modal.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +63,10 @@ import { DeliverySendRequestComponent } from './delivery/delivery-send-request/d
     DeliveryOfferDetailsComponent,
     ProfileManagementComponent,
     CarpoolingEditOfferComponent,
-    DeliverySendRequestComponent
+    DeliverySendRequestComponent,
+    OffersManagementComponent,
+    OffersRequestsComponent,
+    ComplaintModalComponent
     ],
   imports: [
     BrowserModule,

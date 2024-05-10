@@ -60,7 +60,7 @@ export class DeliveryHomeComponent implements OnInit{
   fetchAllOffers(): void {
     this.offerService.getAllOffers()
       .pipe(
-        map((offers: Offer[]) => offers.filter(offer => offer.type === 'Delivery'))
+        map((offers: Offer[]) => offers.filter(offer => offer.type === 'Delivery' && offer.nb_pkg > 0))
       )
       .subscribe(filteredOffers => {
         this.offers = filteredOffers;
