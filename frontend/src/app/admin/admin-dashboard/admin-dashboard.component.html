@@ -1,9 +1,23 @@
-<div class="container">
-  <div class="row">
+<section>
+  <div class="container">
+    <div class="row">
       <div class="col-xl-12">
-        <app-cards [Data]="Data" ></app-cards>
+            <div class="row mt-5">
+        <div class="col-xl-12">
+          <app-cards [Data]="Data"></app-cards>
+        </div>
+      </div>
+      
+      <div class="row mt-4">
+        <div class="col-xl-8">
+          <app-users-complaints [complaints]="complaints" (response)="respondToComplaint($event)"></app-users-complaints>
+        </div>
+        <div class="col-xl-4">
+          <app-pie-chart></app-pie-chart>
+        </div>
+      </div>
       </div>
     </div>
-</div>
+  </div>
+</section>
 
-  

@@ -1,0 +1,29 @@
+button {
+    background: rgb(46, 46, 46);
+    border-radius: 20%;
+    border: none;
+    color: #E29F06;
+    transition: transform 0.3s ease; 
+    cursor: pointer; 
+  }
+  
+  button:focus {
+    outline: none;
+  }
+  
+  button:hover {
+    transform: scale(1.05);
+  }
+  
+  button:active {
+    transform: scale(0.95); 
+  }
+  
+  .custom-table {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    background-color: #ffffff;
+    border-radius: 0.25rem;
+    border: none;
+    padding: 1rem;
+  }
+  

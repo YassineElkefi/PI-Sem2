@@ -118,12 +118,10 @@ router.put('/user/updateProfile/:userId', async (req, res) => {
   
 const uploadDir = path.join(__dirname, '../uploads');
 
-// Ensure the directory exists
 if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });
 }
 
-// Multer configuration for file upload
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, path.join(uploadDir, 'avatars'));
@@ -136,7 +134,6 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-// Route to update user's avatar
 router.put('/user/updateAvatar/:userId', upload.single('avatar'), async (req, res) => {
     try {
         const { userId } = req.params;
@@ -150,6 +147,7 @@ router.put('/user/updateAvatar/:userId', upload.single('avatar'), async (req, re
         res.status(500).json({ message: 'Internal Server Error' });
     }
 });
+
 
 module.exports = router;
 

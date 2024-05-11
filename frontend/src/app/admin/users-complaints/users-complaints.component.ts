@@ -1,92 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Complaint } from '../../models/Complaint';
+import { ComplaintDetailsComponent } from '../complaint-details/complaint-details.component';
+
 
 @Component({
   selector: 'app-users-complaints',
   templateUrl: './users-complaints.component.html',
   styleUrl: './users-complaints.component.css'
 })
-export class UsersComplaintsComponent {
-  recentOrder =[
-    {
-      "id": "84564564",
-      "name": "Camera Lens",
-      "quantity": "40",
-      "status": "Rejected",
-      "status_type": "bg-danger",
-      "amount": "$40,570"
-    },
-    {
-      "id": "84564786",
-      "name": "Laptop",
-      "quantity": "300",
-      "status": "Pending",
-      "status_type": "bg-warning",
-      "amount": "$180,139"
-    },
-    {
-      "id": "84564522",
-      "name": "Mobile",
-      "quantity": "355",
-      "status": "Approved",
-      "status_type": "bg-success",
-      "amount": "$50,139"
-    },
-    {
-      "id": "84564564",
-      "name": "Camera Lens",
-      "quantity": "40",
-      "status": "Rejected",
-      "status_type": "bg-danger",
-      "amount": "$40,570"
-    },
-    {
-      "id": "84564786",
-      "name": "Laptop",
-      "quantity": "300",
-      "status": "Pending",
-      "status_type": "bg-warning",
-      "amount": "$180,139"
-    },
-    {
-      "id": "84564522",
-      "name": "Mobile",
-      "quantity": "355",
-      "status": "Approved",
-      "status_type": "bg-success",
-      "amount": "$50,139"
-    },
-    {
-      "id": "84564564",
-      "name": "Camera Lens",
-      "quantity": "40",
-      "status": "Rejected",
-      "status_type": "bg-danger",
-      "amount": "$40,570"
-    },
-    {
-      "id": "84564786",
-      "name": "Laptop",
-      "quantity": "300",
-      "status": "Pending",
-      "status_type": "bg-warning",
-      "amount": "$180,139"
-    },
-    {
-      "id": "84564522",
-      "name": "Mobile",
-      "quantity": "355",
-      "status": "Approved",
-      "status_type": "bg-success",
-      "amount": "$50,139"
-    },
-    {
-      "id": "84564786",
-      "name": "Laptop",
-      "quantity": "300",
-      "status": "Pending",
-      "status_type": "bg-warning",
-      "amount": "$180,139"
-    }
-  ]
+export class UsersComplaintsComponent implements OnInit{
+
+  @Input() complaints?: Complaint[] ;
+  selectedComplaint: Complaint;
+  @Output() response = new EventEmitter();
+  totalRecords = this.complaints?.length;
+  first = 0;
   
+  @ViewChild('detailsModal') detailsModal?: ComplaintDetailsComponent;
+
+  ngOnInit(): void {
+  }
+  
+  pageChange(event: any) {
+    console.log('Page changed:', event);
+  }
+
+  openDetailsModal(): void {
+    this.detailsModal?.openModal();
+  }
+
+  respondToComplaint(response: any){
+    this.response.emit(response);
+  }
+  recuperer(comp: Complaint){
+    this.selectedComplaint = comp
+  }
+
 }

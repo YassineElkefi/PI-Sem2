@@ -1,31 +1,40 @@
-<h5 class="mb-3">Recent Orders</h5>
-      <div class="card tbl-card">
-        <div class="table-responsive">
-          <table class="table table-hover mb-0">
-            <thead>
-              <tr>
-                <th>TRACKING NO.</th>
-                <th>PRODUCT NAME</th>
-                <th>STATUS</th>
-                <th class="text-end">TOTAL ORDER</th>
-                <th class="text-end">TOTAL AMOUNT</th>
-              </tr>
-            </thead>
-            <tbody>
-              @for (order of recentOrder; track order) {
-                <tr>
-                  <td
-                    ><a href="javascript:" class="text-muted">{{ order.id }}</a></td
-                  >
-                  <td>{{ order.name }}</td>
-                  <td
-                    ><span class="d-block"><i class="badge-circle {{ order.status_type }} f-10 m-r-5"></i>{{ order.status }}</span></td
-                  >
-                  <td class="text-end">{{ order.quantity }}</td>
-                  <td class="text-end">{{ order.amount }}</td>
-                </tr>
-              }
-            </tbody>
-          </table>
-        </div>
-      </div>
+<div class="custom-table">
+    <p-table
+      [value]="complaints"
+      [paginator]="true"
+      [rows]="5"
+      [first]="first"
+      [showCurrentPageReport]="true"
+      [tableStyle]="{ 'min-width': '50rem' }"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      (onPage)="pageChange($event)"
+    >
+      <ng-template pTemplate="header">
+          <tr>
+              <th style="width:25%">Object</th>
+              <th style="width:25%">Description</th>
+              <th style="width:25%">User</th>
+              <th style="width:25%">State</th>
+              <th style="width:25%"></th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-complaint>
+          <tr>
+              <td>{{ complaint.object }}</td>
+              <td>{{ complaint.description }}</td>
+              <td>{{ complaint.user.firstName}} {{ complaint.user.lastName}}</td>
+              <td>{{ complaint.state }}</td>
+              <td>
+                <button 
+                    type="button" 
+                    pButton 
+                    pRipple 
+                    icon="pi pi-external-link" 
+                    (click)="recuperer(complaint);openDetailsModal()" data-bs-toggle="modal" data-bs-target="#addModal">
+                </button>
+            </td>
+          </tr>
+          <app-complaint-details #detailsModal [complaint]="selectedComplaint" (response)="respondToComplaint($event)"></app-complaint-details>
+      </ng-template>
+    </p-table>
+  </div>

@@ -3,6 +3,8 @@ import { OfferService } from '../../services/offer.service';
 import { map } from 'rxjs/operators';
 import { Offer } from '../../models/Offer';
 import { UserServiceService } from '../../services/user-service.service';
+import { ComplaintsService } from '../../services/complaints.service';
+import { Complaint } from '../../models/Complaint';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -13,16 +15,18 @@ export class AdminDashboardComponent implements OnInit{
 
 
   Data: { key: string, value: number }[] = [];
-
+  complaints: Complaint[];
   deliveryOffers: number = 0;
   carpoolingOffers: number = 0;
   users: number = 0;
 
-  constructor(private offerService : OfferService, private userService: UserServiceService){};
+  constructor(private complaintService: ComplaintsService, private offerService : OfferService, private userService: UserServiceService){};
 
   ngOnInit(): void {
       this.fetchAllOffers();
       this.fetchAllUsers();
+      this.loadComplaints();
+      console.log(this.Data);
   }
   
   fetchAllOffers(): void {
@@ -63,5 +67,36 @@ export class AdminDashboardComponent implements OnInit{
     });
   }
   
+
+  loadComplaints() {
+    this.complaintService.findAllComplaints().subscribe((data: Complaint[]) => {
+      this.complaints = data;
+      this.Data.push({ key: 'Complaints', value: this.complaints.length });
+      console.log('Complaints fetched successfully:', this.complaints);
+    }, error => {
+      console.error('Error fetching complaints:', error);
+    });
+  }
+
+  respondToComplaint(response: any){
+    if(response.response){
+      this.complaintService.acceptComplaint(response.complaint._id
+      ).subscribe(complaint =>{
+        console.log('Complaint approved', complaint);
+        response.complaint = null;
+        this.ngOnInit();
+      }, error => {
+        console.error('Complaint couldnt be approved :', error);
+      });
+    }else{
+      this.complaintService.rejectComplaint(response.complaint._id).subscribe(complaint =>{
+        console.log('Complaint rejected', complaint);
+        response.complaint = null;
+        this.ngOnInit();
+      }, error => {
+        console.error('Complaint couldnt be rejected :', error);
+      });
+    }
+  }
 
 }

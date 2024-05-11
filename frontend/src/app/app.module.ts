@@ -36,6 +36,8 @@ import { DeliverySendRequestComponent } from './delivery/delivery-send-request/d
 import { OffersManagementComponent } from './offers-management/offers-management.component';
 import { OffersRequestsComponent } from './offers-requests/offers-requests.component';
 import { ComplaintModalComponent } from './complaint-modal/complaint-modal.component';
+import { ChartModule } from 'primeng/chart';
+import { CardModule } from 'primeng/card';
 
 @NgModule({
   declarations: [
@@ -77,7 +79,9 @@ import { ComplaintModalComponent } from './complaint-modal/complaint-modal.compo
     ButtonModule,
     InputGroupModule,
     InputGroupAddonModule,
-    DropdownModule
+    DropdownModule,
+    ChartModule,
+    CardModule
 
   ],
   providers: [],
