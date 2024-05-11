@@ -43,4 +43,8 @@ export class OfferService {
     return this.http.patch<any>(`${this.baseUrl}/completeOffer/${id}`, {});
   }
 
+  rateOffer(offerId: string, userId: string, rating: number): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/rateOffer/${offerId}/${userId}/${rating}`, {});
+  }
+
 }

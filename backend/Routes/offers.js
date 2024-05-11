@@ -3,6 +3,7 @@ const router = express.Router()
 const Offer = require('../Models/Offer')
 const Request = require('../Models/Request')
 const requests = require('../Routes/requests');
+const User = require('../Models/User');
 const findReqById = requests.findReqById;
 
 
@@ -43,9 +44,9 @@ router.get('/allOffers', async(req,res) =>{
 
 router.post("/addOffer", async (req, res) => {
     try {
-        const { title, path, type, nb_ppl, nb_pkg, departure_time, departure_date,price,car, offeror, state } = req.body;
+        const { title, path, type, nb_ppl, nb_pkg, departure_time, departure_date,price,car, offeror, state,participants, rate } = req.body;
         const offer = await Offer.create({
-            title, path, type, nb_ppl, nb_pkg, departure_time, departure_date,price, car, offeror, state
+            title, path, type, nb_ppl, nb_pkg, departure_time, departure_date,price, car, offeror, state,participants, rate
         });
         res.status(201).json({ message: 'Offer posted', offer });
     } catch (err) {
@@ -107,16 +108,26 @@ router.patch("/acceptRequest/:id", async (req, res) => {
                 return res.status(400).json({ message: 'Offer is completed' });
             }
             offer.nb_ppl--;
+            offer.participants.push(request.sender);
         } else if (offer.type === 'Delivery') {
             if (offer.nb_pkg === 0) {
                 return res.status(400).json({ message: 'Offer is completed' });
             }
             offer.nb_pkg--;
+            offer.participants.push(request.sender);
+
         }
 
         request.state = "Approved";
         await request.save();
         await offer.save();
+
+        const user = await User.findById(request.sender.id);
+        if(user){
+            user.currentOffer = offer;
+            user.haveRated = false;
+            await user.save();
+        }
 
         res.json({ message: 'Request and Offer updated' });
     } catch (err) {
@@ -164,6 +175,49 @@ router.patch("/completeOffer/:id", async (req, res) => {
 );
 
 
+router.post("/rateOffer/:offerId/:userId/:rating", async (req, res) => {
+    const { offerId, userId, rating } = req.params;
+    
+    try {
+        // Find the offer by ID
+        const offer = await findOfferById(offerId);
+        if (!offer) {
+            return res.status(404).json({ message: 'Offer not found' });
+        }
+
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Calculate new rating and update ratings array
+        const newRating = parseInt(rating);
+        offer.ratings.push({
+            rater: user,
+            rating: newRating
+        });
+
+        // Update rate attribute
+        const totalRatings = offer.ratings.length;
+        const currentRating = offer.rate * (totalRatings - 1); // Previous total rating points
+        const updatedRating = (currentRating + newRating) / totalRatings; // New average rating
+        offer.rate = updatedRating;
+
+        // Save changes to the offer
+        await offer.save();
+
+        // Update user's currentOffer and haveRated attributes
+        user.currentOffer = null;
+        user.haveRated = true;
+        await user.save();
+
+        // Send success response
+        res.status(200).json({ message: 'Offer rated successfully', updatedRating });
+    } catch (err) {
+        console.error("Error rating offer:", err);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
 
 router.get("/",(req,res)=>{
     res.send("<h1>Requests working</h1>")

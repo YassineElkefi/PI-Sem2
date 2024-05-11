@@ -35,7 +35,7 @@ export class RegisterComponent {
       console.log("Passwords don't match");
       return;
     }
-    const user: User = new User(this.cin,this.firstName,this.lastName,this.email, this.password,this.phone,this.address,this.car,0,null);
+    const user: User = new User(null,this.cin,this.firstName,this.lastName,this.email, this.password,this.phone,this.address,this.car,0,null);
 
     if (this.haveCar === 'yes') {
       user.car = this.car;

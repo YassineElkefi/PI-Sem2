@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
-
+const Schema = mongoose.Schema;
 const UserSchema = new mongoose.Schema({
+    
     cin:{
         type: String,
         required: true,
@@ -42,6 +43,14 @@ const UserSchema = new mongoose.Schema({
         required: false,
         nullable: true
     },
+    currentOffer:{
+        type: Schema.Types.Mixed,
+        required: false
+    },
+    haveRated:{
+        type: Boolean,
+        required: false
+    }
     });
 
     module.exports = mongoose.model('User',UserSchema)

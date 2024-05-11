@@ -2,7 +2,7 @@ import { User } from "./User";
 
 export class Offer {
   constructor(
-    public _id: number,
+    public _id: string,
     public title: string,
     public path: string[],
     public type: string,

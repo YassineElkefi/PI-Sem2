@@ -42,6 +42,18 @@ const OfferSchema = new Schema({
     state:{
         type: String,
         required: true
+    },
+    rate:{
+        type: Number,
+        required: false
+    },
+    ratings:{
+        type: Array,
+        required: false
+    },
+    participants:{
+        type: Array,
+        required: false
     }
-});
+    });
 module.exports = mongoose.model('Offer',OfferSchema)

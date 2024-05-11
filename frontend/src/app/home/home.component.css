@@ -168,3 +168,19 @@ button{
 -webkit-text-stroke-width: 0.2px;
 -webkit-text-stroke-color: black;
 }
+
+.star-rating i {
+  font-size: 20px; /* Adjust font size as desired */
+}
+
+.far.fa-star {
+  color: #ccc; /* Unfilled star color (gray) */
+}
+
+.fas.fa-star {
+  color: #f0c040; /* Filled star color (gold) */
+}
+.modal-header{
+  border-bottom: none;
+  text-align: center;
+}
