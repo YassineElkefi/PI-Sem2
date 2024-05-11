@@ -37,6 +37,7 @@
           @if(user?.cin != "00000000"){
           <a class="dropdown-item" [routerLink]="['/profile', user?.id]">Profile</a>
           <a class="dropdown-item" [routerLink]="['/myOffers' , user?.id]">My offers</a>
+          <a class="dropdown-item" (click)="logout()">Logout</a>
           }@else{
             <a class="dropdown-item" (click)="logout()">Logout</a>
           }
