@@ -4,18 +4,19 @@ const Complaint = require('../Models/Complaint')
 const Offer = require('../Models/Offer')
 const User = require('../Models/User')
 const offers = require('../Routes/offers');
-const findOfferById = offers.findOfferById;
-
-
 const nodemailer = require('nodemailer');
+require('dotenv').config()
 
 const transporter = nodemailer.createTransport({
-  service: 'Gmail',
-  auth: {
-    user: 'deliveriniDep@gmail.com',
-    pass: 'deliverini123'
-  }
-});
+    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false,
+    auth: {
+      user: process.env.EMAIL,
+      pass: process.env.PW
+    }
+  });
 
 var subject = "Deletion notice"
 var text = "you have been deleted"
@@ -51,41 +52,37 @@ router.patch("/acceptComplaint/:id", async (req, res) => {
             return res.status(404).json({ message: 'Complaint not found' });
         }
         complaint.state = 'Accepted';
-        if (user.nb_strikes > 2) {
-            
-
-
+        if (user.nb_strikes > 1) {
             try {
                 const info = await transporter.sendMail({
-                  from: 'deliveriniDep@gmail.com',
-                  to: user.email,
-                  subject: subject,
-                  text: text
+                    from: 'deliverinidep@gmail.com',
+                    to: user.email,
+                    subject: subject,
+                    text: text
                 });
-            
+
                 console.log('Email sent: ' + info.response);
-                res.send('Email sent successfully');
-              } catch (error) {
+
+                await User.findByIdAndDelete(user.id);
+                console.log('User deleted');
+            } catch (error) {
                 console.error('Error sending email: ', error);
-                res.status(500).send('Error sending email');
-              }
-
-
-
-            await User.findByIdAndDelete(user.id);
-            console.log('User deleted');
+                return res.status(500).send('Error sending email');
+            }
         } else {
             user.nb_strikes += 1;
             await user.save();
         }
-        //notification
+
         await complaint.save();
-        res.json({ message: 'Complaint accepted', complaint });
+
+        return res.json({ message: 'Complaint accepted', complaint });
     } catch (err) {
         console.log(err);
-        res.status(500).json({ message: 'Internal server error' });
+        return res.status(500).json({ message: 'Internal server error' });
     }
 });
+
 
 
 router.patch("/rejectComplaint/:id", async (req, res) => {
