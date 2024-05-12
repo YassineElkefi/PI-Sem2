@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit, AfterViewInit{
           
           // Filter completed offers where user hasn't rated
           const notRatedOffers = completedOffers.filter(offer => {
-            return !this.user.haveRated && offer.participants.some(participant => participant.id === this.user.id);
+            return !this.user?.haveRated && offer.participants.some(participant => participant.id === this.user?.id);
           });
       
           return notRatedOffers;
@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit, AfterViewInit{
     }
   }
   ngAfterViewInit(): void {
-    if (this.user.haveRated === false && this.user?.currentOffer._id === this.completedOffer?._id) {
+    if (this.user?.haveRated === false && this.user?.currentOffer._id === this.completedOffer?._id) {
       this.showOfferRatingMessage = true;
       this.triggerModalButtonClick();
     }
@@ -100,7 +100,7 @@ export class HomeComponent implements OnInit, AfterViewInit{
   rateOffer(index: number): void {
     if (this.completedOffer) { // Check if completedOffer is defined
       const offerId = this.completedOffer._id;
-      const userId = this.user.id;
+      const userId = this.user?.id;
       const rating = index + 1;
   
       this.offerService.rateOffer(offerId, userId, rating).subscribe(
