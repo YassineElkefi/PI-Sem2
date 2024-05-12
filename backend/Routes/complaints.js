@@ -6,6 +6,20 @@ const User = require('../Models/User')
 const offers = require('../Routes/offers');
 const findOfferById = offers.findOfferById;
 
+
+const nodemailer = require('nodemailer');
+
+const transporter = nodemailer.createTransport({
+  service: 'Gmail',
+  auth: {
+    user: 'deliveriniDep@gmail.com',
+    pass: 'deliverini123'
+  }
+});
+
+var subject = "Deletion notice"
+var text = "you have been deleted"
+
 router.get('/allComplaints', async(req,res) =>{
     try{
         const data = await Complaint.find();
@@ -38,7 +52,25 @@ router.patch("/acceptComplaint/:id", async (req, res) => {
         }
         complaint.state = 'Accepted';
         if (user.nb_strikes > 2) {
-            //mailing service notification
+            
+
+
+            try {
+                const info = await transporter.sendMail({
+                  from: 'deliveriniDep@gmail.com',
+                  to: user.email,
+                  subject: subject,
+                  text: text
+                });
+            
+                console.log('Email sent: ' + info.response);
+                res.send('Email sent successfully');
+              } catch (error) {
+                console.error('Error sending email: ', error);
+                res.status(500).send('Error sending email');
+              }
+
+
 
             await User.findByIdAndDelete(user.id);
             console.log('User deleted');
@@ -70,6 +102,9 @@ router.patch("/rejectComplaint/:id", async (req, res) => {
         console.log(err);
         res.status(500).json({ message: 'Internal server error' });
     }
-}
-);
+});
+
+
+
+
 module.exports = router
