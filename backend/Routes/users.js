@@ -73,7 +73,7 @@ router.post('/login',async (req,res)=>{
                 car:user.car,
                 nb_strikes:user.nb_strikes,
                 avatar:user.avatar,
-                currentOffer:user?.currentOffer,
+                currentOffer:user?.currentOffer._id,
                 haveRated:user?.haveRated
             }
         });
