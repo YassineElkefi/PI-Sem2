@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const UserSchema = new mongoose.Schema({
-    
     cin:{
         type: String,
         required: true,

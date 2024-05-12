@@ -45,43 +45,49 @@ router.post('/register',async (req,res)=>{
 
 }});
 
-router.post('/login',async (req,res)=>{
-    try{
-        const {cin,password} = req.body;
-        
-        const user = await User.findOne({cin});
-        if(!user){
-            return res.status(400).json({msg:"Invalid credentials"});
+router.post('/login', async (req, res) => {
+    try {
+        const { cin, password } = req.body;
+
+        const user = await User.findOne({ cin });
+        if (!user) {
+            return res.status(400).json({ msg: "Invalid credentials" });
         }
-        const isMatch = await bcrypt.compare(password,user.password);
-        if(!isMatch){
-            return res.status(400).json({msg:"Invalid credentials"});
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(400).json({ msg: "Invalid credentials" });
         }
 
-        const token = jwt.sign({id:user._id},process.env.JWT_SECRET,{expiresIn: '1h'});
-        
+        let currentOfferId = null;
+        if (user.currentOffer) {
+            currentOfferId = user.currentOffer._id;
+        }
+
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
         res.status(200).json({
             token,
-            user:{
-                id:user._id,
-                cin:user.cin,
-                firstName:user.firstName,
-                lastName:user.lastName,
-                email:user.email,
-                phone:user.phone,
-                address:user.address,
-                car:user.car,
-                nb_strikes:user.nb_strikes,
-                avatar:user.avatar,
-                currentOffer:user?.currentOffer,
-                haveRated:user?.haveRated
+            user: {
+                id: user._id,
+                cin: user.cin,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                phone: user.phone,
+                address: user.address,
+                car: user.car,
+                nb_strikes: user.nb_strikes,
+                avatar: user.avatar,
+                currentOffer: currentOfferId,
+                haveRated: user.haveRated
             }
         });
-    }catch(err){
+    } catch (err) {
         console.error(err.message);
-        res.status(500).send('Internal Server Error')
+        res.status(500).send('Internal Server Error');
     }
 });
+
 router.get('/user/:id', async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
