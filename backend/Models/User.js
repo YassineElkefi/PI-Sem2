@@ -49,6 +49,10 @@ const UserSchema = new mongoose.Schema({
     haveRated:{
         type: Boolean,
         required: false
+    },
+    rate:{
+        type:Number,
+        required:true
     }
     });
 

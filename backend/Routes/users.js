@@ -12,7 +12,7 @@ const User = require('../Models/User')
 //Routes
 router.post('/register',async (req,res)=>{
     try{
-    const {cin,firstName,lastName,password,email,phone,address,car,nb_strikes,avatar} = req.body
+    const {cin,firstName,lastName,password,email,phone,address,car,nb_strikes,avatar,rate} = req.body
     
     let user = await User.findOne({cin});
 
@@ -30,7 +30,8 @@ router.post('/register',async (req,res)=>{
         address,
         car,
         nb_strikes,
-        avatar
+        avatar,
+        rate
     })
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(password,salt);
@@ -79,7 +80,8 @@ router.post('/login', async (req, res) => {
                 nb_strikes: user.nb_strikes,
                 avatar: user.avatar,
                 currentOffer: currentOfferId,
-                haveRated: user.haveRated
+                haveRated: user.haveRated,
+                rate:user.rate
             }
         });
     } catch (err) {
