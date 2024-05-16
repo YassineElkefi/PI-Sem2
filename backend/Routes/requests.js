@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Request = require('../Models/Request')
+const axios = require('axios')
 
 //Get all requests
 router.get("/allRequests", async (req,res)=>{
@@ -22,6 +23,11 @@ router.post("/addRequest", async (req, res) => {
             offer,
             departure,
             arrival
+        });
+        await axios.post('http://localhost:5000/notif/addNotification', {
+            text: sender.firstName + ' ' + sender.lastName + ' has sent you a request to join your offer.',
+            user: receiver,
+            state: 'unread'
         });
         res.status(201).json({ message: 'Request created', newRequest });
     } catch (err) {

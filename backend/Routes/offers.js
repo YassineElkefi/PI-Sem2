@@ -4,7 +4,7 @@ const Offer = require('../Models/Offer')
 const Request = require('../Models/Request')
 const requests = require('../Routes/requests');
 const User = require('../Models/User');
-const findReqById = requests.findReqById;
+const axios=require('axios')
 
 
 const findOfferById = async (id) => {
@@ -119,6 +119,11 @@ router.patch("/acceptRequest/:id", async (req, res) => {
         }
 
         request.state = "Approved";
+        await axios.post('http://localhost:5000/notif/addNotification', {
+            text: 'Your request has been approved',
+            user: request.sender,
+            state: 'unread'
+        });
         await request.save();
         await offer.save();
 
@@ -149,6 +154,11 @@ router.patch("/declineRequest/:id", async (req, res) => {
         }
         console.log(request)
         request.state = "Declined";
+        await axios.post('http://localhost:5000/notif/addNotification', {
+            text: 'Your request has been declined',
+            user: request.sender,
+            state: 'unread'
+        });
         await request.save();
 
         res.json({ message: 'Request declined successfully' });
@@ -157,6 +167,7 @@ router.patch("/declineRequest/:id", async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
+
 router.patch("/completeOffer/:id", async (req, res) => {
     const offerId = req.params.id;
     try {

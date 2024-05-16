@@ -8,6 +8,8 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
+const notification = require('./Routes/notification')
+const axios = require('axios')
 
 const app = express()
 const PORT = process.env.PORT || 5000;
@@ -24,7 +26,7 @@ app.use("/offers",offer)
 app.use("/auth",require("./Routes/users"))
 app.use("/complaints",require("./Routes/complaints"))
 app.use('/uploads/avatars', express.static('uploads/avatars'))
-
+app.use('/notif', notification)
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
