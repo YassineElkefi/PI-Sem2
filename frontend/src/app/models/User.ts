@@ -12,7 +12,8 @@ export class User {
       public address: string,
       public car: string,
       public nb_strikes: number,
-      public avatar: string
+      public avatar: string,
+      public rate:number
     ) {
     }
   }

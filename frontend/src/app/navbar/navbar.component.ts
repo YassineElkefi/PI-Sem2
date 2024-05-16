@@ -21,15 +21,13 @@ export class NavbarComponent implements OnInit{
   userData:any;
   notifs: Notif[] = [];
   private cookieSubscription: Subscription | undefined;
+  notificationInterval: any;
 
   ngOnInit(): void {
 
     //this.fetchNotifications();
 
     // Fetch notifications every 10 seconds
-    setInterval(() => {
-      this.fetchNotifications();
-    }, 10000);
 
     this.isAuthenticated = this.cookieService.check('authToken');
 
@@ -41,6 +39,26 @@ export class NavbarComponent implements OnInit{
       }
       
     });
+
+    if(this.isAuthenticated){
+      this.startNotificationInterval();
+    }
+  }
+  ngOnDestroy(): void {
+    this.cookieSubscription.unsubscribe();
+    this.clearNotificationInterval();
+  }
+
+  startNotificationInterval(): void {
+    this.notificationInterval = setInterval(() => {
+      this.fetchNotifications();
+    }, 10000);
+  }
+
+  clearNotificationInterval(): void {
+    if (this.notificationInterval) {
+      clearInterval(this.notificationInterval);
+    }
   }
   toggleNavbar() {
     this.isNavbarOpen = !this.isNavbarOpen;
@@ -83,6 +101,7 @@ export class NavbarComponent implements OnInit{
 
   logout(){
     this.authService.logout();
+    this.clearNotificationInterval();
     this.router.navigateByUrl('/auth/login');
   }
 }

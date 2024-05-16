@@ -20,6 +20,7 @@
     </div>
   }
     @if(isAuthenticated){
+      @if(user?.cin !=="00000000"){
       <div class="dropdown">
         <!-- Profile Picture or Avatar -->
         <button class="btn dropdown-toggle no-arrow" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -42,6 +43,7 @@
           <a *ngIf="notifs.length === 0" class="dropdown-item">No notifications</a>
         </div>
       </div>
+    }
       <div class="dropdown">
         <button class="btn dropdown-toggle no-arrow" type="button"  id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           @if(user?.cin != "00000000"){
