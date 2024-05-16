@@ -156,6 +156,18 @@ router.put('/user/updateAvatar/:userId', upload.single('avatar'), async (req, re
     }
 });
 
+router.delete('/user/deleteAccount/:userId', async (req, res) => {
+    try {
+        const { userId } = req.params;
+
+        await User.findByIdAndDelete(userId);
+
+        res.status(200).json({ message: 'User deleted successfully' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
 
 module.exports = router;
 

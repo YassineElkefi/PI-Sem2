@@ -28,4 +28,9 @@ updateAvatar(userId: string, avatar: File): Observable<any> {
 
   return this.http.put<any>(`${this.baseUrl}/user/updateAvatar/${userId}`, formData);
 }
+
+deleteAccount(userId: string): Observable<any> {
+  return this.http.delete<any>(`${this.baseUrl}/user/deleteAccount/${userId}`);
+}
+  
 }

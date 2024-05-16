@@ -1,11 +1,12 @@
 import { Component, Input, ViewChild, viewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserServiceService } from '../services/user-service.service';
 import { CookieService } from 'ngx-cookie-service';
 import { OfferService } from '../services/offer.service';
 import { map } from 'rxjs';
 import { RequestService } from '../services/request.service';
 import { ComplaintModalComponent } from '../complaint-modal/complaint-modal.component';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-profile-management',
@@ -26,7 +27,7 @@ export class ProfileManagementComponent {
   deliveryOffers:any;
   requests:any;
 
-  constructor(private route: ActivatedRoute, private userService:UserServiceService, private cookieService:CookieService,private offerService: OfferService,private requestService: RequestService) { }
+  constructor(private route: ActivatedRoute, private userService:UserServiceService, private cookieService:CookieService,private offerService: OfferService,private requestService: RequestService,private router:Router, private authService:AuthService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -125,6 +126,20 @@ export class ProfileManagementComponent {
       this.complaintModal?.openModal();
       console.log("Selected Request : ",this.selectedRequest);
       
+    }
+
+    deleteAccount(){
+      this.userService.deleteAccount(this.userId).subscribe(
+        response => {
+          console.log(response);
+          this.authService.logout();
+          this.router.navigate(['/auth/register']);
+        },
+        error => {
+          console.error(error);
+        }
+      );
+    
     }
 //   saveCar(){
 //     if (!this.haveCar) {
