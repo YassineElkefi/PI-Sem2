@@ -1,25 +1,37 @@
-<div class="container">
-    <div class="slider">
-      <div class="slide-track">
-        <div class="slide" *ngFor="let member of teamMembers">
-          <div class="team-item">
-            <div class="overflow-hidden">
-                <img class="img-fluid" [src]="'../../assets/images/' + member.imageUrl" alt="">
-            </div>
-            <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
-              <div class="bg-light d-flex justify-content-center pt-2 px-1">
-                <a class="btn btn-sm-square mx-1" href="" style="color: #06bbcc;"><i class="fab fa-facebook-f"></i></a>
-                <a class="btn btn-sm-square mx-1" href="" style="color: #06bbcc;"><i class="fab fa-twitter"></i></a>
-                <a class="btn btn-sm-square mx-1" href="" style="color: #06bbcc;"><i class="fab fa-instagram"></i></a>
-              </div>
-            </div>
-            <div class="text-center p-4">
-              <h5 class="mb-0">{{ member.name }}</h5>
-              <small>{{ member.role }}</small>
-            </div>
-          </div>
-        </div>
-      </div>
+
+<section class="about-us-container">
+  <div class="header">
+    <h2>Welcome to <span style="color: #E29F06;">DELIVERINI</span></h2>
+    <p>
+      At <strong>DELIVERINI</strong>, Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt reiciendis cupiditate omnis dolore, magni temporibus quia eos facere, inventore laborum iusto sit hic, minus qui? Repellendus reprehenderit nesciunt laboriosam sed.
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt reiciendis cupiditate omnis dolore, magni temporibus quia eos facere, inventore laborum iusto sit hic, minus qui? Repellendus reprehenderit nesciunt laboriosam sed.
+    </p>
+  </div>
+
+  <div class="mission">
+    <h3 style="color: #E29F06;">Our Mission</h3>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt reiciendis cupiditate omnis dolore, magni temporibus quia eos facere, inventore laborum iusto sit hic, minus qui? Repellendus reprehenderit nesciunt laboriosam sed.
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt reiciendis cupiditate omnis dolore, magni temporibus quia eos facere, inventore laborum iusto sit hic, minus qui? Repellendus reprehenderit nesciunt laboriosam sed.
+    </p>
+  </div>
+
+  <div class="why-choose-us">
+    <h3 style="color: #E29F06;">Why Choose Us?</h3>
+    <div class="bubble-container">
+      <div class="bubble">Expertise</div>
+      <div class="bubble">Innovation</div>
+      <div class="bubble">Customization</div>
+      <div class="bubble">Support</div>
+      <div class="bubble">Commitment to Quality</div>
     </div>
   </div>
-  
+
+  <div class="contact">
+    <h3 style="color: #E29F06;">Get in Touch</h3>
+    <p>
+      Have a question or need assistance? Don't hesitate to reach out to us. Our friendly team is here to help.
+      Contact us today to learn more about how <strong>DELIVERINI</strong> can take your life to the next level.
+    </p>
+  </div>
+</section>
