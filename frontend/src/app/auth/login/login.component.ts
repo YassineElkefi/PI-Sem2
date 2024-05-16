@@ -23,7 +23,8 @@ export class LoginComponent {
       next: (response) => {
         if(!(response.status === 200) && !(response.status === 400)){
         console.log(response);
-        if (credentials.cin == "00000000"){
+        console.log("CIN:", credentials.cin);
+        if (credentials.cin === "00000000"){
           this.router.navigate(['/admin/admin-dashboard']);
         }else{
           this.router.navigate(['/']);
