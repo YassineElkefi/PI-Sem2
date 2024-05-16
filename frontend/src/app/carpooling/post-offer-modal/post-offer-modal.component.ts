@@ -18,7 +18,33 @@ export class PostOfferModalComponent {
   car: any;
   path: string[] = [];
   locations: string[] = [''];
-  locationOptions: string[] = ['Yasminet', 'Mourouj', 'Tekup'];
+  locationOptions: string[] = [
+    "Ariana",
+    "Béja",
+    "Ben Arous",
+    "Bizerte",
+    "Gabès",
+    "Gafsa",
+    "Jendouba",
+    "Kairouan",
+    "Kasserine",
+    "Kebili",
+    "Kef",
+    "Mahdia",
+    "Manouba",
+    "Medenine",
+    "Monastir",
+    "Nabeul",
+    "Sfax",
+    "Sidi Bouzid",
+    "Siliana",
+    "Sousse",
+    "Tataouine",
+    "Tozeur",
+    "Tunis",
+    "Zaghouan"
+];
+
   isOpen: boolean = false;
   
   @Output() offerToHome = new EventEmitter();

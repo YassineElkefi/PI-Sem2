@@ -7,7 +7,33 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class CarpoolingFiltersComponent {
 
-  locations: string[] = ["Ben arous", "Ariana", "Tunis", "Mourouj"];
+  locations: string[] = [
+    "Ariana",
+    "Béja",
+    "Ben Arous",
+    "Bizerte",
+    "Gabès",
+    "Gafsa",
+    "Jendouba",
+    "Kairouan",
+    "Kasserine",
+    "Kebili",
+    "Kef",
+    "Mahdia",
+    "Manouba",
+    "Medenine",
+    "Monastir",
+    "Nabeul",
+    "Sfax",
+    "Sidi Bouzid",
+    "Siliana",
+    "Sousse",
+    "Tataouine",
+    "Tozeur",
+    "Tunis",
+    "Zaghouan"
+];
+
 
   @Output() sendFiltersToHome = new EventEmitter<any>();
 

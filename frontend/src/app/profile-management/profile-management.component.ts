@@ -19,7 +19,7 @@ export class ProfileManagementComponent {
   user:any = {};
   haveCar: boolean = false;
   car: string= '';
-  selectedRequest:any;
+  selectedRequest: any;
   @ViewChild('complaintModal') complaintModal?: ComplaintModalComponent;
 
   newAvatar: File;

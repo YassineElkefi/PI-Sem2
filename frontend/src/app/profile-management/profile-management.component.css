@@ -32,3 +32,11 @@
   .ellipsis-icon {
     margin: 5px; /* Add margin to the ellipsis icon */
   }
+
+  .flag:hover{
+    color: red;
+  }
+
+  .pen:hover{
+    color: green;
+  }
