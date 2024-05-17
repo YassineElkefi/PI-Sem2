@@ -1,5 +1,3 @@
-import { User } from "./User";
-
 export class Offer {
   constructor(
     public _id: string,

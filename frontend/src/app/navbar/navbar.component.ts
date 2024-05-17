@@ -2,7 +2,6 @@ import { Component, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Subscription, interval, map } from 'rxjs';
-import { User } from '../models/User';
 import { AuthService } from '../services/auth.service';
 import { NotifService } from '../services/notif.service';
 import { Notif } from '../models/Notif';
@@ -24,10 +23,6 @@ export class NavbarComponent implements OnInit{
   notificationInterval: any;
 
   ngOnInit(): void {
-
-    //this.fetchNotifications();
-
-    // Fetch notifications every 10 seconds
 
     this.isAuthenticated = this.cookieService.check('authToken');
 
@@ -84,20 +79,6 @@ export class NavbarComponent implements OnInit{
       console.error('Error marking notification as read:', error);
     });
   }
-  
-
-  // fetchNotifications() {
-  //   this.notificationService.getAllNotifs().subscribe(
-  //     (data) => {
-  //       // Update notifications array with new notifications
-  //       this.notifications = data;
-  //       console.log("Notifications: ", this.notifications);
-  //     },
-  //     (error) => {
-  //       console.error('Error fetching notifications:', error);
-  //     }
-  //   );
-  // }
 
   logout(){
     this.authService.logout();
