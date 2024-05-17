@@ -217,9 +217,11 @@ router.post("/rateOffer/:offerId/:userId/:rating", async (req, res) => {
         // Save changes to the offer
         await offer.save();
 
+        if(!isNaN(user.rate)){
         const currentRate = user.rate;
         const updatedRate = (currentRate + newRating) / 2;
         user.rate = updatedRate;
+        }
 
         // Update user's currentOffer and haveRated attributes
         user.currentOffer = null;

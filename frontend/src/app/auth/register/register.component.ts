@@ -40,25 +40,25 @@ export class RegisterComponent {
     if (this.haveCar === 'yes') {
       user.car = this.car;
     }
-    this.authService.register(user).subscribe(
-      (response) => {
+    this.authService.register(user).subscribe({
+      next: (response) => {
         console.log(response);
         console.log('User registered successfully');
         this.router.navigate(['/auth/login']);
       },
-      (error) => {
+      error: (error) => {
         if (error.status === 400) {
           Swal.fire({
             icon: 'error',
             title: 'Error',
-            text: 'Identity number already used !',
-            confirmButtonColor:"#C21515",
+            text: 'Identity number already used!',
+            confirmButtonColor: "#C21515",
             animation: true
           });
         } else {
-          console.log(error);
+          console.error('An error occurred:', error);
         }
       }
-    );
+    });
   }
 }

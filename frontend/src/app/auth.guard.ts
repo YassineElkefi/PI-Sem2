@@ -31,23 +31,23 @@ export const authGuard3: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
 
   if (authService.isAuthenticated()) {
-    const userData = authService.getUser(); // Directly get the user data object
+    const userData = authService.getUser();
     console.log("userData:", userData);
 
     if (userData) {
-      const { cin } = userData; // Assuming "cin" is a direct property of userData
+      const { cin } = userData;
       if (cin === "00000000") {
-        return true; // Allow access to the admin dashboard
+        return true;
       } else {
-        router.navigate(['/']); // Redirect to another page if "cin" is not "00000000"
+        router.navigate(['/']);
         return false;
       }
     } else {
-      router.navigate(['/']); // Redirect to another page if userData is empty
+      router.navigate(['/']);
       return false;
     }
   } else {
-    router.navigate(['/auth/login']); // Redirect to the login page if not authenticated
+    router.navigate(['/auth/login']);
     return false;
   }
 }

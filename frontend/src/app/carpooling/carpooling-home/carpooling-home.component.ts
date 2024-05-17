@@ -66,57 +66,72 @@ export class CarpoolingHomeComponent implements OnInit{
 
   handlePostedOffer(offerData: any) {
 
-    this.offerService.postOffer(offerData)
-        .subscribe(response => {
-          console.log('Offer posted successfully:', response);
-          this.fetchAllCarpoolingOffers();
-        }, error => {
-          console.error('Error posting the offer:', error);
-        });
+    this.offerService.postOffer(offerData).subscribe({
+      next: (response) => {
+        console.log('Offer posted successfully:', response);
+        this.fetchAllCarpoolingOffers();
+      },
+      error: (error) => {
+        console.error('Error posting the offer:', error);
+      }
+    });
   }
   
   handleUpdatedOffer(offerData: any){
-    this.offerService.editOffer(this.selectedOffer._id.toString(),offerData)
-        .subscribe(response => {
-          console.log('Offer posted successfully:', response);
-          this.ngOnInit();
-        }, error => {
-          console.error('Error posting the offer:', error);
-        });
-  }
+    this.offerService.editOffer(this.selectedOffer._id.toString(), offerData).subscribe({
+    next: (response) => {
+      console.log('Offer edited successfully:', response);
+      this.ngOnInit();
+    },
+    error: (error) => {
+      console.error('Error editing the offer:', error);
+    }
+  });
 
+  }
 
   handleToBeDeletedOffer(offer: Offer){
     this.offerService.deleteOffer(offer._id.toString())
-    .subscribe(response => {
+  .subscribe({
+    next: (response) => {
       console.log('Offer deleted successfully:', response);
       this.ngOnInit();
-    }, error => {
-      console.error('Error adding Offer:', error);
-    });
+    },
+    error: (error) => {
+      console.error('Error deleting the offer:', error);
+    }
+  });
+
   }
 
   fetchAllCarpoolingOffers(): void {
     this.offerService.getAllOffers()
-    .pipe(
-      map((offers: Offer[]) => offers.filter(offer => offer.type === 'Carpooling' && offer.nb_ppl > 0))
-    )
-    .subscribe(filteredOffers => {
+  .pipe(
+    map((offers: Offer[]) => offers.filter((offer) => offer.type === 'Carpooling' && offer.nb_ppl > 0))
+  ).subscribe({
+    next: (filteredOffers) => {
       this.offers = filteredOffers;
       console.log('Filtered offers fetched successfully:', this.offers);
-    }, error => {
+    },
+    error: (error) => {
       console.error('Error fetching filtered offers:', error);
-    });
+    }
+  });
+
   }
 
   handleRequestPosted(requestData: any) {
     this.requestService.postRequest(requestData)
-    .subscribe(response => {
+  .subscribe({
+    next: (response) => {
       console.log('Request sent successfully:', response);
       this.ngOnInit();
-    }, error => {
+    },
+    error: (error) => {
       console.error('Error sending request:', error);
-    });
+    }
+  });
+
   }
 
 

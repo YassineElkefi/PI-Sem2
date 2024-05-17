@@ -25,47 +25,32 @@ export class HomeComponent implements OnInit, AfterViewInit{
     for (let i = 0; i < this.totalStars; i++) {
     this.stars.push({ filled: false });
   }
-
     this.resetStars();
-
     if (this.cookieService.get('userData')) {
       this.user = JSON.parse(this.cookieService.get('userData'));
-      this.offerService.getAllOffers().pipe(
-        map((offers: any[]) => {
-          // Filter completed offers
-          const completedOffers = offers.filter(offer => offer.state === 'Completed');
-          
-          // Filter completed offers where user hasn't rated
-          const notRatedOffers = completedOffers.filter(offer => {
-            return !this.user?.haveRated && offer.participants.some(participant => participant.id === this.user?.id);
-          });
-      
-          return notRatedOffers;
-        })
-      ).subscribe((notRatedOffers) => {
-        console.log("Completed offers where user hasn't rated: ", notRatedOffers);
-        // Handle notRatedOffers here
-        notRatedOffers.forEach(completedOffer => {
-          if (this.user?.currentOffer === completedOffer._id) {
-            this.completedOffer = completedOffer;
-            this.showOfferRatingMessage = true;
-            this.triggerModalButtonClick();
-          }
-        });
-      });
-      // this.offerService.getAllOffers().pipe(
-      //   map((offers: any) => offers.find(offer => {
-      //     return offer.participants.some(participant => participant.id === this.user.id) && offer.state === 'Completed';
-      //   }))
-      // ).subscribe((completed) => {
-      //   this.completedOffer = completed;
-      //   console.log("the Offer : ",this.completedOffer);
-      //   if (this.user.haveRated === false && this.user?.currentOffer?._id === this.completedOffer?._id) {
-      //     this.showOfferRatingMessage = true;
-      //     this.triggerModalButtonClick();
-      //   }
-      //   console.log("Did the user rate ?",this.user.haveRated);
-      // });
+      this.offerService.getAllOffers()
+      .pipe(
+        map((offers: any[]) =>
+        offers.filter((offer) => offer.state === 'Completed').filter((offer) => {
+        return !this.user?.haveRated && offer.participants.some((participant) => participant.id === this.user?.id);
+      })
+    )
+  )
+  .subscribe({
+    next: (notRatedOffers) => {
+      console.log("Completed offers where user hasn't rated: ", notRatedOffers);
+
+      const completedOffer = notRatedOffers.find((offer) => offer._id === this.user?.currentOffer);
+      if (completedOffer) {
+        this.completedOffer = completedOffer;
+        this.showOfferRatingMessage = true;
+        this.triggerModalButtonClick();
+      }
+    },
+    error: (error) => {
+      console.error('Error fetching completed offers:', error);
+    }
+  });
     } else {
       console.log('User is not authenticated');
     }
@@ -77,15 +62,9 @@ export class HomeComponent implements OnInit, AfterViewInit{
     }
   }
 
-  // resetStars(): void {
-  //   this.stars = Array(10).fill({ filled: false });
-  // }
-
   hoverStar(index: number): void {
-    // Reset all stars before filling based on hover
     this.resetStars();
   
-    // Fill stars only up to the hovered index
     for (let i = 0; i <= index; i++) {
       this.stars[i].filled = true;
     }
@@ -98,45 +77,29 @@ export class HomeComponent implements OnInit, AfterViewInit{
   }
 
   rateOffer(index: number): void {
-    if (this.completedOffer) { // Check if completedOffer is defined
+    if (this.completedOffer) {
       const offerId = this.completedOffer._id;
       const userId = this.user?.id;
       const rating = index + 1;
   
-      this.offerService.rateOffer(offerId, userId, rating).subscribe(
-        response => {
-          console.log('Rating successful', response);
-          this.user.haveRated = true;
-          const cookieOptions = this.cookieService.get('userData');
-          this.cookieService.set('userData', JSON.stringify(this.user), null, cookieOptions);
-        },      
-        error => {
-          console.error('Error rating offer', error);
-        }
-      );
+      this.offerService.rateOffer(offerId, userId, rating).subscribe({
+    next: (response) => {
+      console.log('Rating successful:', response);
+      this.user.haveRated = true;
+      const cookieOptions = this.cookieService.get('userData');
+      this.cookieService.set('userData', JSON.stringify(this.user), null, cookieOptions);
+    },
+    error: (error) => {
+      console.error('Error rating offer:', error);
+    }
+  });
+
     } else {
       console.error('completedOffer is not defined');
     }
   
     console.log(`Rated with ${index + 1} stars`);
-    // const offerId = this.completedOffer._id;
-    // const userId = this.user.id;
-    // const rating = index + 1;
-
-    // this.offerService.rateOffer(offerId, userId, rating).subscribe(
-    //   response => {
-    //     console.log('Rating successful', response);
-    //       this.user.haveRated = true;
-    //       const cookieOptions = this.cookieService.get('userData')
-    //       this.cookieService.set('userData', JSON.stringify(this.user), null, cookieOptions);
-    //     },      
-    //   error => {
-    //     console.error('Error rating offer', error);
-    //   }
-    // );
-
-    // console.log(`Rated with ${index + 1} stars`);
-  }
+}
   triggerModalButtonClick() {
     const button = document.getElementById('openModalButton');
     button.click();

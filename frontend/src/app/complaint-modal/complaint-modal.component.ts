@@ -38,11 +38,14 @@ export class ComplaintModalComponent {
   }
 
   postComplaint(form: any){
-    this.complaintService.addComplaint(form)
-        .subscribe(response => {
-          console.log('Offer posted successfully:', response);
-        }, error => {
-          console.error('Error posting the offer:', error);
-        });
+    this.complaintService.addComplaint(form).subscribe({
+    next: (response) => {
+      console.log('Complaint submitted successfully:', response);
+    },
+    error: (error) => {
+      console.error('Error submitting complaint:', error);
+    }
+  });
+
   }
 }

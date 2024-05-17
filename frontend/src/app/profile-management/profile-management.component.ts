@@ -41,37 +41,47 @@ export class ProfileManagementComponent {
     });
 
     this.offerService.getAllOffers()
-    .pipe(
-      map((offers: any) => offers.filter(offer => offer.type === 'Carpooling' && offer.offeror.id === this.userId))
-    )
-    .subscribe(filteredOffers => {      
+  .pipe(
+    map((offers: any[]) => offers.filter((offer) => offer.type === 'Carpooling' && offer.offeror.id === this.userId))
+  )
+  .subscribe({
+    next: (filteredOffers) => {
       this.carpoolingOffers = filteredOffers;
       console.log('Filtered offers fetched successfully:', this.carpoolingOffers);
-    }, error => {
+    },
+    error: (error) => {
       console.error('Error fetching filtered offers:', error);
-    });
+    }
+  });
 
-    this.offerService.getAllOffers()
-    .pipe(
-      map((offers: any) => offers.filter(offer => offer.type === 'Delivery' && offer.offeror.id === this.userId))
-    )
-    .subscribe(filteredOffers => {      
+  this.offerService.getAllOffers()
+  .pipe(
+    map((offers: any[]) => offers.filter((offer) => offer.type === 'Delivery' && offer.offeror.id === this.userId))
+  )
+  .subscribe({
+    next: (filteredOffers) => {
       this.deliveryOffers = filteredOffers;
       console.log('Filtered offers fetched successfully:', this.deliveryOffers);
-    }, error => {
+    },
+    error: (error) => {
       console.error('Error fetching filtered offers:', error);
-    });
+    }
+  });
 
-    this.requestService.getAllRequests()
-    .pipe(
-      map((offers: any) => offers.filter(request => request.sender.id === this.userId))
-    )
-    .subscribe(filteredOffers => {      
-      this.requests = filteredOffers;
-      console.log('Filtered offers fetched successfully:', this.requests);
-    }, error => {
-      console.error('Error fetching filtered offers:', error);
-    });
+  this.requestService.getAllRequests()
+  .pipe(
+    map((requests: any[]) => requests.filter((request) => request.sender.id === this.userId))
+  )
+  .subscribe({
+    next: (filteredRequests) => {
+      this.requests = filteredRequests;
+      console.log('Filtered requests fetched successfully:', this.requests);
+    },
+    error: (error) => {
+      console.error('Error fetching filtered requests:', error);
+    }
+  });
+
   }
 
 
@@ -84,37 +94,38 @@ export class ProfileManagementComponent {
       return;
     }
 
-    this.userService.updateAvatar(this.userId, this.newAvatar).subscribe(
-      response => {
-        console.log('Avatar updated successfully:', response);
-        this.user.avatar = response.user.avatar;
-        const userDataString = this.cookieService.get('userData');
-        if (userDataString) {
-          const userData = JSON.parse(userDataString);
-          userData.avatar = response.user.avatar;
-          const cookieOptions = this.cookieService.get('userData')
-          this.cookieService.set('userData', JSON.stringify(userData), null, cookieOptions);
-        }
-      },
-      error => {
-        // Handle error
-        console.error('Failed to update avatar:', error);
+    this.userService.updateAvatar(this.userId, this.newAvatar)
+  .subscribe({
+    next: (response) => {
+      console.log('Avatar updated successfully:', response);
+      this.user.avatar = response.user.avatar;
+    
+      const userDataString = this.cookieService.get('userData');
+      if (userDataString) {
+        const userData = JSON.parse(userDataString);
+        userData.avatar = response.user.avatar;
+        this.cookieService.set('userData', JSON.stringify(userData), null, this.cookieService.get('userData')); // Assuming cookieService.get('userData') returns cookie options
       }
-    );
+    },
+    error: (error) => {
+      console.error('Failed to update avatar:', error);
+    }
+  });
   }
 
   saveChanges() {
     if (!this.haveCar) {
              this.user.car = '';
     }
-    this.userService.updateProfile(this.userId, this.user).subscribe(
-      response => {
-        console.log(response);
-      },
-      error => {
-        console.error(error);
-      }
-    );
+    this.userService.updateProfile(this.userId, this.user).subscribe({
+    next: (response) => {
+      console.log('Profile updated successfully:', response);
+    },
+    error: (error) => {
+      console.error('Failed to update profile:', error);
+    }
+  });
+
   }
 
   recupererRequest(req:any) {
@@ -129,24 +140,16 @@ export class ProfileManagementComponent {
     }
 
     deleteAccount(){
-      this.userService.deleteAccount(this.userId).subscribe(
-        response => {
-          console.log(response);
-          this.authService.logout();
-          this.router.navigate(['/auth/register']);
-        },
-        error => {
-          console.error(error);
-        }
-      );
-    
+      this.userService.deleteAccount(this.userId).subscribe({
+    next: (response) => {
+      console.log('Account deleted successfully:', response);
+      this.authService.logout();
+      this.router.navigate(['/auth/register']);
+    },
+    error: (error) => {
+      console.error('Failed to delete account:', error);
     }
-//   saveCar(){
-//     if (!this.haveCar) {
-//       this.car = '';
-//     }
-//     this.user.car = this.car;
-//     this.userService.updateCar(this.userId, this.user.car);
-//     this.ngOnInit();
-// }
+  });
+
+    }
 }

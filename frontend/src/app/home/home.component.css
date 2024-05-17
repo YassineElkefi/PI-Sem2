@@ -170,15 +170,15 @@ button{
 }
 
 .star-rating i {
-  font-size: 20px; /* Adjust font size as desired */
+  font-size: 20px;
 }
 
 .far.fa-star {
-  color: #ccc; /* Unfilled star color (gray) */
+  color: #ccc;
 }
 
 .fas.fa-star {
-  color: #f0c040; /* Filled star color (gold) */
+  color: #f0c040; 
 }
 .modal-header{
   border-bottom: none;
