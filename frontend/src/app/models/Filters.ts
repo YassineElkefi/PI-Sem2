@@ -1,5 +1,4 @@
 export class filters {
-
   
     constructor(
       public _id: number,

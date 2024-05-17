@@ -22,24 +22,19 @@
     @if(isAuthenticated){
       @if(user?.cin !=="00000000"){
       <div class="dropdown">
-        <!-- Profile Picture or Avatar -->
         <button class="btn dropdown-toggle no-arrow" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <!-- Profile Picture or Avatar Here -->
-          <!-- Add Bell Icon -->
+
           @if(notifs.length == 0){
             <i class="bi bi-bell" style="font-size: 1.5rem; color: #E29F06;"></i>
           }@else {
             <i class="bi bi-bell-fill" style="font-size: 1.5rem; color: #E29F06;"></i>
           }
         </button>
-        <!-- Notifications Dropdown -->
         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-          <!-- Loop through notifications and display them -->
           <a *ngFor="let notification of notifs" class="dropdown-item notification-text">
             {{ notification.text }}
             <i class="bi bi-check" style="border-radius:50%; font-size: 1rem; color: #E29F06;margin-left:3.5rem" (click)="markNotificationAsRead(notification)"></i>
           </a>
-          <!-- If there are no notifications, show a message -->
           <a *ngIf="notifs.length === 0" class="dropdown-item">No notifications</a>
         </div>
       </div>

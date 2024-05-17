@@ -32,71 +32,103 @@ export class AdminDashboardComponent implements OnInit{
   fetchAllOffers(): void {
     this.offerService.getAllOffers()
       .pipe(
-        map((offers: Offer[]) => offers.filter(offer => offer.type === 'Carpooling'))
+        map((offers: Offer[]) => offers.filter((offer) => offer.type === 'Carpooling'))
       )
-      .subscribe(filteredOffers => {
-        this.carpoolingOffers = filteredOffers.length;
-        this.Data.push({ key: 'Carpooling Offers', value: this.carpoolingOffers });
-        console.log('Filtered Carpooling offers fetched successfully:', this.Data);
-      }, error => {
-        console.error('Error fetching filtered Carpooling offers:', error);
+      .subscribe({
+        next: (filteredOffers) => {
+          this.carpoolingOffers = filteredOffers.length;
+          this.Data.push({ key: 'Carpooling Offers', value: this.carpoolingOffers });
+          console.log('Filtered Carpooling offers fetched successfully:', this.Data);
+        },
+        error: (error) => {
+          console.error('Error fetching filtered Carpooling offers:', error);
+        },
+        complete: () => {
+          console.log('Subscription to filtered Carpooling offers completed.');
+        },
       });
   
-  
-
-    this.offerService.getAllOffers()
-    .pipe(
-      map((offers: Offer[]) => offers.filter(offer => offer.type === 'Delivery'))
-    )
-    .subscribe(filteredOffers => {
-      this.deliveryOffers = filteredOffers.length;
-      this.Data.push({ key: 'Delivery Offers', value: this.deliveryOffers });
-      console.log('Filtered offers fetched successfully:', this.Data);
-    }, error => {
-      console.error('Error fetching filtered offers:', error);
-    });
+      this.offerService.getAllOffers()
+      .pipe(
+        map((offers: Offer[]) => offers.filter((offer) => offer.type === 'Delivery'))
+      )
+      .subscribe({
+        next: (filteredOffers) => {
+          this.deliveryOffers = filteredOffers.length;
+          this.Data.push({ key: 'Delivery Offers', value: this.deliveryOffers });
+          console.log('Filtered Delivery offers fetched successfully:', this.Data);
+        },
+        error: (error) => {
+          console.error('Error fetching filtered Delivery offers:', error);
+        },
+        complete: () => {
+          console.log('Subscription to filtered Delivery offers completed.');
+        },
+      });
   }
 
   fetchAllUsers(): void {
-    this.userService.getAllUsers().subscribe(users => {
-      this.users = users.length - 1;
-      this.Data.push({ key: 'Users', value: this.users });
-      console.log('Users fetched successfully:', this.Data);
-    }, error => {
-      console.error('Error fetching users:', error);
-    });
+    this.userService.getAllUsers()
+      .subscribe({
+        next: (users) => {
+          this.users = users.length;
+          this.Data.push({ key: 'Users', value: this.users });
+          console.log('Users fetched successfully:', this.Data);
+        },
+        error: (error) => {
+          console.error('Error fetching users:', error);
+        },
+        complete: () => {
+          console.log('Subscription to users fetched completed.');
+        },
+      });
+  }
+
+  loadComplaints(): void {
+    this.complaintService.findAllComplaints()
+      .subscribe({
+        next: (complaints: Complaint[]) => {
+          this.complaints = complaints;
+          this.Data.push({ key: 'Complaints', value: this.complaints.length });
+          console.log('Complaints fetched successfully:', this.complaints);
+        },
+        error: (error) => {
+          console.error('Error fetching complaints:', error);
+        },
+        complete: () => {
+          console.log('Subscription to complaints fetched completed.');
+        },
+      });
   }
   
 
-  loadComplaints() {
-    this.complaintService.findAllComplaints().subscribe((data: Complaint[]) => {
-      this.complaints = data;
-      this.Data.push({ key: 'Complaints', value: this.complaints.length });
-      console.log('Complaints fetched successfully:', this.complaints);
-    }, error => {
-      console.error('Error fetching complaints:', error);
-    });
-  }
-
-  respondToComplaint(response: any){
-    if(response.response){
-      this.complaintService.acceptComplaint(response.complaint._id
-      ).subscribe(complaint =>{
-        console.log('Complaint approved', complaint);
-        response.complaint = null;
-        this.ngOnInit();
-      }, error => {
-        console.error('Complaint couldnt be approved :', error);
-      });
-    }else{
-      this.complaintService.rejectComplaint(response.complaint._id).subscribe(complaint =>{
-        console.log('Complaint rejected', complaint);
-        response.complaint = null;
-        this.ngOnInit();
-      }, error => {
-        console.error('Complaint couldnt be rejected :', error);
-      });
+  respondToComplaint(response: any) {
+    if (response.response) {
+      this.complaintService.acceptComplaint(response.complaint._id)
+        .subscribe({
+          next: (complaint) => {
+            console.log('Complaint approved:', complaint);
+            response.complaint = null;
+            this.ngOnInit(); 
+          },
+          error: (error) => {
+            console.error('Complaint could not be approved:', error);
+          },
+        });
+    } else {
+      this.complaintService.rejectComplaint(response.complaint._id)
+        .subscribe({
+          next: (complaint) => {
+            console.log('Complaint rejected:', complaint);
+            response.complaint = null;
+            this.ngOnInit();
+          },
+          error: (error) => {
+            console.error('Complaint could not be rejected:', error);
+          },
+        });
     }
   }
+  
 
 }

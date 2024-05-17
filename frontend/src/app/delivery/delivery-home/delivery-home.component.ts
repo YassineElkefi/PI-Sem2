@@ -60,54 +60,74 @@ export class DeliveryHomeComponent implements OnInit{
   fetchAllOffers(): void {
     this.offerService.getAllOffers()
       .pipe(
-        map((offers: Offer[]) => offers.filter(offer => offer.type === 'Delivery' && offer.nb_pkg > 0))
+        map((offers: Offer[]) => offers.filter((offer) => offer.type === 'Delivery' && offer.nb_pkg > 0))
       )
-      .subscribe(filteredOffers => {
-        this.offers = filteredOffers;
-        console.log('Filtered offers fetched successfully:', this.offers);
-      }, error => {
-        console.error('Error fetching filtered offers:', error);
+      .subscribe({
+        next: (filteredOffers) => {
+          this.offers = filteredOffers;
+          console.log('Filtered offers fetched successfully:', this.offers);
+        },
+        error: (error) => {
+          console.error('Error fetching filtered offers:', error);
+        },
       });
   }
+  
 
-  handlePostedOffer(form: any){
+  handlePostedOffer(form: any) {
     this.offerService.postOffer(form)
-    .subscribe(response => {
-      console.log('Offer added successfully:', response);
-      this.ngOnInit();
-    }, error => {
-      console.error('Error adding Offer:', error);
-    });
-  }
-
-  handleUpdatedOffer(offerData: any){
-    this.offerService.editOffer(this.selectedOffer._id.toString(),offerData)
-        .subscribe(response => {
-          console.log('Offer posted successfully:', response);
+      .subscribe({
+        next: (response) => {
+          console.log('Offer added successfully:', response);
           this.ngOnInit();
-        }, error => {
-          console.error('Error posting the offer:', error);
-        });
+        },
+        error: (error) => {
+          console.error('Error adding Offer:', error);
+        },
+      });
   }
+  
 
-  handleToBeDeletedOffer(offer: Offer){
-    this.offerService.deleteOffer(offer._id.toString())
-    .subscribe(response => {
-      console.log('Offer deleted successfully:', response);
-      this.ngOnInit();
-    }, error => {
-      console.error('Error adding Offer:', error);
-    });
+  handleUpdatedOffer(offerData: any) {
+    this.offerService.editOffer(this.selectedOffer._id.toString(), offerData)
+      .subscribe({
+        next: (response) => {
+          console.log('Offer updated successfully:', response);
+          this.ngOnInit();
+        },
+        error: (error) => {
+          console.error('Error updating the offer:', error);
+        },
+      });
   }
+  
+
+  handleToBeDeletedOffer(offer: Offer) {
+    this.offerService.deleteOffer(offer._id.toString())
+      .subscribe({
+        next: (response) => {
+          console.log('Offer deleted successfully:', response);
+          this.ngOnInit();
+        },
+        error: (error) => {
+          console.error('Error deleting offer:', error);
+        },
+      });
+  }
+  
 
   handleRequestPosted(requestData: any) {
     this.requestService.postRequest(requestData)
-    .subscribe(response => {
-      console.log('Request sent successfully:', response);
-      this.ngOnInit();
-    }, error => {
-      console.error('Error sending request:', error);
-    });
+      .subscribe({
+        next: (response) => {
+          console.log('Request sent successfully:', response);
+          this.ngOnInit();
+        },
+        error: (error) => {
+          console.error('Error sending request:', error);
+        },
+      });
   }
+  
 
 }
